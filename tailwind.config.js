@@ -9,7 +9,8 @@ export default {
       colors:{
         'green-pro': '#008C8C',
         'bg-pro': '#F6FAFA',
-        'green-g': 'rgba(0, 161, 69, 0.2)'
+        'green-g': 'rgba(0, 161, 69, 0.2)',
+        'green-c': '#005454'
       },
       backgroundColor: {
         'default': '#F6FAFA',

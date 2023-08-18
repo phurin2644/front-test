@@ -8,8 +8,8 @@ function Navbar() {
                     <h1 className="font-bold text-xl pt-4">Fast track</h1>
                 </div>
                 <div className="flex text-base space-x-4 h-full mx-9">
-                    <h1 className=" bg-red-300 h-full pt-5 px-2 ">Dashboard</h1>
-                    <h1 className="bg-blue-300 h-full pt-5 px-2 hover:bg-gradient-to-b from-blue-300 to-slate-300">
+                    <h1 className="bg-transparent h-full pt-5 px-2 hover:bg-gradient-to-b from-green-pro to-green-c">Dashboard</h1>
+                    <h1 className="bg-transparent h-full pt-5 px-2 hover:bg-gradient-to-b from-green-pro to-green-c">
                         Users
                     </h1>
                     <div className=" px-7">
