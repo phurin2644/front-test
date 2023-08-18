@@ -5,7 +5,7 @@
 
 @layer components{
   .navbar{
-    @apply  bg-green-pro m-0 p-0 h-16 text-white flex justify-between px-9 
+    @apply  bg-green-pro m-0 p-0 h-16 text-white flex justify-between  
   }
 
   .gradient{
