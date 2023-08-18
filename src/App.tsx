@@ -5,8 +5,9 @@ import Navbar from './components/Navbar'
 function App() {
   return (
     <>
-    <Navbar></Navbar>
-    <Flow></Flow>
+      <Navbar></Navbar>
+      <Flow></Flow>
+      
     </>
   )
 }

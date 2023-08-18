@@ -13,7 +13,7 @@ function Navbar() {
                         Users
                     </h1>
                     <div className=" px-5">
-                        <img src="src\img\profile.png" alt="" className="mt-2 w-12 h-12 rounded-full mx-auto object-cover" />
+                        <img src="src\img\profile.png" alt="" className="mt-2 w-11 h-11 rounded-full mx-auto object-cover" />
                     </div>
                 </div>
             </div>
