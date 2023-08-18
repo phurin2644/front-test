@@ -13,7 +13,9 @@ function Navbar() {
                         Users
                     </h1>
                     <div className=" px-5">
+                        <a href="https://www.youtube.com/watch?v=hJeEOzEZstU&list=RDMD_GRqxhASs&index=27">
                         <img src="src\img\profile.png" alt="" className="mt-2 w-11 h-11 rounded-full mx-auto object-cover" />
+                        </a>
                     </div>
                 </div>
             </div>
