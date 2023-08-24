@@ -12,5 +12,10 @@
     @apply bg-gradient-to-b from-green-pro  to-green-g
   }
 
+  .custom{
+    @apply h-36 w-52
+  }
+
 
 }
+

@@ -13,20 +13,34 @@ import ReactFlow, {
 
 import 'reactflow/dist/style.css';
 
+
 const initialNodes = [
     {
         id: '1', position: { x: 200, y: 0 }, data: {
-            label: <div>
+            label: <div className='h-36 w-52'>
                 <p>Node1</p>
-                <div className="btn">
-                    <button className="addtask-btn" ><img src="./images/add.png"></img>Add Task</button>
-                    <button><img src="./images/click.png"></img>Track</button>
+                <div className='flex bg-green-pro rounded-lg '>
+                    <div className='w-24 p-0 mx-2 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+                        <div className='flex'>
+                            <img src="src\img\addicon.png"></img>
+                            <button className='text-sm'>Add Task</button>
+                        </div>
+
+                    </div>
+                    <div className='bg-green-pro w-24 p-0 mx-2 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+                        <div className='flex'>
+                            <button className='text-sm'>Track</button>
+                            <img src="src\img\Vector.png"></img>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
-        }
+        }, type: 'textUpdater',
     },
-   
+
 ];
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2', animated: true }];
 
@@ -57,14 +71,21 @@ function Flow() {
         // console.log(newIdNode)
         const newNode = {
             id: `${idNode.current}`,
-            data: { label: <div>
-                <p>Node{`${idNode.current}`}</p>
-                <div className="btn">
-                    <button className="addtask-btn" onClick={onAdd}><img src="./images/add.png"></img>Add Task</button>
-                    <button><img src="./images/click.png"></img>Track</button>
-                </div>
+            data: {
+                label: <div>
+                    <p>Node{`${idNode.current}`}</p>
+                    <div className=''>
+                        <div className='w-24 p-1 mx-2 mt-4 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro'>
+                            <button onClick={onAdd}><img src="./images/add.png"></img>Add Task</button>
+                        </div>
+                        <div className='w-24 p-1 mx-2 mt-4 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro'>
+                            <button><img src="./images/click.png"></img>Track</button>
+                        </div>
 
-            </div> },
+                    </div>
+
+                </div>
+            },
             position: {
                 x: 200,
                 y: yPos.current,
@@ -97,7 +118,7 @@ function Flow() {
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
-                    fitView
+
                 >
                     <Panel position="top-right">
                         <button onClick={onAdd}>add node</button>
