@@ -1,4 +1,4 @@
-import React, { useCallback, } from 'react';
+import React, { useCallback, useRef, } from 'react';
 import ReactFlow, {
     Controls,
     Background,
@@ -14,12 +14,13 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 
 const initialNodes = [
-    { id: '1', position: { x: 200, y: 40 }, data: { label: '1' } },
-    { id: '2', position: { x: 200, y: 140 }, data: { label: '2' } },
+    { id: '1', position: { x: 200, y: 0 }, data: { label: '1' } },
+    { id: '2', position: { x: 200, y: 100 }, data: { label: '2' } },
 ];
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2', animated: true }];
 
 const getNodeId = () => `randomnode_${+new Date()}`;
+const newIdNode = () => `randomnode_${+useRef(0)}`;
 
 function Flow() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -27,21 +28,37 @@ function Flow() {
 
     const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-    var currentTime = new Date();
-    var hours = currentTime.getHours();
-    var minutes = currentTime.getMinutes();
-    var seconds = currentTime.getSeconds();
+    // var currentTime = new Date();
+    // var hours = currentTime.getHours();
+    // var minutes = currentTime.getMinutes();
+    // var seconds = currentTime.getSeconds(); time
+    const yPos = useRef(100);
+    const idNode = useRef(2);
 
     const onAdd = useCallback(() => {
+        yPos.current += 100;
+        idNode.current += 1;
+        console.log(yPos)
+        console.log(yPos.current)
+        console.log(getNodeId())
+        console.log(getNodeId)
+        console.log(idNode)
+        console.log(newIdNode)
         const newNode = {
-            id: getNodeId(),
+            id: `${idNode.current}`,
             data: { label: 'Added node' },
             position: {
-                x: Math.random() * window.innerWidth - 100,
-                y: Math.random() * window.innerHeight,
+                x: 200 ,
+                y: yPos.current ,
             },
         };
+        const newEdge = {
+            id: 'f',
+            source: `${idNode.current-1}`,
+            target: `${idNode.current}`,
+        };
         setNodes((nds) => nds.concat(newNode));
+        setEdges((nes) => nes.concat(newEdge));
     }, [setNodes]);
 
 
