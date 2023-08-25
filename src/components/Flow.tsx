@@ -26,7 +26,7 @@ const initialNodes = [
                 <div className=' bg-green-pro rounded-lg '>
                     <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
-                            <img src="public\addicon.png"></img>
+                            <img src="/addicon.png"></img>
                             <button className='text-sm' >Add Task</button>
                         </div>
 
@@ -34,7 +34,7 @@ const initialNodes = [
                     <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
                             <button className='text-sm'>Track</button>
-                            <img src="public\Vector.png"></img>
+                            <img src="/Vector.png"></img>
                         </div>
 
                     </div>
@@ -83,7 +83,7 @@ function Flow() {
                 <div className=' bg-green-pro rounded-lg '>
                     <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex' onClick={onAdd}>
-                            <img src="public\addicon.png"></img>
+                            <img src="/addicon.png"></img>
                             <button className='text-sm' >Add Task</button>
                         </div>
 
@@ -91,7 +91,7 @@ function Flow() {
                     <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
                             <button className='text-sm'>Track</button>
-                            <img src="public\Vector.png"></img>
+                            <img src="/Vector.png"></img>
                         </div>
 
                     </div>
