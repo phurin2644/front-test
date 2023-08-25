@@ -1,0 +1,16 @@
+.text-updater-node {
+    height: 100px;
+    width: 250px;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: 10px;
+    background: rgb(253, 253, 253);
+    border-color: black;
+  }
+  
+  .text-updater-node label {
+    display: block;
+    color: rgb(44, 43, 43);
+    font-size: 12px;
+  }
+  

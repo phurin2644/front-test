@@ -12,22 +12,26 @@ import ReactFlow, {
 
 
 import 'reactflow/dist/style.css';
+import TextUpdaterNode from './TextUpdaterNode';
 
+import './text-updater-node.css';
+
+const nodeTypes = { textUpdater: TextUpdaterNode };
 
 const initialNodes = [
     {
-        id: '1', position: { x: 200, y: 0 }, data: {
-            label: <div className='h-36 w-52'>
-                <p>Node1</p>
-                <div className='flex bg-green-pro rounded-lg '>
-                    <div className='w-24 p-0 mx-2 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+        id: '1', position: { x: 550, y: 70 }, data: {
+            label: (<div className='h-20 w-24 ml-4'>
+                <p className='pl-3 font-medium text-sm'>Node1</p>
+                <div className=' bg-green-pro rounded-lg '>
+                    <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
                             <img src="src\img\addicon.png"></img>
-                            <button className='text-sm'>Add Task</button>
+                            <button className='text-sm' >Add Task</button>
                         </div>
 
                     </div>
-                    <div className='bg-green-pro w-24 p-0 mx-2 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+                    <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
                             <button className='text-sm'>Track</button>
                             <img src="src\img\Vector.png"></img>
@@ -37,8 +41,10 @@ const initialNodes = [
 
                 </div>
 
-            </div>
-        }, type: 'textUpdater',
+            </div>),
+            
+        }, 
+        //type: 'textUpdater',
     },
 
 ];
@@ -57,11 +63,11 @@ function Flow() {
     // var hours = currentTime.getHours();
     // var minutes = currentTime.getMinutes();
     // var seconds = currentTime.getSeconds(); time
-    const yPos = useRef(0);
+    const yPos = useRef(70);
     const idNode = useRef(1);
 
     const onAdd = useCallback(() => {
-        yPos.current += 100;
+        yPos.current += 120;
         idNode.current += 1;
         // console.log(yPos)
         // console.log(yPos.current)
@@ -72,24 +78,32 @@ function Flow() {
         const newNode = {
             id: `${idNode.current}`,
             data: {
-                label: <div>
-                    <p>Node{`${idNode.current}`}</p>
-                    <div className=''>
-                        <div className='w-24 p-1 mx-2 mt-4 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro'>
-                            <button onClick={onAdd}><img src="./images/add.png"></img>Add Task</button>
+                label: <div className='h-20 w-24 ml-4'>
+                <p className='pl-3 font-medium text-sm'>Node{idNode.current}</p>
+                <div className=' bg-green-pro rounded-lg '>
+                    <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+                        <div className='flex' onClick={onAdd}>
+                            <img src="src\img\addicon.png"></img>
+                            <button className='text-sm' >Add Task</button>
                         </div>
-                        <div className='w-24 p-1 mx-2 mt-4 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro'>
-                            <button><img src="./images/click.png"></img>Track</button>
+
+                    </div>
+                    <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+                        <div className='flex'>
+                            <button className='text-sm'>Track</button>
+                            <img src="src\img\Vector.png"></img>
                         </div>
 
                     </div>
 
                 </div>
+
+            </div>
             },
             position: {
-                x: 200,
+                x: 550,
                 y: yPos.current,
-            },
+            }, 
         };
         const newEdge = {
             id: 'f',
@@ -118,6 +132,7 @@ function Flow() {
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
+                    nodeTypes={nodeTypes}
 
                 >
                     <Panel position="top-right">
@@ -132,3 +147,5 @@ function Flow() {
     );
 }
 export default Flow
+
+ 
