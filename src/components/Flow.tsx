@@ -26,7 +26,7 @@ const initialNodes = [
                 <div className=' bg-green-pro rounded-lg '>
                     <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
-                            <img src="src\img\addicon.png"></img>
+                            <img src="public\addicon.png"></img>
                             <button className='text-sm' >Add Task</button>
                         </div>
 
@@ -34,7 +34,7 @@ const initialNodes = [
                     <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
                             <button className='text-sm'>Track</button>
-                            <img src="src\img\Vector.png"></img>
+                            <img src="public\Vector.png"></img>
                         </div>
 
                     </div>
@@ -83,7 +83,7 @@ function Flow() {
                 <div className=' bg-green-pro rounded-lg '>
                     <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex' onClick={onAdd}>
-                            <img src="src\img\addicon.png"></img>
+                            <img src="public\addicon.png"></img>
                             <button className='text-sm' >Add Task</button>
                         </div>
 
@@ -91,7 +91,7 @@ function Flow() {
                     <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
                         <div className='flex'>
                             <button className='text-sm'>Track</button>
-                            <img src="src\img\Vector.png"></img>
+                            <img src="public\Vector.png"></img>
                         </div>
 
                     </div>
@@ -118,10 +118,8 @@ function Flow() {
     return (
         <>
             <div className='bg-slate-50 h-screen flex'>
-                <div className=' inline-block bg-green-light-3 h-32 w-32 ml-6 mt-8 p-1 rounded-md space-y-5'>
-                    <div className='w-24 p-1 mx-2 mt-4 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro'>
-                        <button>เพิ่ม Task</button>
-                    </div>
+                <div className=' inline-block bg-green-light-3 h-11 w-32 ml-6 mt-8 p-1 rounded-md space-y-5'>
+                    
                     <div className='w-24 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro'>
                         <button>ข้อมูล</button>
                     </div>
