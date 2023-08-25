@@ -132,7 +132,7 @@ function Flow() {
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
-                    nodeTypes={nodeTypes}
+                    
 
                 >
                     <Panel position="top-right">
