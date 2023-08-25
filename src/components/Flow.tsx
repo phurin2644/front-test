@@ -12,11 +12,11 @@ import ReactFlow, {
 
 
 import 'reactflow/dist/style.css';
-import TextUpdaterNode from './TextUpdaterNode';
+// import TextUpdaterNode from './TextUpdaterNode';
 
 import './text-updater-node.css';
 
-const nodeTypes = { textUpdater: TextUpdaterNode };
+// const nodeTypes = { textUpdater: TextUpdaterNode };
 
 const initialNodes = [
     {
