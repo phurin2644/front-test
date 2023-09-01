@@ -14,7 +14,7 @@ import 'reactflow/dist/style.css';
 // import TextUpdaterNode from './TextUpdaterNode';
 // import './text-updater-node.css';
 import { useDisclosure } from '@mantine/hooks';
-import { Drawer, Button, Group } from '@mantine/core';
+import { Drawer} from '@mantine/core';
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 
