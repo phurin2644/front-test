@@ -10,11 +10,11 @@ import ReactFlow, {
     Panel,
 } from 'reactflow';
 
-
 import 'reactflow/dist/style.css';
 // import TextUpdaterNode from './TextUpdaterNode';
-
-import './text-updater-node.css';
+// import './text-updater-node.css';
+import { useDisclosure } from '@mantine/hooks';
+import { Drawer, Button, Group } from '@mantine/core';
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 
@@ -42,8 +42,8 @@ const initialNodes = [
                 </div>
 
             </div>),
-            
-        }, 
+
+        },
         //type: 'textUpdater',
     },
 
@@ -54,6 +54,7 @@ const initialEdges = [{ id: 'e1-2', source: '1', target: '2', animated: true }];
 // const newIdNode = () => `randomnode_${+useRef(0)}`;
 
 function Flow() {
+    const [opened, { open, close }] = useDisclosure(false);
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -79,31 +80,31 @@ function Flow() {
             id: `${idNode.current}`,
             data: {
                 label: <div className='h-20 w-24 ml-4'>
-                <p className='pl-3 font-medium text-sm'>Node{idNode.current}</p>
-                <div className=' bg-green-pro rounded-lg '>
-                    <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
-                        <div className='flex' onClick={onAdd}>
-                            <img src="/addicon.png"></img>
-                            <button className='text-sm' >Add Task</button>
-                        </div>
+                    <p className='pl-3 font-medium text-sm'>Node{idNode.current}</p>
+                    <div className=' bg-green-pro rounded-lg '>
+                        <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+                            <div className='flex' onClick={onAdd}>
+                                <img src="/addicon.png"></img>
+                                <button className='text-sm' >Add Task</button>
+                            </div>
 
-                    </div>
-                    <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
-                        <div className='flex'>
-                            <button className='text-sm'>Track</button>
-                            <img src="/Vector.png"></img>
+                        </div>
+                        <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
+                            <div className='flex'>
+                                <button className='text-sm'>Track</button>
+                                <img src="/Vector.png"></img>
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
-
-            </div>
             },
             position: {
                 x: 550,
                 y: yPos.current,
-            }, 
+            },
         };
         const newEdge = {
             id: 'f',
@@ -117,11 +118,14 @@ function Flow() {
 
     return (
         <>
+            <Drawer opened={opened} onClose={close} title="Authentication">
+                {/* Drawer content */}
+            </Drawer>
             <div className='bg-slate-50 h-screen flex'>
                 <div className=' inline-block bg-green-light-3 h-11 w-32 ml-6 mt-8 p-1 rounded-md space-y-5'>
-                    
-                    <div className='w-24 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro'>
-                        <button>ข้อมูล</button>
+
+                    <div className='w-24 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro' onClick={open}>
+                        <button >ข้อมูล</button>
                     </div>
                 </div>
                 <ReactFlow
@@ -130,7 +134,7 @@ function Flow() {
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
-                    
+
 
                 >
                     <Panel position="top-right">
@@ -146,4 +150,3 @@ function Flow() {
 }
 export default Flow
 
- 

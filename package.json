@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^6.0.19",
+    "@mantine/hooks": "^6.0.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flow": "^1.0.3",
+    "react-router-dom": "^6.15.0",
     "reactflow": "^11.8.2"
   },
   "devDependencies": {

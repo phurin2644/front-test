@@ -16,6 +16,14 @@
     @apply h-36 w-52
   }
 
+  .nav-hover{
+    @apply bg-transparent h-full pt-5 px-2 hover:bg-gradient-to-b from-green-pro to-green-c
+  }
+
+  .nav-active{
+    @apply  h-full pt-5 px-2 bg-gradient-to-b from-green-pro to-green-c
+  }
+
 
 }
 

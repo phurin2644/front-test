@@ -1,6 +1,6 @@
 import React, { useCallback, ChangeEvent } from 'react';
 import { Handle, Position } from 'reactflow';
-import onAdd from './Flow';
+import onAdd from '../pages/Flow';
 
 const handleStyle = { left: 10 };
 
