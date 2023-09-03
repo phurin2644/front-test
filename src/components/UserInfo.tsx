@@ -15,20 +15,20 @@ const Normal = () => (
 function UserInfo() {
   return (
     <div>
-      <div className="bg-slate-50 flex p-3 justify-between font-light">
+      <div className="bg-slate-50 flex items-center p-3 justify-between font-light">
         <div className="flex w-64 ">
           <h1 className="w-9">1</h1>
-          <h1>phurin</h1>
+          <h1>Phurin Prasit</h1>
         </div>
         <div className="flex justify-end">
-          <div className="flex w-40 ">
+          <div className="flex items-center w-40 ">
             <h1>Cell Text</h1>
           </div>
-          <div className="flex w-40 ">
+          <div className="flex items-center w-40 ">
             <Admin />
             <Normal />
           </div>
-          <div className="flex w-40 ">
+          <div className="flex items-center w-40 ">
             <h1>วว/ดด/ปป</h1>
           </div>
           <div className="flex w-44 justify-between">

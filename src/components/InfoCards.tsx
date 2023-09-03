@@ -6,6 +6,7 @@ function InfoCard() {
             <h1>I'm Card</h1>
             <Link to='/flow'>
                 <button className="bg-slate-200 p-1 rounded-md">click me!!</button>
+                
             </Link>
             
 

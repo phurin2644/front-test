@@ -1,5 +1,5 @@
 import { IconSearch } from "@tabler/icons-react";
-import { Input } from "@mantine/core";
+import { Input, ScrollArea } from "@mantine/core";
 import UserInfo from "../components/UserInfo";
 
 function Users() {
@@ -46,7 +46,24 @@ function Users() {
               </div>
             </div>
           </div>
-          <UserInfo />
+          <ScrollArea h={500} type="scroll">
+            <div className="divide-y">
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+              <UserInfo />
+            </div>
+          </ScrollArea>
+
         </div>
       </div>
     </>
