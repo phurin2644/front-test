@@ -11,7 +11,8 @@ export default {
         'bg-pro': '#F6FAFA',
         'green-g': 'rgba(0, 161, 69, 0.2)',
         'green-c': '#005454',
-        'green-light-3': '#E4F0EF'
+        'green-light-3': '#E4F0EF',
+        'green-light-1': '#cce8e8',
       },
       backgroundColor: {
         'default': '#F6FAFA',

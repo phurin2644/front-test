@@ -1,6 +1,7 @@
 import { IconSearch } from "@tabler/icons-react";
-import { Input, ScrollArea } from "@mantine/core";
+import { Input, ScrollArea, Button } from "@mantine/core";
 import UserInfo from "../components/UserInfo";
+import { UserPlus } from "tabler-icons-react";
 
 function Users() {
   return (
@@ -14,7 +15,7 @@ function Users() {
             </div>
             <div className="justify-center">
               <Input
-                className="w-96 "
+                style={{width:600}}
                 icon={<IconSearch className="h-5" />}
                 variant="filled"
                 placeholder="Search"
@@ -22,11 +23,18 @@ function Users() {
               />
             </div>
 
-            <button className="bg-green-pro rounded-lg p-2 text-sm text-white">
+            <Button className="bg-green-c rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-pro" >
+              <div className="mr-2">
+                <UserPlus
+                  size={20}
+                  strokeWidth={2}
+                  color={'white'}
+                />
+              </div>
               New Member
-            </button>
+            </Button>
           </div>
-          <div className="bg-slate-300 mt-7 flex p-3 justify-between font-medium rounded-t-lg">
+          <div className="bg-green-light-1 mt-7 flex p-3 justify-between font-medium rounded-t-lg">
             <div className="flex w-64 ">
               <h1 className="w-9 ">No</h1>
               <h1>Username</h1>
@@ -47,7 +55,7 @@ function Users() {
             </div>
           </div>
           <ScrollArea h={500} type="scroll">
-            <div className="divide-y">
+            <div className="divide-y ">
               <UserInfo />
               <UserInfo />
               <UserInfo />
