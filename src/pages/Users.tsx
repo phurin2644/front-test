@@ -11,7 +11,7 @@ function Users() {
           <div className='flex justify-between p-4 pt-10'>
             <div>
               <h1 className='text-xl'>User</h1>
-              <h1 className='text-xs text-slate-500'>x users</h1>
+              <h1 className='text-xs text-slate-500'>x55 users</h1>
             </div>
             <div className='justify-center'>
               <Input
