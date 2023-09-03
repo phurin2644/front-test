@@ -1,5 +1,6 @@
 import { IconSearch } from '@tabler/icons-react';
 import { Input } from '@mantine/core';
+import UserInfo from '../components/UserInfo';
 
 
 function Users() {
@@ -24,9 +25,25 @@ function Users() {
 
             <button className='bg-green-pro rounded-lg p-2 text-sm text-white'>New Member</button>
           </div>
-          <div className='bg-slate-300 mt-7'>
-            <h1>ggggggg</h1>
+          <div className='bg-slate-300 mt-7 flex p-3 justify-between'>
+            <div className='flex w-64 bg-green-pro'>
+              <h1 className='w-9'>No</h1>
+              <h1>Username</h1>
+            </div>
+            <div className='flex w-48 bg-green-pro'>
+              <h1>Department</h1>
+            </div>
+            <div className='flex w-48 bg-green-pro' >
+              <h1>Admin</h1>
+            </div>
+            <div className='flex w-48 bg-green-pro'>
+              <h1>Created</h1>
+            </div>
+            <div className='flex w-48 bg-green-pro'>
+              <h1>Title</h1>
+            </div>
           </div>
+          <UserInfo />
 
         </div>
 
