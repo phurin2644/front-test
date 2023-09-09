@@ -13,10 +13,22 @@ export default {
         'green-c': '#005454',
         'green-light-3': '#E4F0EF',
         'green-light-1': '#cce8e8',
+        'green-bar': '#48BABA'
       },
       backgroundColor: {
         'default': '#F6FAFA',
       },
+      height:{
+        '670': 870,
+        '320': 420,
+        '450': 450
+      },
+      width:{
+        '650': 650,
+        '550' : 550,
+        '1280': 1280
+      },
+      
     },
   },
   plugins: [],

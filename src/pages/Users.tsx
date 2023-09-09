@@ -15,7 +15,7 @@ function Users() {
 
   return (
     <>
-      <div className="bg-slate-50 h-screen p-7">
+      <div className="bg-slate-50  p-7">
         <div className="bg-white h-screen  mx-10 rounded-lg shadow-md px-10">
           <div className="flex justify-between p-4 pt-10">
             <div>
