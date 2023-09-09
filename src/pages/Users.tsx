@@ -1,9 +1,11 @@
 import { IconSearch } from "@tabler/icons-react";
 import { Input, ScrollArea, Button } from "@mantine/core";
-import UserInfo from "../components/UserInfo";
 import { UserPlus } from "tabler-icons-react";
+import UserList from "../components/UserInfo";
+
 
 function Users() {
+  
   return (
     <>
       <div className="bg-slate-50 h-screen p-7">
@@ -56,19 +58,7 @@ function Users() {
           </div>
           <ScrollArea h={500} type="scroll">
             <div className="divide-y ">
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
-              <UserInfo />
+             <UserList />
             </div>
           </ScrollArea>
 

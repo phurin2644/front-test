@@ -1,35 +1,46 @@
-import { CircleCheck, CircleLetterX, Dots, FilePencil, Trash } from "tabler-icons-react";
+import {
+  CircleCheck,
+  CircleLetterX,
+  Dots,
+  FilePencil,
+  Trash,
+} from "tabler-icons-react";
+import userdata from "../Userdata";
+import { Userdata } from "../Userdata";
 
-const Admin = () => (
-  <div className="bg-green-400 h-6 w-6 flex items-center justify-center rounded-lg">
-    <CircleCheck size={20} strokeWidth={2} color={"#FFFFFF"} />
-  </div>
-);
 
-const Normal = () => (
-  <div className="bg-red-400 h-6 w-6 flex items-center justify-center rounded-lg">
-    <CircleLetterX size={20} strokeWidth={2} color={"#FFFFFF"} />
-  </div>
-);
 
-function UserInfo() {
+function UserInfo(props: Userdata) {
+  const Admin = () => (
+    <div className="bg-green-400 h-6 w-6 flex items-center justify-center rounded-lg">
+      <CircleCheck size={20} strokeWidth={2} color={"#FFFFFF"} />
+    </div>
+  );
+
+  const Normal = () => (
+    <div className="bg-red-400 h-6 w-6 flex items-center justify-center rounded-lg">
+      <CircleLetterX size={20} strokeWidth={2} color={"#FFFFFF"} />
+    </div>
+  );
+
   return (
     <div>
       <div className="bg-slate-50 flex items-center p-3 justify-between font-light">
         <div className="flex w-64 ">
-          <h1 className="w-9">1</h1>
-          <h1>Phurin Prasit</h1>
+          <h1 className="w-9">{props.id}</h1>
+          <h1>
+            {props.firstName} {props.lastName}
+          </h1>
         </div>
         <div className="flex justify-end">
           <div className="flex items-center w-40 ">
-            <h1>Cell Text</h1>
+            <h1>{props.deparment}</h1>
           </div>
           <div className="flex items-center w-40 ">
-            <Admin />
-            <Normal />
+            {props.status ? <Admin /> : <Normal />}
           </div>
           <div className="flex items-center w-40 ">
-            <h1>วว/ดด/ปป</h1>
+            <h1>{props.date}</h1>
           </div>
           <div className="flex w-44 justify-between">
             <div className="flex">
@@ -50,4 +61,23 @@ function UserInfo() {
     </div>
   );
 }
-export default UserInfo;
+
+const UserList = () => {
+  return (
+    <div>
+      {userdata.map((user) => (
+        <UserInfo
+          key={user.id}
+          id={user.id}
+          firstName={user.firstName}
+          lastName={user.lastName}
+          status={user.status}
+          deparment={user.deparment}
+          date={user.date}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default UserList;
