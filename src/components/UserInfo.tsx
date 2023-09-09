@@ -5,8 +5,8 @@ import {
   FilePencil,
   Trash,
 } from "tabler-icons-react";
-import userdata from "../Userdata";
-import { Userdata } from "../Userdata";
+import userdata from "../data/Userdata";
+import { Userdata } from "../data/Userdata";
 import { Divider } from "@mantine/core";
 
 
