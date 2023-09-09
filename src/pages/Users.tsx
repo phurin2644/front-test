@@ -1,14 +1,18 @@
 
-import { ScrollArea, Button, Input } from "@mantine/core";
+import { ScrollArea, Button, Modal } from "@mantine/core";
 import { UserPlus } from "tabler-icons-react";
 import UserList from "../components/UserInfo";
 import SearchBar from "../components/SearchBar";
 import { useState } from "react";
-import { IconSearch } from "@tabler/icons-react";
+import { useDisclosure } from "@mantine/hooks";
+
 
 
 function Users() {
   const [searchText, setSearchText] = useState('');
+  const [opened, { open, close }] = useDisclosure(false);
+
+
   return (
     <>
       <div className="bg-slate-50 h-screen p-7">
@@ -19,7 +23,10 @@ function Users() {
               <h1 className="text-xs text-slate-500">x users</h1>
             </div>
             <SearchBar value={searchText} onChange={setSearchText} />
-            <Button className="bg-green-c rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-pro" >
+            <Modal opened={opened} onClose={close} title="Authentication" centered>
+              {/* Modal content */}
+            </Modal>
+            <Button className="bg-green-c rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-pro" onClick={open}>
               <div className="mr-2">
                 <UserPlus
                   size={20}
@@ -52,7 +59,7 @@ function Users() {
           </div>
           <ScrollArea h={500} type="scroll">
             <div className="divide-y ">
-             <UserList value={searchText}/>
+              <UserList value={searchText} />
             </div>
           </ScrollArea>
 

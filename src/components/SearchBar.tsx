@@ -16,7 +16,7 @@ function SearchBar(props: { value: string; onChange: (value: string) => void }) 
         onChange={(event) => {
           const text = event.target.value;
           onChange(text);
-          // console.log(text.toLowerCase());
+          console.log(text.toLowerCase());
         }}
         value={value}
       />

@@ -36,6 +36,20 @@ const  userdata : Userdata[] = [
         status: true,
         deparment: 'xxxxx',
         date: '13/02/44'
+    },{
+        id: '5',
+        firstName: 'Piyaphat',
+        lastName: 'Khaosaeng',
+        status: false,
+        deparment: 'xxxxx',
+        date: '08/11/45'
+    },{
+        id: '6',
+        firstName: 'Chonlanan',
+        lastName: 'Thongthai',
+        status: false,
+        deparment: 'xxxxx',
+        date: '05/12/45'
     },
 ]
 export default userdata

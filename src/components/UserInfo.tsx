@@ -7,6 +7,7 @@ import {
 } from "tabler-icons-react";
 import userdata from "../Userdata";
 import { Userdata } from "../Userdata";
+import { Divider } from "@mantine/core";
 
 
 
@@ -26,6 +27,7 @@ function UserInfo(props: Userdata) {
 
   return (
     <div>
+      <Divider />
       <div className="bg-slate-50 flex items-center p-3 justify-between font-light">
         <div className="flex w-64 ">
           <h1 className="w-9">{props.id}</h1>
@@ -65,25 +67,24 @@ function UserInfo(props: Userdata) {
 
 
 
-const UserList = (props: { value: string;}) => {
-  const {value} = props;
+const UserList = (props: { value: string; }) => {
+  const { value } = props;
   const lower = value.toLowerCase();
-  const filterList = userdata.filter((user) =>{
-    return user.firstName.toLowerCase().includes(lower) 
-    // || user.lastName.toLowerCase().includes(lower) ;
+  const filterList = userdata.filter((user) => {
+    return user.firstName.toLowerCase().includes(lower);
   });
   return (
     <div>
       {filterList.map((user) => (
-        <UserInfo
-          key={user.id}
-          id={user.id}
-          firstName={user.firstName}
-          lastName={user.lastName}
-          status={user.status}
-          deparment={user.deparment}
-          date={user.date}
-        />
+          <UserInfo
+            key={user.id}
+            id={user.id}
+            firstName={user.firstName}
+            lastName={user.lastName}
+            status={user.status}
+            deparment={user.deparment}
+            date={user.date}
+          />
       ))}
     </div>
   );
