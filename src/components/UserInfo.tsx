@@ -39,7 +39,7 @@ function UserInfo(props: Userdata) {
           <div className="flex items-center w-40 ">
             <h1>{props.deparment}</h1>
           </div>
-          <div className="flex items-center w-40 ">
+          <div className="flex items-center w-40 pl-2">
             {props.status ? <Admin /> : <Normal />}
           </div>
           <div className="flex items-center w-40 ">
