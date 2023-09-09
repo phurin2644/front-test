@@ -10,6 +10,7 @@ import { Userdata } from "../Userdata";
 
 
 
+
 function UserInfo(props: Userdata) {
   const Admin = () => (
     <div className="bg-green-400 h-6 w-6 flex items-center justify-center rounded-lg">
@@ -62,10 +63,18 @@ function UserInfo(props: Userdata) {
   );
 }
 
-const UserList = () => {
+
+
+const UserList = (props: { value: string;}) => {
+  const {value} = props;
+  const lower = value.toLowerCase();
+  const filterList = userdata.filter((user) =>{
+    return user.firstName.toLowerCase().includes(lower) 
+    // || user.lastName.toLowerCase().includes(lower) ;
+  });
   return (
     <div>
-      {userdata.map((user) => (
+      {filterList.map((user) => (
         <UserInfo
           key={user.id}
           id={user.id}

@@ -1,11 +1,14 @@
-import { IconSearch } from "@tabler/icons-react";
-import { Input, ScrollArea, Button } from "@mantine/core";
+
+import { ScrollArea, Button, Input } from "@mantine/core";
 import { UserPlus } from "tabler-icons-react";
 import UserList from "../components/UserInfo";
+import SearchBar from "../components/SearchBar";
+import { useState } from "react";
+import { IconSearch } from "@tabler/icons-react";
 
 
 function Users() {
-  
+  const [searchText, setSearchText] = useState('');
   return (
     <>
       <div className="bg-slate-50 h-screen p-7">
@@ -15,16 +18,7 @@ function Users() {
               <h1 className="text-xl">User</h1>
               <h1 className="text-xs text-slate-500">x users</h1>
             </div>
-            <div className="justify-center">
-              <Input
-                style={{width:600}}
-                icon={<IconSearch className="h-5" />}
-                variant="filled"
-                placeholder="Search"
-                radius="lg"
-              />
-            </div>
-
+            <SearchBar value={searchText} onChange={setSearchText} />
             <Button className="bg-green-c rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-pro" >
               <div className="mr-2">
                 <UserPlus
@@ -58,7 +52,7 @@ function Users() {
           </div>
           <ScrollArea h={500} type="scroll">
             <div className="divide-y ">
-             <UserList />
+             <UserList value={searchText}/>
             </div>
           </ScrollArea>
 
