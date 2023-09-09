@@ -10,7 +10,7 @@ function SearchBar(props: { value: string; onChange: (value: string) => void }) 
         style={{ width: 600 }}
         icon={<IconSearch className="h-5" />}
         variant="filled"
-        placeholder="SearchBar"
+        placeholder="Search"
         radius="lg"
         type="search"
         onChange={(event) => {
