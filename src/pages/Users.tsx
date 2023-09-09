@@ -5,12 +5,14 @@ import UserList from "../components/UserInfo";
 import SearchBar from "../components/SearchBar";
 import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
+import userdata from "../data/Userdata";
 
 
 
 function Users() {
   const [searchText, setSearchText] = useState('');
   const [opened, { open, close }] = useDisclosure(false);
+  const numUser = userdata.length;
 
 
   return (
@@ -20,7 +22,7 @@ function Users() {
           <div className="flex justify-between p-4 pt-10">
             <div>
               <h1 className="text-xl">User</h1>
-              <h1 className="text-xs text-slate-500">x users</h1>
+              <h1 className="text-xs text-slate-500">{numUser} users</h1>
             </div>
             <SearchBar value={searchText} onChange={setSearchText} />
             <Modal opened={opened} onClose={close} title="Authentication" centered>
