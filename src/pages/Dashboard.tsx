@@ -75,7 +75,7 @@ function Dashboard() {
 const ActivityInfo = () => (
   <div>
     <Divider />
-    <div className="bg-slate-50 flex items-center p-3 justify-between font-light">
+    <div className="bg-slate-50 flex items-center p-4 justify-between font-light">
       <div className="flex w-64 ">
         <h1 className="w-9">1</h1>
         <h1>
@@ -95,10 +95,6 @@ const ActivityInfo = () => (
         <div className="flex w-44 justify-between">
           <div className="flex">
             <h1>Cell Text</h1>
-          </div>
-
-          <div className="h-8 w-8 flex items-center justify-center ">
-            <Dots size={20} strokeWidth={2} color={"#79a1d2"} />
           </div>
         </div>
       </div>
