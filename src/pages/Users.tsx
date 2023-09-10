@@ -28,7 +28,7 @@ function Users() {
             <Modal opened={opened} onClose={close} title="Authentication" centered>
               {/* Modal content */}
             </Modal>
-            <Button className="bg-green-c rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-pro" onClick={open}>
+            <Button className="bg-green-pro rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-c" onClick={open}>
               <div className="mr-2">
                 <UserPlus
                   size={20}
