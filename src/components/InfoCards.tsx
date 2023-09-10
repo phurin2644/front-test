@@ -1,17 +1,24 @@
+// import React from "react";
 import { Link } from "react-router-dom";
 
-function InfoCard() {
-    return (
-        <div className="bg-slate-400 h-28 w-52 p-4 m-5 rounded-md">
-            <h1>I'm Card</h1>
-            <Link to='/flow'>
-                <button className="bg-slate-200 p-1 rounded-md">click me!!</button>
-                
-            </Link>
-            
-
-        </div>
-    );
+interface InfoCardProps {
+  id: number;
+  title: string;
+  content: string;
+  timestamp: string;
 }
 
-export default InfoCard
+function InfoCard({ title, content, timestamp }: InfoCardProps) {
+  return (
+    <div className="bg-slate-400 h-35 w-52 p-4 m-5 rounded-md">
+      <h1>{title}</h1>
+      <p>{content}</p>
+      <p>{timestamp}</p>
+      <Link to="/flow">
+        <button className="bg-slate-200 p-1 rounded-md">Fast track!!</button>
+      </Link>
+    </div>
+  );
+}
+
+export default InfoCard;
