@@ -54,7 +54,7 @@ export default function Login({ }: Props) {
                         </div>
                         <button
                             type="button"
-                            className="mt-3 text-lg font-semibold bg-green-pro w-full text-white rounded-lg px-6 py-3 block shadow-lg hover:text-white hover:bg-green-c"
+                            className="mt-3 text-lg font-semibold bg-green-pro w-full text-white rounded-lg px-6 py-3 block shadow-md hover:text-white hover:bg-green-c"
                         >
                             Login
                         </button>
