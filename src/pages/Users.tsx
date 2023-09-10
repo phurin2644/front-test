@@ -1,11 +1,12 @@
 
-import { ScrollArea, Button, Modal } from "@mantine/core";
+import { ScrollArea, Button, Modal, TextInput, Checkbox, Autocomplete } from "@mantine/core";
 import { UserPlus } from "tabler-icons-react";
 import UserList from "../components/UserInfo";
 import SearchBar from "../components/SearchBar";
 import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import userdata from "../data/Userdata";
+import NewMember from "../components/NewMember";
 
 
 
@@ -25,8 +26,12 @@ function Users() {
               <h1 className="text-xs text-slate-500">{numUser} users</h1>
             </div>
             <SearchBar value={searchText} onChange={setSearchText} />
-            <Modal opened={opened} onClose={close} title="Authentication" centered>
-              {/* Modal content */}
+            <Modal opened={opened} onClose={close}  withCloseButton={false} centered overlayProps={{
+              color: '#dee2e6',
+              opacity: 0.2,
+              blur: 1,
+            }}>
+              <NewMember close={close} />
             </Modal>
             <Button className="bg-green-pro rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-c" onClick={open}>
               <div className="mr-2">
