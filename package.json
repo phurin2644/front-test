@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mantine/core": "^6.0.19",
+    "@mantine/core": "^6.0.20",
     "@mantine/hooks": "^6.0.19",
-    "@tabler/icons-react": "^2.32.0",
+    "@tabler/icons-react": "^2.34.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flow": "^1.0.3",
