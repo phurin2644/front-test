@@ -1,4 +1,4 @@
-import { Divider, Input, PasswordInput, TextInput } from '@mantine/core';
+import { Divider, PasswordInput, TextInput } from '@mantine/core';
 
 
 type Props = {};

@@ -1,5 +1,5 @@
 
-import { ScrollArea, Button, Modal, TextInput, Checkbox, Autocomplete } from "@mantine/core";
+import { ScrollArea, Button, Modal} from "@mantine/core";
 import { UserPlus } from "tabler-icons-react";
 import UserList from "../components/UserInfo";
 import SearchBar from "../components/SearchBar";

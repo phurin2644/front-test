@@ -1,5 +1,4 @@
 import { Divider, ScrollArea } from "@mantine/core";
-import { Dots } from "tabler-icons-react";
 
 function Dashboard() {
   return (
