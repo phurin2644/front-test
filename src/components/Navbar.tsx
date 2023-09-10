@@ -28,7 +28,7 @@ function Navbar() {
                             <Menu.Label>User Profile</Menu.Label>
                             <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
                             <Menu.Divider />
-                            <Menu.Item color="red" icon={<IconLogout size={14} />}>Delete my account</Menu.Item>
+                            <Menu.Item color="red" icon={<IconLogout size={14} />}>log out</Menu.Item>
                         </Menu.Dropdown>
                     </Menu>
 
