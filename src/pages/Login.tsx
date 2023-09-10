@@ -10,7 +10,7 @@ export default function Login({ }: Props) {
         <section className="w-screen h-screen flex">
             <div
                 className="flex-1 bg-cover bg-center"
-                style={{ backgroundImage: 'url("/login_bg.jpg")' }}
+                style={{ backgroundImage: 'url("/picture.png")' }}
             ></div>
             <div className="flex-1 bg-white p-20">
                 <form className="mt-8">
