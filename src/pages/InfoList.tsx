@@ -26,7 +26,7 @@ function InfoList() {
   const handleCreateCard = () => {
     const newCard = {
       id: infoCards.length + 1,
-      title: "New Card",
+      title: "New Card " +`${infoCards.length +1}`,
       content: "Content for New Card",
       timestamp: "2023-09-10 00:00:00",
     };
