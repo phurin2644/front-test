@@ -1,8 +1,10 @@
 import { Divider, ScrollArea } from "@mantine/core";
+import Navbar from "../components/Navbar";
 
 function Dashboard() {
   return (
     <>
+    <Navbar />
       <div className='bg-slate-50 p-7 '>
         <div className=" flex justify-center mx-10">
           <div className=" h-670 w-screen mr-10" >

@@ -15,6 +15,7 @@ import 'reactflow/dist/style.css';
 // import './text-updater-node.css';
 import { useDisclosure } from '@mantine/hooks';
 import { Drawer} from '@mantine/core';
+import Navbar from '../components/Navbar';
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 
@@ -121,6 +122,7 @@ function Flow() {
             <Drawer opened={opened} onClose={close} title="Authentication">
                 {/* Drawer content */}
             </Drawer>
+            <Navbar></Navbar>
             <div className='bg-slate-50 h-screen flex'>
                 <div className=' inline-block bg-green-light-3 h-11 w-32 ml-6 mt-8 p-1 rounded-md space-y-5'>
 

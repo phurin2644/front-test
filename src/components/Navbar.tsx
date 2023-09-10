@@ -1,12 +1,20 @@
 import { NavLink } from 'react-router-dom';
 import { Menu } from '@mantine/core';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        // Use navigate to navigate to the '/App' route
+        navigate('/');
+    };
+
     return (
         <div className="navbar ">
             <div className="flex justify-between gradient w-full">
-                <NavLink to='/'>
+                <NavLink to='/card'>
                     <div className="flex px-10 mx-6">
                         <img src="/icon.png " alt="" className="h-8 mt-4 mr-2" />
                         <h1 className="font-bold text-xl pt-4">Fast track</h1>
@@ -24,7 +32,7 @@ function Navbar() {
                             </div>
                         </Menu.Target>
 
-                        <Menu.Dropdown>
+                        <Menu.Dropdown onClick={handleClick}>
                             <Menu.Label>User Profile</Menu.Label>
                             <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
                             <Menu.Divider />

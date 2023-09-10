@@ -1,10 +1,15 @@
 import { Divider, PasswordInput, TextInput } from '@mantine/core';
-
+import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
 export default function Login({ }: Props) {
+    const navigate = useNavigate();
 
+    const handleClick = () => {
+        // Use navigate to navigate to the '/App' route
+        navigate('/card');
+    };
 
     return (
         <section className="w-screen h-screen flex">
@@ -55,19 +60,20 @@ export default function Login({ }: Props) {
                         <button
                             type="button"
                             className="mt-3 text-lg font-semibold bg-green-pro w-full text-white rounded-lg px-6 py-3 block shadow-md hover:text-white hover:bg-green-c"
+                            onClick={handleClick}
                         >
                             Login
                         </button>
-                        <Divider my="sm" className='mt-10 mb-7'/>
+                        <Divider my="sm" className='mt-10 mb-7' />
                         <a
-                                    href="#"
-                                    className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
-                                >
-                                    <span>No account yet? Sign Up</span>
-                                </a>
+                            href="#"
+                            className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
+                        >
+                            <span>No account yet? Sign Up</span>
+                        </a>
                     </div>
-                    
-                </form> 
+
+                </form>
             </div>
         </section>
     );

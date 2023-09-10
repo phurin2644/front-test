@@ -5,13 +5,15 @@ import Navbar from './components/Navbar'
 import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
 import InfoList from './pages/InfoList'
+import Login from './pages/Login'
 
 function App() {
   return (
     <>
-      <Navbar></Navbar>
+      
       <Routes>
-        <Route path='/' element={<InfoList />}></Route>
+        <Route path='/' element={<Login />}></Route>
+        <Route path='/card' element={<InfoList />}></Route>
         <Route path='/flow' element={<Flow />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/user' element={<Users />}></Route>

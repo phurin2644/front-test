@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import userdata from "../data/Userdata";
 import NewMember from "../components/NewMember";
+import Navbar from "../components/Navbar";
 
 
 
@@ -18,6 +19,7 @@ function Users() {
 
   return (
     <>
+    <Navbar></Navbar>
       <div className="bg-slate-50  p-7">
         <div className="bg-white h-screen  mx-10 rounded-lg shadow-md px-10">
           <div className="flex justify-between p-4 pt-10">
