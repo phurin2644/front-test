@@ -1,4 +1,4 @@
-import { Input, PasswordInput, TextInput } from '@mantine/core';
+import { Divider, Input, PasswordInput, TextInput } from '@mantine/core';
 
 
 type Props = {};
@@ -43,7 +43,7 @@ export default function Login({ }: Props) {
                                     Remember Me
                                 </span>
                             </label>
-                            <label className="block text-gray-500 font-bold my-4">
+                            <label className="block text-gray-500  my-4">
                                 <a
                                     href="#"
                                     className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
@@ -58,9 +58,16 @@ export default function Login({ }: Props) {
                         >
                             Login
                         </button>
-
+                        <Divider my="sm" className='mt-10 mb-7'/>
+                        <a
+                                    href="#"
+                                    className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
+                                >
+                                    <span>No account yet? Sign Up</span>
+                                </a>
                     </div>
-                </form>
+                    
+                </form> 
             </div>
         </section>
     );
