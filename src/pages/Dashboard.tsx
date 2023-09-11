@@ -8,8 +8,8 @@ const ActivityCard = (props: { title: string, detail: string, pic: string }) => 
   const { title, detail, pic } = props;
 
   return (
-    <div className="bg-slate-100 h-24 rounded-2xl mb-7 flex">
-      <div className=" h-24 w-36 rounded-l-2xl bg-cover bg-center"
+    <div className="bg-slate-100 h-88 rounded-2xl mb-8 flex">
+      <div className=" h-88 w-36 rounded-l-2xl bg-cover bg-center"
         style={{ backgroundImage: `url("${pic}")` }}>
       </div>
       <div className="p-4 pl-8">
