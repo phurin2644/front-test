@@ -1,13 +1,27 @@
 import { Divider, ScrollArea } from "@mantine/core";
 import Navbar from "../components/Navbar";
 
+const ActivityCard = (props: {title: string, detail:string}) => {
+  const { title, detail} = props;
+  return(
+    <div className="bg-slate-100 h-28 rounded-lg m-2 flex">
+      <div className="bg-orange-300 h-28 w-40 rounded-l-lg">
+      </div>
+      <div className="p-5">
+        <h1 className="text-lg">{title}</h1>
+        <h1 className="text-3xl font-thin">{detail}</h1>
+      </div>
+    </div>
+  );
+}
+
 function Dashboard() {
   return (
     <>
-    <Navbar />
-      <div className='bg-slate-50 p-7 '>
+      <Navbar />
+      <div className="bg-slate-50 p-7 ">
         <div className=" flex justify-center mx-10">
-          <div className=" h-670 w-screen mr-10" >
+          <div className=" h-670 w-screen mr-10">
             {/* //card1 Amit */}
             <div className="bg-white shadow-md h-320 rounded-lg ">
               <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
@@ -22,9 +36,17 @@ function Dashboard() {
             </div>
           </div>
           {/* //card3 Activity */}
-          <div className="bg-white shadow-md rounded-lg h-670 w-screen ml-10" >
+          <div className="bg-white shadow-md rounded-lg h-670 w-screen ml-10">
             <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
               <h1 className="pl-7">Activity</h1>
+            </div>
+            <div className="flex flex-col h-screen mx-12 m-5">
+              <ActivityCard title="เคสทั้งหมด" detail="2 เคส"/>
+              <ActivityCard title="เคสส่งตัวกลับ" detail="1 เคส"/>
+              <ActivityCard title="เคสเสียชีวิต" detail="0 เคส"/>
+              <ActivityCard title="เคสผ่าตัด" detail="1 เคส"/>
+              <ActivityCard title="เคสไม่ต้องผ่าตัด" detail="0 เคส"/>
+              <ActivityCard title="เคสตรงเวลา" detail="1 เคส"/>
             </div>
           </div>
         </div>
@@ -64,13 +86,11 @@ function Dashboard() {
                 <ActivityInfo />
               </div>
             </ScrollArea>
-
           </div>
         </div>
       </div>
-
     </>
-  )
+  );
 }
 
 const ActivityInfo = () => (
@@ -79,9 +99,7 @@ const ActivityInfo = () => (
     <div className="bg-slate-50 flex items-center p-4 justify-between font-light">
       <div className="flex w-64 ">
         <h1 className="w-9">1</h1>
-        <h1>
-          Jane Doe
-        </h1>
+        <h1>Jane Doe</h1>
       </div>
       <div className="flex justify-end">
         <div className="flex items-center w-44 ">
@@ -103,4 +121,4 @@ const ActivityInfo = () => (
   </div>
 );
 
-export default Dashboard
+export default Dashboard;
