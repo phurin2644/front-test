@@ -13,8 +13,8 @@ const ActivityCard = (props: { title: string, detail: string, pic: string }) => 
         style={{ backgroundImage: `url("${pic}")` }}>
       </div>
       <div className="p-4 pl-8">
-        <h1 className="text-lg">{title}</h1>
-        <h1 className="text-2xl">{detail}</h1>
+        <h1 className="text-base">{title}</h1>
+        <h1 className="text-xl">{detail}</h1>
       </div>
     </div>
   );
