@@ -1,27 +1,48 @@
 import { Divider, ScrollArea } from "@mantine/core";
 import Navbar from "../components/Navbar";
+import { DatePickerInput } from '@mantine/dates';
+import { useState } from "react";
+import { IconCalendar } from "@tabler/icons-react";
 
-const ActivityCard = (props: {title: string, detail:string}) => {
-  const { title, detail} = props;
-  return(
-    <div className="bg-slate-100 h-28 rounded-lg m-2 flex">
-      <div className="bg-orange-300 h-28 w-40 rounded-l-lg">
+const ActivityCard = (props: { title: string, detail: string, pic: string }) => {
+  const { title, detail, pic } = props;
+
+  return (
+    <div className="bg-slate-100 h-24 rounded-2xl mb-7 flex">
+      <div className=" h-24 w-36 rounded-l-2xl bg-cover bg-center"
+        style={{ backgroundImage: `url("${pic}")` }}>
       </div>
-      <div className="p-5">
+      <div className="p-4 pl-8">
         <h1 className="text-lg">{title}</h1>
-        <h1 className="text-3xl font-thin">{detail}</h1>
+        <h1 className="text-2xl">{detail}</h1>
       </div>
     </div>
   );
 }
 
 function Dashboard() {
+  const [dateStart, setDateStart] = useState<Date | null>(null);
+  const [dateEnd, setDateEnd] = useState<Date | null>(null);
   return (
     <>
       <Navbar />
-      <div className="bg-slate-50 p-7 ">
+      <div className="bg-slate-50 p-7 pt-4 ">
         <div className=" flex justify-center mx-10">
-          <div className=" h-670 w-screen mr-10">
+          <div className=" h-966 w-screen mr-10">
+            <div className="h-24 rounded-lg ">
+              <DatePickerInput
+                className="w-550 mt-2"
+                icon={<IconCalendar size="1.1rem" stroke={1.5} />}
+                valueFormat="DD MM YYYY"
+                label="เริ่มต้น"
+                placeholder="Pick date"
+                value={dateStart}
+                onChange={setDateStart}
+                maw={400}
+                size="md"
+                radius="md"
+              />
+            </div>
             {/* //card1 Amit */}
             <div className="bg-white shadow-md h-320 rounded-lg ">
               <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
@@ -36,19 +57,36 @@ function Dashboard() {
             </div>
           </div>
           {/* //card3 Activity */}
-          <div className="bg-white shadow-md rounded-lg h-670 w-screen ml-10">
-            <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
-              <h1 className="pl-7">Activity</h1>
+          <div className="h-966 w-screen ml-10">
+            <div className="h-24 rounded-lg ">
+              <DatePickerInput
+                className="w-550 mt-2"
+                icon={<IconCalendar size="1.1rem" stroke={1.5} />}
+                valueFormat="DD MM YYYY"
+                label="สิ้นสุด"
+                placeholder="Pick date"
+                value={dateEnd}
+                onChange={setDateEnd}
+                maw={400}
+                size="md"
+                radius="md"
+              />
             </div>
-            <div className="flex flex-col h-screen mx-12 m-5">
-              <ActivityCard title="เคสทั้งหมด" detail="2 เคส"/>
-              <ActivityCard title="เคสส่งตัวกลับ" detail="1 เคส"/>
-              <ActivityCard title="เคสเสียชีวิต" detail="0 เคส"/>
-              <ActivityCard title="เคสผ่าตัด" detail="1 เคส"/>
-              <ActivityCard title="เคสไม่ต้องผ่าตัด" detail="0 เคส"/>
-              <ActivityCard title="เคสตรงเวลา" detail="1 เคส"/>
+            <div className="bg-white shadow-md rounded-lg h-670">
+              <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
+                <h1 className="pl-7">Activity</h1>
+              </div>
+              <div className="flex flex-col h-screen mx-16 m-5 mt-12">
+                <ActivityCard title="เคสทั้งหมด" detail="2 เคส" pic="/c-2.png" />
+                <ActivityCard title="เคสส่งตัวกลับ" detail="1 เคส" pic="/c-1.png" />
+                <ActivityCard title="เคสเสียชีวิต" detail="0 เคส" pic="/c-3.png" />
+                <ActivityCard title="เคสผ่าตัด" detail="1 เคส" pic="/c-4.png" />
+                <ActivityCard title="เคสไม่ต้องผ่าตัด" detail="0 เคส" pic="/c-5.png" />
+                <ActivityCard title="เคสตรงเวลา" detail="1 เคส" pic="/c-6.png" />
+              </div>
             </div>
           </div>
+
         </div>
         <div className="flex justify-center ">
           <div className="bg-white shadow-md rounded-lg h-450 w-screen mx-10 mt-10">

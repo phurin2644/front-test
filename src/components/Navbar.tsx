@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import { Menu } from "@mantine/core";
 import { IconLogout, IconSettings } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
-import { MenuItem } from "@mantine/core/lib/Menu/MenuItem/MenuItem";
 
 function Navbar() {
   const navigate = useNavigate();
