@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
-export default function Login({ }: Props) {
+export default function Login(props:{login:() => void}) {
+    const { login } = props;
     const navigate = useNavigate();
 
     const handleClick = () => {
-        // Use navigate to navigate to the '/App' route
+        login()
         navigate('/card');
     };
 

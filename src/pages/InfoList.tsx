@@ -1,9 +1,10 @@
 "use client";
 import InfoCard from "../components/InfoCards";
-import { ScrollArea, Button, Modal } from "@mantine/core";
+import { ScrollArea, Button} from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/Navbar";
+
 
 const initialInfoCardsData = [
   {
