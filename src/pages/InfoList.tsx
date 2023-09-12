@@ -11,12 +11,14 @@ import { initialInfoCardsData } from "../data/Patient";
 function InfoList() {
   const [searchText, setSearchText] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
+  const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
 
   const lower = searchText.toLowerCase();
   const filterList = initialInfoCardsData.filter((Patient) => {
     return (
-      Patient.name.toLowerCase().includes(lower) ||
-      Patient.title.toLowerCase().includes(lower)
+      (Patient.name.toLowerCase().includes(lower) ||
+        Patient.title.toLowerCase().includes(lower)) &&
+      (selectedStatus === "" || Patient.Status === selectedStatus)
     );
   });
 
@@ -31,10 +33,16 @@ function InfoList() {
             {/* Create Button */}
             <div className="flex justify-end ml-10">
               <div className="flex border-2 border-dashed rounded-md border-zinc-600 px-2 gap-3 ">
-                <Button className="p-0 hover:bg-transparent">
+                <Button
+                  className="p-0 hover:bg-transparent"
+                  onClick={() => setSelectedStatus(true)}
+                >
                   <SuccessBtn />
                 </Button>
-                <Button className="p-0 hover:bg-transparent">
+                <Button
+                  className="p-0 hover:bg-transparent"
+                  onClick={() => setSelectedStatus(false)}
+                >
                   <ActiveBtn />
                 </Button>
               </div>
