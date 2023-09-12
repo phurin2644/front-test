@@ -1,10 +1,9 @@
 "use client";
-import InfoCard from "../components/InfoCards";
-import { ScrollArea, Button} from "@mantine/core";
+import InfoCard, { InfoCardEd } from "../components/InfoCards";
+import { ScrollArea, Button } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/Navbar";
-
 
 const initialInfoCardsData = [
   {
@@ -22,7 +21,7 @@ const initialInfoCardsData = [
 ];
 
 function InfoList() {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [infoCards, setInfoCards] = useState(initialInfoCardsData);
 
   const handleCreateCard = () => {
@@ -58,7 +57,7 @@ function InfoList() {
         </div>
         <ScrollArea className="w-full h-550 mt-7" type="scroll">
           <div className="grid justify-items-center grid-cols-5  gap-y-8">
-            {infoCards.map((card) => (
+            {/* {infoCards.map((card) => (
               <div className="col-span-1">
                 <InfoCard
                   id={card.id}
@@ -67,14 +66,28 @@ function InfoList() {
                   timestamp={card.timestamp}
                 />
               </div>
-            ))}
+            ))} */}
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
+            <InfoCardEd />
           </div>
         </ScrollArea>
-
       </div>
     </>
-
-
   );
 }
 
