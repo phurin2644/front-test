@@ -9,14 +9,16 @@ const initialInfoCardsData = [
   {
     id: 1,
     title: "Card 1",
-    content: "Content for Card 1",
+    name: "Phurin",
     timestamp: "2023-09-10 10:00:00",
+    Status: "Active",
   },
   {
     id: 2,
     title: "Card 2",
-    content: "Content for Card 2",
+    name: "Suwichada",
     timestamp: "2023-09-10 11:00:00",
+    Status: "Seccess",
   },
 ];
 
@@ -28,8 +30,9 @@ function InfoList() {
     const newCard = {
       id: infoCards.length + 1,
       title: "New Card " + `${infoCards.length + 1}`,
-      content: "Content for New Card",
+      name: "Content for New Card",
       timestamp: "2023-09-10 00:00:00",
+      Status: "Active",
     };
 
     setInfoCards([...infoCards, newCard]);
@@ -62,8 +65,9 @@ function InfoList() {
                 <InfoCard
                   id={card.id}
                   title={card.title}
-                  content={card.content}
+                  name={card.name}
                   timestamp={card.timestamp}
+                  Status={card.Status}
                 />
               </div>
             ))}
