@@ -1,46 +1,16 @@
 "use client";
-import InfoCard, {
-  ActiveBtn,
-  Success,
-  SuccessBtn,
-} from "../components/InfoCards";
-import { ScrollArea, Button } from "@mantine/core";
+import InfoCard, { ActiveBtn, SuccessBtn } from "../components/InfoCards";
+import { ScrollArea, Button, Modal } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/Navbar";
-
-const initialInfoCardsData = [
-  {
-    id: 1,
-    title: "Card 1",
-    name: "Phurin",
-    timestamp: "2023-09-10 10:00:00",
-    Status: "Active",
-  },
-  {
-    id: 2,
-    title: "Card 2",
-    name: "Suwichada",
-    timestamp: "2023-09-10 11:00:00",
-    Status: "Success",
-  },
-];
+import { useDisclosure } from "@mantine/hooks";
+import NewPatientList from "../components/NewPatientList";
+import { initialInfoCardsData } from "../data/Patient";
 
 function InfoList() {
   const [searchText, setSearchText] = useState("");
-  const [infoCards, setInfoCards] = useState(initialInfoCardsData);
-
-  const handleCreateCard = () => {
-    const newCard = {
-      id: infoCards.length + 1,
-      title: "New Card " + `${infoCards.length + 1}`,
-      name: "Content for New Card",
-      timestamp: "2023-09-10 00:00:00",
-      Status: "Active",
-    };
-
-    setInfoCards([...infoCards, newCard]);
-  };
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
@@ -52,15 +22,33 @@ function InfoList() {
             <SearchBar value={searchText} onChange={setSearchText} />
             {/* Create Button */}
             <div className="flex justify-end ml-10">
-              <div className="flex border-2 border-dashed rounded-md border-zinc-600 p-2 gap-3 ">
-                <SuccessBtn />
-                <ActiveBtn />
+              <div className="flex border-2 border-dashed rounded-md border-zinc-600 px-2 gap-3 ">
+                <Button className="p-0 hover:bg-transparent">
+                  <SuccessBtn />
+                </Button>
+                <Button className="p-0 hover:bg-transparent">
+                  <ActiveBtn />
+                </Button>
               </div>
 
+              <Modal
+                opened={opened}
+                onClose={close}
+                withCloseButton={false}
+                centered
+                overlayProps={{
+                  color: "#dee2e6",
+                  opacity: 0.2,
+                  blur: 1,
+                }}
+              >
+                <NewPatientList close={close} />
+              </Modal>
               <Button
                 style={{ width: 100 }}
-                onClick={handleCreateCard}
+                // onClick={handleCreateCard}
                 className="bg-green-pro  hover:bg-green-c p-1 rounded-md ml-7"
+                onClick={open}
               >
                 Create
               </Button>
@@ -69,7 +57,7 @@ function InfoList() {
         </div>
         <ScrollArea className="w-full h-550 mt-7" type="scroll">
           <div className="grid justify-items-center grid-cols-5  gap-y-8">
-            {infoCards.map((card) => (
+            {initialInfoCardsData.map((card) => (
               <div className="col-span-1">
                 <InfoCard
                   id={card.id}

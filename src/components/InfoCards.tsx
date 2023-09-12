@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@mantine/core";
 import { Bolt, ClockEdit, Edit } from "tabler-icons-react";
 
-interface InfoCardProps {
+export interface InfoCardProps {
   id: number;
   title: string;
   name: string;
