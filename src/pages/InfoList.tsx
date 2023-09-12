@@ -18,7 +18,7 @@ function InfoList() {
     return (
       (Patient.name.toLowerCase().includes(lower) ||
         Patient.title.toLowerCase().includes(lower)) &&
-      (selectedStatus === "" || Patient.Status === selectedStatus)
+      (selectedStatus === null || Patient.Status === selectedStatus)
     );
   });
 
