@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import { useDisclosure } from "@mantine/hooks";
 import NewPatientList from "../components/NewPatientList";
 import { initialInfoCardsData } from "../data/Patient";
+import { X } from "tabler-icons-react";
 
 function InfoList() {
   const [searchText, setSearchText] = useState("");
@@ -32,7 +33,7 @@ function InfoList() {
             <SearchBar value={searchText} onChange={setSearchText} />
             {/* Create Button */}
             <div className="flex justify-end ml-10">
-              <div className="flex border-2 border-dashed rounded-md border-zinc-600 px-2 gap-3 ">
+              <div className="flex border-2 border-dashed rounded-md border-zinc-600 px-2 gap-3 items-center justify-center">
                 <Button
                   className="p-0 hover:bg-transparent"
                   onClick={() => setSelectedStatus(true)}
@@ -44,6 +45,12 @@ function InfoList() {
                   onClick={() => setSelectedStatus(false)}
                 >
                   <ActiveBtn />
+                </Button>
+                <Button
+                  className="bg-stone-400 h-5 w-5 flex  rounded-full m-0 pl-0.5 "
+                  onClick={() => setSelectedStatus(null)}
+                >
+                  <X size={15} strokeWidth={2} color={"#FFFFFF"} />
                 </Button>
               </div>
 
@@ -84,9 +91,6 @@ function InfoList() {
                 />
               </div>
             ))}
-            {/* Success */}
-
-            {/* Active */}
           </div>
         </ScrollArea>
       </div>
