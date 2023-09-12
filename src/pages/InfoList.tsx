@@ -47,6 +47,7 @@ function InfoList() {
                   <ActiveBtn />
                 </Button>
                 <Button
+                  size="0.8"
                   className="bg-stone-400 h-5 w-5 flex  rounded-full m-0 pl-0.5 "
                   onClick={() => setSelectedStatus(null)}
                 >
