@@ -33,7 +33,7 @@ function InfoList() {
             <SearchBar value={searchText} onChange={setSearchText} />
             {/* Create Button */}
             <div className="flex justify-end ml-10">
-              <div className="flex border-2 border-dashed rounded-md border-zinc-600 px-2 gap-3 items-center justify-center">
+              <div className="flex border-2 border-dashed rounded-md border-zinc-400 px-2 gap-3 items-center justify-center">
                 <Button
                   className="p-0 hover:bg-transparent"
                   onClick={() => setSelectedStatus(true)}
