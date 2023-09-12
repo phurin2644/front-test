@@ -10,7 +10,7 @@ interface InfoCardProps {
 
 function InfoCard({ title, content, timestamp }: InfoCardProps) {
   return (
-    <div className="bg-slate-400 h-35 w-52 p-4 m-5 rounded-md">
+    <div className="bg-white shadow-sm h-35 w-52 p-4 rounded-md">
       <h1>{title}</h1>
       <p>{content}</p>
       <p>{timestamp}</p>

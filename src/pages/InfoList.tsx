@@ -1,9 +1,8 @@
 "use client";
-// import InfoCard from "../components/InfoCards";
+import InfoCard from "../components/InfoCards";
+import { IconSearch } from "@tabler/icons-react";
+import { Input } from "@mantine/core";
 import { useState } from "react";
-import SearchBar from "../components/SearchBar";
-import { useDisclosure } from "@mantine/hooks";
-import { Button, Modal } from "@mantine/core";
 
 const initialInfoCardsData = [
   {
@@ -21,17 +20,15 @@ const initialInfoCardsData = [
 ];
 
 function InfoList() {
-  // const [infoCards, setInfoCards] = useState(initialInfoCardsData);
-  const [searchText, setSearchText] = useState("");
-  const [opened, { open, close }] = useDisclosure(false);
+  const [infoCards, setInfoCards] = useState(initialInfoCardsData);
 
-  // const handleCreateCard = () => {
-  //   const newCard = {
-  //     id: infoCards.length + 1,
-  //     title: "New Card",
-  //     content: "Content for New Card",
-  //     timestamp: "2023-09-10 00:00:00",
-  //   };
+  const handleCreateCard = () => {
+    const newCard = {
+      id: infoCards.length + 1,
+      title: "New Card",
+      content: "Content for New Card",
+      timestamp: "2023-09-10 00:00:00",
+    };
 
   //   setInfoCards([...infoCards, newCard]);
   // };
@@ -42,28 +39,28 @@ function InfoList() {
     <div className="flex flex-col h-screen">
       <div className="flex justify-center items-center p-4">
         {/* Search Input */}
-        <SearchBar value={searchText} onChange={setSearchText} />
-
-        {/* content Input */}
-        <Modal opened={opened} onClose={close} title="Authentication" centered>
-          {/* Modal content */}
-        </Modal>
-
+        <Input
+          style={{ width: 600 }}
+          icon={<IconSearch className="h-5" />}
+          variant="filled"
+          placeholder="Search"
+          radius="lg"
+        />
+        {/* Create Button */}
         <div className="flex justify-end p-4">
-          <Button
+          <button
             style={{ width: 100 }}
-            // onClick={handleCreateCard}
-            className="bg-green-pro hover:bg-green-c p-1 rounded-md"
-            onClick={open}
+            onClick={handleCreateCard}
+            className="bg-slate-200 p-1 rounded-md"
           >
             Create
-          </Button>
+          </button>
         </div>
       </div>
 
-      <div className="bg p-1">
+      <div className="bg-slate-50 p-1">
         <div className="grid grid-cols-5 gap-4">
-          {/* {infoCards.map((card) => (
+          {infoCards.map((card) => (
             <div className="col-span-1 ml-4 mr-4">
               <InfoCard
                 id={card.id}
@@ -74,8 +71,10 @@ function InfoList() {
             </div>
           ))} */}
         </div>
-      </div>
+      </ScrollArea>
+
     </div>
+
   );
 }
 
