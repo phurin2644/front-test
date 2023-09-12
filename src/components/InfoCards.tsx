@@ -8,7 +8,7 @@ export interface InfoCardProps {
   title: string;
   name: string;
   timestamp: string;
-  Status: string;
+  Status: boolean;
 }
 
 export const SuccessBtn = () => {
@@ -50,22 +50,10 @@ export const Active = (prop: { title: string }) => {
 };
 
 function InfoCard({ title, name, timestamp, Status }: InfoCardProps) {
-  // let bgColorClass = "";
-
-  // if (Status === "Success") {
-  //   bgColorClass = "bg-green-Suscess-1";
-  // } else if (Status === "Active") {
-  //   bgColorClass = "bg-purple-Active-1";
-  // }
-
   return (
     <>
       <div className="bg-white shadow-sm h-44 w-64 rounded-md">
-        {Status === "Success" ? (
-          <Success title={title} />
-        ) : (
-          <Active title={title} />
-        )}
+        {Status ? <Success title={title} /> : <Active title={title} />}
         <div className="px-4 py-3">
           <h1>{name}</h1>
           <div className="flex items-center ">

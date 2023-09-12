@@ -3,7 +3,7 @@ export interface InfoCardProps {
   title: string;
   name: string;
   timestamp: string;
-  Status: string;
+  Status: boolean;
 }
 
 export const initialInfoCardsData: InfoCardProps[] = [
@@ -12,7 +12,7 @@ export const initialInfoCardsData: InfoCardProps[] = [
     title: "Card 1",
     name: "Phurin",
     timestamp: "2023-09-10 10:00:00",
-    Status: "Active",
+    Status: false,
   },
 
   {
@@ -20,27 +20,27 @@ export const initialInfoCardsData: InfoCardProps[] = [
     title: "Card 2",
     name: "Suwichada",
     timestamp: "2023-09-10 11:00:00",
-    Status: "Success",
+    Status: true,
   },
   {
     id: 3,
     title: "Card 3",
     name: "Peera",
     timestamp: "2023-09-10 11:00:00",
-    Status: "Success",
+    Status: true,
   },
   {
     id: 4,
     title: "Card 4",
     name: "Piyaphat",
     timestamp: "2023-09-10 11:00:00",
-    Status: "Success",
+    Status: true,
   },
   {
     id: 5,
     title: "Card 4",
     name: "Chonlanan",
     timestamp: "2023-09-10 11:00:00",
-    Status: "Success",
+    Status: true,
   },
 ];

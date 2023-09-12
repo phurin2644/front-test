@@ -12,6 +12,14 @@ function InfoList() {
   const [searchText, setSearchText] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
 
+  const lower = searchText.toLowerCase();
+  const filterList = initialInfoCardsData.filter((Patient) => {
+    return (
+      Patient.name.toLowerCase().includes(lower) ||
+      Patient.title.toLowerCase().includes(lower)
+    );
+  });
+
   return (
     <>
       <Navbar></Navbar>
@@ -46,7 +54,6 @@ function InfoList() {
               </Modal>
               <Button
                 style={{ width: 100 }}
-                // onClick={handleCreateCard}
                 className="bg-green-pro  hover:bg-green-c p-1 rounded-md ml-7"
                 onClick={open}
               >
@@ -56,8 +63,9 @@ function InfoList() {
           </div>
         </div>
         <ScrollArea className="w-full h-550 mt-7" type="scroll">
+          {/* Default */}
           <div className="grid justify-items-center grid-cols-5  gap-y-8">
-            {initialInfoCardsData.map((card) => (
+            {filterList.map((card) => (
               <div className="col-span-1">
                 <InfoCard
                   id={card.id}
@@ -68,6 +76,9 @@ function InfoList() {
                 />
               </div>
             ))}
+            {/* Success */}
+
+            {/* Active */}
           </div>
         </ScrollArea>
       </div>

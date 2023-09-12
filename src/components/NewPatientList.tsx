@@ -23,7 +23,7 @@ function NewPatientList(props: { close: () => void }) {
       title: HnInput,
       name: fullNameInput,
       timestamp: formattedDate,
-      Status: "Active",
+      Status: false,
     };
     console.log(currentDate);
     initialInfoCardsData.push(newPatient);
