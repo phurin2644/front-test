@@ -14,6 +14,9 @@ export default {
         "green-Suscess-1": "#A2ECC2",
         "green-Suscess-2": "#00A145",
         "green-Suscess-3": "#006129",
+        "purple-Active-1": "#CDA9D9",
+        "purple-Active-2": "#852FA2",
+        "purple-Active-3": "#501C61",
       },
       backgroundColor: {
         default: "#F6FAFA",

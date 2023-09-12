@@ -1,5 +1,9 @@
 "use client";
-import InfoCard from "../components/InfoCards";
+import InfoCard, {
+  ActiveBtn,
+  Success,
+  SuccessBtn,
+} from "../components/InfoCards";
 import { ScrollArea, Button } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
@@ -18,7 +22,7 @@ const initialInfoCardsData = [
     title: "Card 2",
     name: "Suwichada",
     timestamp: "2023-09-10 11:00:00",
-    Status: "Seccess",
+    Status: "Success",
   },
 ];
 
@@ -42,12 +46,17 @@ function InfoList() {
     <>
       <Navbar></Navbar>
       <div className="bg-slate-50 p-7 h-screen">
-        <div className="flex justify-center py-7">
-          <div className="flex ">
+        <div className="flex items-center justify-center py-7">
+          <div className="flex  ">
             {/* Search Input */}
             <SearchBar value={searchText} onChange={setSearchText} />
             {/* Create Button */}
-            <div className="flex justify-end ">
+            <div className="flex justify-end ml-10">
+              <div className="flex border-2 border-dashed rounded-md border-zinc-600 p-2 gap-3 ">
+                <SuccessBtn />
+                <ActiveBtn />
+              </div>
+
               <Button
                 style={{ width: 100 }}
                 onClick={handleCreateCard}
