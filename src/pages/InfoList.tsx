@@ -1,10 +1,9 @@
 "use client";
 import InfoCard from "../components/InfoCards";
-import { ScrollArea, Button} from "@mantine/core";
+import { ScrollArea, Button } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/Navbar";
-
 
 const initialInfoCardsData = [
   {
@@ -22,7 +21,7 @@ const initialInfoCardsData = [
 ];
 
 function InfoList() {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [infoCards, setInfoCards] = useState(initialInfoCardsData);
 
   const handleCreateCard = () => {
@@ -70,11 +69,8 @@ function InfoList() {
             ))}
           </div>
         </ScrollArea>
-
       </div>
     </>
-
-
   );
 }
 
