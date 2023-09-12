@@ -1,8 +1,9 @@
 "use client";
 import InfoCard from "../components/InfoCards";
-import { IconSearch } from "@tabler/icons-react";
-import { Input } from "@mantine/core";
+import { ScrollArea, Button } from "@mantine/core";
 import { useState } from "react";
+import SearchBar from "../components/SearchBar";
+import Navbar from "../components/Navbar";
 
 const initialInfoCardsData = [
   {
@@ -20,61 +21,56 @@ const initialInfoCardsData = [
 ];
 
 function InfoList() {
+  const [searchText, setSearchText] = useState("");
   const [infoCards, setInfoCards] = useState(initialInfoCardsData);
 
   const handleCreateCard = () => {
     const newCard = {
       id: infoCards.length + 1,
-      title: "New Card",
+      title: "New Card " + `${infoCards.length + 1}`,
       content: "Content for New Card",
       timestamp: "2023-09-10 00:00:00",
     };
 
-  //   setInfoCards([...infoCards, newCard]);
-  // };
-
-  // เอาไปใส่ใน modal
+    setInfoCards([...infoCards, newCard]);
+  };
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex justify-center items-center p-4">
-        {/* Search Input */}
-        <Input
-          style={{ width: 600 }}
-          icon={<IconSearch className="h-5" />}
-          variant="filled"
-          placeholder="Search"
-          radius="lg"
-        />
-        {/* Create Button */}
-        <div className="flex justify-end p-4">
-          <button
-            style={{ width: 100 }}
-            onClick={handleCreateCard}
-            className="bg-slate-200 p-1 rounded-md"
-          >
-            Create
-          </button>
-        </div>
-      </div>
-
-      <div className="bg-slate-50 p-1">
-        <div className="grid grid-cols-5 gap-4">
-          {infoCards.map((card) => (
-            <div className="col-span-1 ml-4 mr-4">
-              <InfoCard
-                id={card.id}
-                title={card.title}
-                content={card.content}
-                timestamp={card.timestamp}
-              />
+    <>
+      <Navbar></Navbar>
+      <div className="bg-slate-50 p-7 h-screen">
+        <div className="flex justify-center py-7">
+          <div className="flex ">
+            {/* Search Input */}
+            <SearchBar value={searchText} onChange={setSearchText} />
+            {/* Create Button */}
+            <div className="flex justify-end ">
+              <Button
+                style={{ width: 100 }}
+                onClick={handleCreateCard}
+                className="bg-green-pro  hover:bg-green-c p-1 rounded-md ml-7"
+              >
+                Create
+              </Button>
             </div>
-          ))} */}
+          </div>
         </div>
-      </ScrollArea>
-
-    </div>
-
+        <ScrollArea className="w-full h-550 mt-7" type="scroll">
+          <div className="grid justify-items-center grid-cols-5  gap-y-8">
+            {infoCards.map((card) => (
+              <div className="col-span-1">
+                <InfoCard
+                  id={card.id}
+                  title={card.title}
+                  content={card.content}
+                  timestamp={card.timestamp}
+                />
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>
+    </>
   );
 }
 

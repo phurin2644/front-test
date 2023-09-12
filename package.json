@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@mantine/core": "^6.0.20",
-    "@mantine/hooks": "^6.0.19",
+    "@mantine/dates": "^6.0.20",
+    "@mantine/hooks": "^6.0.20",
     "@tabler/icons-react": "^2.34.0",
+    "dayjs": "^1.11.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flow": "^1.0.3",
