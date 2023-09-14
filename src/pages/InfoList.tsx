@@ -91,24 +91,7 @@ function InfoList() {
                   Status={card.Status}
                 />
               </div>
-            ))} */}
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
-            <InfoCardEd />
-            <InfoCardEd />
-            <InfoCardEd />
-            <InfoCardEd />
-            <InfoCardEd />
-            <InfoCardEd />
-            <InfoCardEd />
+            ))}
           </div>
         </ScrollArea>
       </div>
