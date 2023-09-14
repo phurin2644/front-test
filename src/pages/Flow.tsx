@@ -16,6 +16,7 @@ import 'reactflow/dist/style.css';
 import { useDisclosure } from '@mantine/hooks';
 import { Drawer} from '@mantine/core';
 import Navbar from '../components/Navbar';
+import CustomDrawer from '../components/customdrawer';
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 
@@ -119,8 +120,12 @@ function Flow() {
 
     return (
         <>
-            <Drawer opened={opened} onClose={close} title="Authentication">
-                {/* Drawer content */}
+            <Drawer opened={opened} onClose={close} withCloseButton={false} overlayProps={{
+                color: '#dee2e6',
+                opacity: 0.2,
+                blur: 1,
+            }}>
+                <CustomDrawer />
             </Drawer>
             <Navbar></Navbar>
             <div className='bg-slate-50 h-screen flex'>
@@ -142,9 +147,6 @@ function Flow() {
                     <Panel position="top-right">
                         <button onClick={onAdd}>add node</button>
                     </Panel>
-                    <Background></Background>
-                    <Controls></Controls>
-
                 </ReactFlow>
             </div>
         </>
