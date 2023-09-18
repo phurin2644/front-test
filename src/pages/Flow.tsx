@@ -20,7 +20,8 @@ import { Menu } from "@mantine/core";
 import { IconSettings } from "@tabler/icons-react";
 import { IconLogout } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
-
+import { SuccessBtn } from "../components/InfoCards";
+import { InProcessBtn } from "../components/InfoCards";
 //import components
 import Navbar from "../components/Navbar";
 import CaseInfo from "../components/CaseInfo";
@@ -61,19 +62,18 @@ function Flow() {
     navigate("/");
   };
 
- 
   const options = [
     {
-      label: "Option1",
-      value: "op1",
+      label: "task1",
+      value: "t1",
     },
     {
-      label: "Option2",
-      value: "op2",
+      label: "task2",
+      value: "t2",
     },
     {
-      label: "Option3",
-      value: "op3",
+      label: "task3",
+      value: "t3",
     },
   ];
 
@@ -85,8 +85,10 @@ function Flow() {
       style: {
         width: 270,
         height: 190,
-
+        boxShadow: "1px 2px 9px #F4AAB9",
         padding: 0,
+        border: "none",
+        borderRadius: "5px",
       },
       data: {
         label: (
@@ -94,18 +96,23 @@ function Flow() {
             className="flex flex-col justify-center"
             style={{ width: "270px" }}
           >
-            <div className="flex justify-center bg-green-400 pl-4 py-2">
-              <p className="text-base font-bold">Success</p>
+            <div
+              className="flex justify-center pl-4 py-2"
+              style={{ borderRadius: "5px 5px 0px 0px", backgroundColor:"#A2ECC2"}}
+            >
+               <SuccessBtn/>
             </div>
 
             <div className="flex justify-center mt-3  pl-4">
-              <span className="text-xl font-semibold">จุดคัดกรอง</span>
+              <span className="text-xl font-semibold font-Mitr">
+                จุดคัดกรอง
+              </span>
             </div>
             <div className="flex justi-start pt-3  pl-4 mb-6">
               <img className="mr-3" src="src/img/unify.png" />
               <span className="text-base">วว/ดด/ปป 12.00</span>
             </div>
-            
+
             <section
               className="flex flex-row border-2 border-green-pro bg-slate-500 mx-auto"
               style={{ borderRadius: "5px", width: "250px" }}
@@ -124,14 +131,12 @@ function Flow() {
                   </article>
                 </Menu.Target>
 
-                <Menu.Dropdown onClick = {firstClickAddNode}>
+                <Menu.Dropdown onClick={firstClickAddNode}>
                   {options.map((x) => (
-                     <Menu.Item>
-                     <p>{x.label}</p>
-                   </Menu.Item>
- 
+                    <Menu.Item>
+                      <p>{x.label}</p>
+                    </Menu.Item>
                   ))}
-                  
                 </Menu.Dropdown>
               </Menu>
               <Menu shadow="md" width={250} position="top-end">
@@ -190,7 +195,10 @@ function Flow() {
       style: {
         width: 270,
         height: 190,
+        boxShadow: "1px 2px 9px #F4AAB9",
         padding: 0,
+        border: "none",
+        borderRadius: "5px",
       },
       data: {
         label: (
@@ -198,46 +206,70 @@ function Flow() {
             className="flex flex-col justify-center"
             style={{ width: "270px" }}
           >
-            <div className="flex justify-center bg-rose-400 pl-4 py-2">
-              <p className="text-base font-bold">In Process</p>
+            <div
+              className="flex justify-center pl-4 py-2"
+              style={{ borderRadius: "5px 5px 0px 0px",backgroundColor:"var(--info-3, #E08D8B)" }}
+            >
+              <InProcessBtn/>
             </div>
 
             <div className="flex justify-center mt-3  pl-4">
               <span className="text-xl font-semibold">จุดคัดกรอง</span>
             </div>
-            <div className="flex justi-start pt-3  pl-4">
+            <div className="flex justi-start pt-3 pl-4 mb-6">
               <img className="mr-3" src="src/img/unify.png" />
-              <span className="text-base font-bold">วว/ดด/ปป 12.00</span>
+              <span className="text-base font-base">วว/ดด/ปป 12.00</span>
             </div>
-            <div className="flex justify-end">
-              <span className="pl-3 font-semibold   text-sm">
+            {/* <div className="flex justify-end">
+              <span className="pl-3 font-semibold text-sm">
                 Node{idNode.current}
               </span>
-            </div>
+            </div> */}
 
             <section
               className="flex flex-row border-2 border-green-pro bg-slate-500 mx-auto"
               style={{ borderRadius: "5px", width: "250px" }}
             >
-              <div className="flex flex=row items-center flex-1 justify-start bg-white w-7/12">
-                <button
-                  onClick={onAdd}
-                  className="flex flex-row w-24 inline-block border-2 border-transparent text-sm bg-white"
-                  style={{ borderRadius: "5px" }}
-                >
-                  <img className="mr-2" src="/addicon.png"></img>
-                  <p className="text-sm font-semibold">Add Task</p>
-                </button>
-              </div>
-              <div className="flex flex-row items-center flex-1 justify-end bg-green-pro w-5/12">
-                <button
-                  className="flex flex-row w-24 inline-block border--2 border-transparent gap-x-4 pl-1"
-                  style={{ borderRadius: "5px" }}
-                >
-                  <p className="text-sm text-white font-semibold">Track</p>
-                  <img src="/Vector.png"></img>
-                </button>
-              </div>
+              <Menu shadow="md" width={123.4} position="bottom-end">
+                <Menu.Target>
+                  <article className="flex flex-col items-center flex-1 justify-start bg-white w-7/12">
+                    <button
+                      className="flex flex-row w-24 inline-block border-2 border-transparent text-sm bg-white aboslute"
+                      style={{ borderRadius: "5px" }}
+                      onClick={handleOpen}
+                    >
+                      <img className="mr-2" src="/addicon.png"></img>
+                      <p className="text-sm font-semibold">Add Task</p>
+                    </button>
+                  </article>
+                </Menu.Target>
+
+                <Menu.Dropdown onClick={firstClickAddNode}>
+                  {options.map((x) => (
+                    <Menu.Item>
+                      <p>{x.label}</p>
+                    </Menu.Item>
+                  ))}
+                </Menu.Dropdown>
+              </Menu>
+              <Menu shadow="md" width={250} position="top-end">
+                <Menu.Target>
+                  <article className="flex flex-row items-center flex-1 justify-end bg-green-pro w-5/12">
+                    <button
+                      className="flex flex-row w-24 inline-block border--2 border-transparent gap-x-4 pl-1"
+                      style={{ borderRadius: "5px" }}
+                    >
+                      <p className="text-sm text-white font-semibold">Track</p>
+                      <img src="/Vector.png"></img>
+                    </button>
+                  </article>
+                </Menu.Target>
+
+                {/* <Menu.Dropdown>
+                
+                  
+                </Menu.Dropdown> */}
+              </Menu>
             </section>
             <div></div>
           </main>
