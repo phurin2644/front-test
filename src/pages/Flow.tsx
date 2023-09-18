@@ -1,156 +1,310 @@
-import { useCallback, useRef, } from 'react';
+import { useCallback, useRef, useState } from "react";
+import "reactflow/dist/style.css";
+//import library
 import ReactFlow, {
-    Controls,
-    Background,
-    useNodesState,
-    useEdgesState,
-    addEdge,
-    Connection,
-    Edge,
-    Panel,
-} from 'reactflow';
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  Connection,
+  Edge,
+  // Panel,
+} from "reactflow";
+import { useDisclosure } from "@mantine/hooks";
+import { Button, Drawer } from "@mantine/core";
+import { Input, Tooltip, Select } from "@mantine/core";
+import { Edit } from "tabler-icons-react";
+import { IconInfoOctagon } from "@tabler/icons-react";
+import { Menu } from "@mantine/core";
+import { IconSettings } from "@tabler/icons-react";
+import { IconLogout } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
 
-import 'reactflow/dist/style.css';
+//import components
+import Navbar from "../components/Navbar";
+import CaseInfo from "../components/CaseInfo";
+
 // import TextUpdaterNode from './TextUpdaterNode';
 // import './text-updater-node.css';
-import { useDisclosure } from '@mantine/hooks';
-import { Drawer} from '@mantine/core';
-import Navbar from '../components/Navbar';
-import CustomDrawer from '../components/customdrawer';
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 
-const initialNodes = [
-    {
-        id: '1', position: { x: 550, y: 70 }, data: {
-            label: (<div className='h-20 w-24 ml-4'>
-                <p className='pl-3 font-medium text-sm'>Node1</p>
-                <div className=' bg-green-pro rounded-lg '>
-                    <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
-                        <div className='flex'>
-                            <img src="/addicon.png"></img>
-                            <button className='text-sm' >Add Task</button>
-                        </div>
-
-                    </div>
-                    <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
-                        <div className='flex'>
-                            <button className='text-sm'>Track</button>
-                            <img src="/Vector.png"></img>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>),
-
-        },
-        //type: 'textUpdater',
-    },
-
-];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2', animated: true }];
-
-// const getNodeId = () => `randomnode_${+new Date()}`;
-// const newIdNode = () => `randomnode_${+useRef(0)}`;
-
 function Flow() {
-    const [opened, { open, close }] = useDisclosure(false);
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  // var currentTime = new Date();
+  // var hours = currentTime.getHours();
+  // var minutes = currentTime.getMinutes();
+  // var seconds = currentTime.getSeconds(); time
 
-    const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+  const yPos = useRef(70);
+  const idNode = useRef(1);
 
-    // var currentTime = new Date();
-    // var hours = currentTime.getHours();
-    // var minutes = currentTime.getMinutes();
-    // var seconds = currentTime.getSeconds(); time
-    const yPos = useRef(70);
-    const idNode = useRef(1);
+  const handleChange = () => {};
 
-    const onAdd = useCallback(() => {
-        yPos.current += 120;
-        idNode.current += 1;
-        // console.log(yPos)
-        // console.log(yPos.current)
-        // console.log(getNodeId())
-        // console.log(getNodeId)
-        // console.log(idNode)
-        // console.log(newIdNode)
-        const newNode = {
-            id: `${idNode.current}`,
-            data: {
-                label: <div className='h-20 w-24 ml-4'>
-                    <p className='pl-3 font-medium text-sm'>Node{idNode.current}</p>
-                    <div className=' bg-green-pro rounded-lg '>
-                        <div className='w-24 p-0 m-0 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
-                            <div className='flex' onClick={onAdd}>
-                                <img src="/addicon.png"></img>
-                                <button className='text-sm' >Add Task</button>
-                            </div>
+  const [ages, setAges] = useState("0");
 
-                        </div>
-                        <div className='bg-green-pro w-24 pl-4 m-0 inline-block rounded-lg border-2 border-transparent hover:border-green-pro text-sm'>
-                            <div className='flex'>
-                                <button className='text-sm'>Track</button>
-                                <img src="/Vector.png"></img>
-                            </div>
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
-                        </div>
+  const handleOpen = () => {
+    setIsDropDownOpen(!isDropDownOpen);
+    // onAdd();
+  };
 
-                    </div>
+  const firstClickAddNode = () => {
+    onAdd();
+  };
 
-                </div>
-            },
-            position: {
-                x: 550,
-                y: yPos.current,
-            },
-        };
-        const newEdge = {
-            id: 'f',
-            source: `${idNode.current - 1}`,
-            target: `${idNode.current}`,
-        };
-        setNodes((nds) => nds.concat(newNode));
-        setEdges((nes) => nes.concat(newEdge));
-    }, [setNodes]);
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    // Use navigate to navigate to the '/App' route
+    navigate("/");
+  };
 
-    return (
-        <>
-            <Drawer opened={opened} onClose={close} withCloseButton={false} overlayProps={{
-                color: '#dee2e6',
-                opacity: 0.2,
-                blur: 1,
-            }}>
-                <CustomDrawer />
-            </Drawer>
-            <Navbar></Navbar>
-            <div className='bg-slate-50 h-screen flex'>
-                <div className=' inline-block bg-green-light-3 h-11 w-32 ml-6 mt-8 p-1 rounded-md space-y-5'>
+ 
+  const options = [
+    {
+      label: "Option1",
+      value: "op1",
+    },
+    {
+      label: "Option2",
+      value: "op2",
+    },
+    {
+      label: "Option3",
+      value: "op3",
+    },
+  ];
 
-                    <div className='w-24 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro' onClick={open}>
-                        <button >ข้อมูล</button>
-                    </div>
-                </div>
-                <ReactFlow
-                    nodes={nodes}
-                    edges={edges}
-                    onNodesChange={onNodesChange}
-                    onEdgesChange={onEdgesChange}
-                    onConnect={onConnect}
+  const initialNodes = [
+    {
+      id: "1",
+      position: { x: 550, y: 70 },
+      type: "input",
+      style: {
+        width: 270,
+        height: 190,
 
-
-                >
-                    <Panel position="top-right">
-                        <button onClick={onAdd}>add node</button>
-                    </Panel>
-                </ReactFlow>
+        padding: 0,
+      },
+      data: {
+        label: (
+          <main
+            className="flex flex-col justify-center"
+            style={{ width: "270px" }}
+          >
+            <div className="flex justify-center bg-green-400 pl-4 py-2">
+              <p className="text-base font-bold">Success</p>
             </div>
-        </>
-    );
-}
-export default Flow
 
+            <div className="flex justify-center mt-3  pl-4">
+              <span className="text-xl font-semibold">จุดคัดกรอง</span>
+            </div>
+            <div className="flex justi-start pt-3  pl-4 mb-6">
+              <img className="mr-3" src="src/img/unify.png" />
+              <span className="text-base">วว/ดด/ปป 12.00</span>
+            </div>
+            
+            <section
+              className="flex flex-row border-2 border-green-pro bg-slate-500 mx-auto"
+              style={{ borderRadius: "5px", width: "250px" }}
+            >
+              <Menu shadow="md" width={123.4} position="bottom-end">
+                <Menu.Target>
+                  <article className="flex flex-col items-center flex-1 justify-start bg-white w-7/12">
+                    <button
+                      className="flex flex-row w-24 inline-block border-2 border-transparent text-sm bg-white aboslute"
+                      style={{ borderRadius: "5px" }}
+                      onClick={handleOpen}
+                    >
+                      <img className="mr-2" src="/addicon.png"></img>
+                      <p className="text-sm font-semibold">Add Task</p>
+                    </button>
+                  </article>
+                </Menu.Target>
+
+                <Menu.Dropdown onClick = {firstClickAddNode}>
+                  {options.map((x) => (
+                     <Menu.Item>
+                     <p>{x.label}</p>
+                   </Menu.Item>
+ 
+                  ))}
+                  
+                </Menu.Dropdown>
+              </Menu>
+              <Menu shadow="md" width={250} position="top-end">
+                <Menu.Target>
+                  <article className="flex flex-row items-center flex-1 justify-end bg-green-pro w-5/12">
+                    <button
+                      className="flex flex-row w-24 inline-block border--2 border-transparent gap-x-4 pl-1"
+                      style={{ borderRadius: "5px" }}
+                    >
+                      <p className="text-sm text-white font-semibold">Track</p>
+                      <img src="/Vector.png"></img>
+                    </button>
+                  </article>
+                </Menu.Target>
+
+                {/* <Menu.Dropdown>
+                
+                  
+                </Menu.Dropdown> */}
+              </Menu>
+            </section>
+          </main>
+        ),
+      },
+      //type: 'textUpdater',
+    },
+  ];
+  const initialEdges = [
+    { id: "e-1", source: "1", target: "node-2", animated: true },
+    // { id: "e2-3," source: "2" target: "3", animated: true}
+  ];
+
+  const [opened, { open, close }] = useDisclosure(false);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const onConnect = useCallback(
+    (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
+  );
+
+  // const getNodeId = () => `randomnode_${+new Date()}`;
+  // const newIdNode = () => `randomnode_${+useRef(0)}`;
+
+  const onAdd = () => {
+    yPos.current += 120;
+    idNode.current += 1;
+    // console.log(yPos)
+    // console.log(yPos.current)
+    // console.log(getNodeId())
+    // console.log(getNodeId)
+    // console.log(idNode)
+    // console.log(newIdNode)
+    const newNode = {
+      id: `${idNode.current}`,
+      style: {
+        width: 270,
+        height: 190,
+        padding: 0,
+      },
+      data: {
+        label: (
+          <main
+            className="flex flex-col justify-center"
+            style={{ width: "270px" }}
+          >
+            <div className="flex justify-center bg-rose-400 pl-4 py-2">
+              <p className="text-base font-bold">In Process</p>
+            </div>
+
+            <div className="flex justify-center mt-3  pl-4">
+              <span className="text-xl font-semibold">จุดคัดกรอง</span>
+            </div>
+            <div className="flex justi-start pt-3  pl-4">
+              <img className="mr-3" src="src/img/unify.png" />
+              <span className="text-base font-bold">วว/ดด/ปป 12.00</span>
+            </div>
+            <div className="flex justify-end">
+              <span className="pl-3 font-semibold   text-sm">
+                Node{idNode.current}
+              </span>
+            </div>
+
+            <section
+              className="flex flex-row border-2 border-green-pro bg-slate-500 mx-auto"
+              style={{ borderRadius: "5px", width: "250px" }}
+            >
+              <div className="flex flex=row items-center flex-1 justify-start bg-white w-7/12">
+                <button
+                  onClick={onAdd}
+                  className="flex flex-row w-24 inline-block border-2 border-transparent text-sm bg-white"
+                  style={{ borderRadius: "5px" }}
+                >
+                  <img className="mr-2" src="/addicon.png"></img>
+                  <p className="text-sm font-semibold">Add Task</p>
+                </button>
+              </div>
+              <div className="flex flex-row items-center flex-1 justify-end bg-green-pro w-5/12">
+                <button
+                  className="flex flex-row w-24 inline-block border--2 border-transparent gap-x-4 pl-1"
+                  style={{ borderRadius: "5px" }}
+                >
+                  <p className="text-sm text-white font-semibold">Track</p>
+                  <img src="/Vector.png"></img>
+                </button>
+              </div>
+            </section>
+            <div></div>
+          </main>
+        ),
+      },
+      position: {
+        x: 550,
+        y: yPos.current,
+      },
+    };
+    const newEdge = {
+      id: "f",
+      source: `${idNode.current - 1}`,
+      target: `${idNode.current}`,
+    };
+    setNodes((nds) => nds.concat(newNode));
+    setEdges((nes) => nes.concat(newEdge));
+  };
+
+  return (
+    <>
+      <Navbar></Navbar>
+      <main className="flex h-screen">
+        <section className="flex bg-zinc-200  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
+          <div
+            className="flex justify-center w-12 h-12 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-black hover:bg-zinc-300"
+            onClick={open}
+          >
+            <button>
+              <IconInfoOctagon />
+            </button>
+          </div>
+        </section>
+        <Drawer
+          opened={opened}
+          onClose={close}
+          withCloseButton={false}
+          overlayProps={{
+            color: "#dee2e6",
+            opacity: 0.2,
+            blur: 1,
+          }}
+        >
+          <div className="px-4">
+            <div className="flex justify-end">
+              <Button className="bg-stone-200 p-0 m-0 px-2 hover:bg-stone-300">
+                <Edit size={20} strokeWidth={2} className="p-0 m-0" />
+              </Button>
+            </div>
+
+            {/* Drawer content */}
+            <CaseInfo />
+            {/* {Drawer content end} */}
+          </div>
+        </Drawer>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+        >
+          <Background></Background>
+          <Controls></Controls>
+        </ReactFlow>
+      </main>
+    </>
+  );
+}
+export default Flow;
