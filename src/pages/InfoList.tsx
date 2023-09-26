@@ -23,6 +23,10 @@ function InfoList() {
       (selectedStatus === null || Patient.Status === selectedStatus)
     );
   });
+  initialInfoCardsData.sort(
+    (a, b) => b.timestamp.getTime() - a.timestamp.getTime()
+  );
+
   // .sort(compareTimestamps);
 
   // function compareTimestamps(a: InfoCardProps, b: InfoCardProps): number {
