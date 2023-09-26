@@ -33,8 +33,9 @@ function Flow() {
   // var minutes = currentTime.getMinutes();
   // var seconds = currentTime.getSeconds(); time
 
-  const yPos: any = useRef(220);
   const xPos: any = useRef(550);
+  const yPos: any = useRef(50);
+ 
 
   const idNode = useRef(1);
 
@@ -51,10 +52,10 @@ function Flow() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    // Use navigate to navigate to the '/App' route
-    navigate("/");
-  };
+  // const handleClick = () => {
+  //   // Use navigate to navigate to the '/App' route
+  //   navigate("/");
+  // };
 
   const options = [
     {
@@ -148,11 +149,6 @@ function Flow() {
                     </button>
                   </article>
                 </Menu.Target>
-
-                {/* <Menu.Dropdown>
-                
-                  
-                </Menu.Dropdown> */}
               </Menu>
             </section>
           </main>
@@ -162,7 +158,7 @@ function Flow() {
     },
   ];
   const initialEdges = [
-    { id: "e-1", source: "1", target: "node-2", animated: true },
+    { id: "e-1", source: "1", target: "2", animated: true },
     // { id: "e2-3," source: "2" target: "3", animated: true}
   ];
 
