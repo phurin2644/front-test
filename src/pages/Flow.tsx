@@ -2,8 +2,6 @@ import { useCallback, useRef, useState } from "react";
 import "reactflow/dist/style.css";
 //import library
 import ReactFlow, {
-  Controls,
-  Background,
   useNodesState,
   useEdgesState,
   addEdge,
@@ -17,8 +15,6 @@ import { Input, Tooltip, Select } from "@mantine/core";
 import { Edit } from "tabler-icons-react";
 import { IconInfoOctagon } from "@tabler/icons-react";
 import { Menu } from "@mantine/core";
-import { IconSettings } from "@tabler/icons-react";
-import { IconLogout } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { SuccessBtn } from "../components/InfoCards";
 import { InProcessBtn } from "../components/InfoCards";
