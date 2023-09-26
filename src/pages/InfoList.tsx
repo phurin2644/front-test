@@ -8,6 +8,8 @@ import { useDisclosure } from "@mantine/hooks";
 import NewPatientList from "../components/NewPatientList";
 import { initialInfoCardsData } from "../data/Patient";
 import { X } from "tabler-icons-react";
+import { InfoCardProps } from "../components/InfoCards";
+
 
 function InfoList() {
   const [searchText, setSearchText] = useState("");
@@ -15,13 +17,28 @@ function InfoList() {
   const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
 
   const lower = searchText.toLowerCase();
-  const filterList = initialInfoCardsData.filter((Patient) => {
-    return (
-      (Patient.name.toLowerCase().includes(lower) ||
-        Patient.title.toLowerCase().includes(lower)) &&
-      (selectedStatus === null || Patient.Status === selectedStatus)
-    );
-  });
+  const filterList = initialInfoCardsData
+    .filter((Patient) => {
+      return (
+        (Patient.name.toLowerCase().includes(lower) ||
+          Patient.title.toLowerCase().includes(lower)) &&
+        (selectedStatus === null || Patient.Status === selectedStatus)
+      );
+    })
+    .sort(compareTimestamps);
+
+  function compareTimestamps(a: InfoCardProps, b: InfoCardProps): number {
+    const timestampA = new Date(a.timestamp);
+    const timestampB = new Date(b.timestamp);
+
+    if (timestampA < timestampB) {
+      return -1;
+    }
+    if (timestampA > timestampB) {
+      return 1;
+    }
+    return 0;
+  }
 
   return (
     <>
@@ -80,9 +97,9 @@ function InfoList() {
         </div>
         <ScrollArea className="w-full h-550 mt-7" type="scroll">
           {/* Default */}
-          <div className="grid justify-items-center grid-cols-5  gap-y-8">
+          <div className="justify-items-center flex flex-col md:grid md:grid-cols-3  lg:grid-cols-5   md:gap-y-8">
             {filterList.map((card) => (
-              <div className="col-span-1">
+              <div className="md:col-span-1">
                 <InfoCard
                   id={card.id}
                   title={card.title}

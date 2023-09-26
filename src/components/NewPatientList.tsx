@@ -9,7 +9,7 @@ function NewPatientList(props: { close: () => void }) {
   const [HnInput, sethnInput] = useState("");
 
   const Add = () => {
-    var currentDate = new Date();
+    const currentDate = new Date();
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
     const Sec = currentDate.getSeconds();
