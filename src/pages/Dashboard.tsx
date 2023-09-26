@@ -1,4 +1,4 @@
-import { Divider, ScrollArea } from "@mantine/core";
+import { Divider, RingProgress, ScrollArea, Text } from "@mantine/core";
 import Navbar from "../components/Navbar";
 import { DatePickerInput } from '@mantine/dates';
 import { useState } from "react";
@@ -8,7 +8,7 @@ const ActivityCard = (props: { title: string, detail: string, pic: string }) => 
   const { title, detail, pic } = props;
 
   return (
-    <div className="bg-slate-100 h-88 rounded-2xl mb-8 flex">
+    <div className="bg-slate-100 h-78 rounded-2xl mb-5 flex">
       <div className=" h-88 w-36 rounded-l-2xl bg-cover bg-center"
         style={{ backgroundImage: `url("${pic}")` }}>
       </div>
@@ -16,6 +16,17 @@ const ActivityCard = (props: { title: string, detail: string, pic: string }) => 
         <h1 className="text-base">{title}</h1>
         <h1 className="text-xl">{detail}</h1>
       </div>
+    </div>
+  );
+}
+
+const Ad = () => {
+  return (
+    <div className="flex items-center">
+      <div className="bg-green-pro h-4 w-4 rounded-full flex justify-center items-center mr-2" >
+        <div className="bg-white h-2 w-2 rounded-full"></div>
+      </div>
+      <h1>sicu (35%)</h1>
     </div>
   );
 }
@@ -48,11 +59,63 @@ function Dashboard() {
               <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
                 <h1 className="pl-7">Admit</h1>
               </div>
+              <div className=" pl-14 flex">
+                <RingProgress
+                  size={250}
+                  thickness={40}
+                  label={
+                    <Text size="xs" ta="center">
+                      Application data usage
+                    </Text>
+                  }
+                  sections={[
+                    { value: 40, color: 'cyan' },
+                    { value: 15, color: 'orange' },
+                    { value: 15, color: 'grape' },
+                  ]}
+                />
+                <div className="p-10 mt-10 flex space-x-5">
+                  <div className="space-y-4">
+                    <Ad></Ad>
+                    <Ad></Ad>
+                  </div>
+                  <div className="space-y-4">
+                    <Ad></Ad>
+                    <Ad></Ad>
+                  </div>
+                </div>
+              </div>
             </div>
             {/* //card2 Method */}
             <div className="bg-white shadow-md h-320 rounded-lg mt-8">
               <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
                 <h1 className="pl-7">Method</h1>
+              </div>
+              <div className=" pl-14 flex">
+                <RingProgress
+                  size={250}
+                  thickness={40}
+                  label={
+                    <Text size="xs" ta="center">
+                      Application data usage
+                    </Text>
+                  }
+                  sections={[
+                    { value: 40, color: 'cyan' },
+                    { value: 15, color: 'orange' },
+                    { value: 15, color: 'grape' },
+                  ]}
+                />
+                <div className="p-10 mt-10 flex space-x-5">
+                  <div className="space-y-4">
+                    <Ad></Ad>
+                    <Ad></Ad>
+                  </div>
+                  <div className="space-y-4">
+                    <Ad></Ad>
+                    <Ad></Ad>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -76,7 +139,7 @@ function Dashboard() {
               <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
                 <h1 className="pl-7">Activity</h1>
               </div>
-              <div className="flex flex-col h-screen mx-16 m-5 mt-12">
+              <div className="flex flex-col h-screen mx-16 m-5 mt-5">
                 <ActivityCard title="เคสทั้งหมด" detail="2 เคส" pic="/c-2.png" />
                 <ActivityCard title="เคสส่งตัวกลับ" detail="1 เคส" pic="/c-1.png" />
                 <ActivityCard title="เคสเสียชีวิต" detail="0 เคส" pic="/c-3.png" />
