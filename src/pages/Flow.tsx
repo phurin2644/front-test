@@ -37,12 +37,10 @@ function Flow() {
   // var minutes = currentTime.getMinutes();
   // var seconds = currentTime.getSeconds(); time
 
-  const yPos = useRef(70);
+  const yPos: any = useRef(220);
+  const xPos: any = useRef(550);
+
   const idNode = useRef(1);
-
-  const handleChange = () => {};
-
-  const [ages, setAges] = useState("0");
 
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
@@ -80,7 +78,7 @@ function Flow() {
   const initialNodes = [
     {
       id: "1",
-      position: { x: 550, y: 70 },
+      position: { x: xPos.current, y: yPos.current },
       type: "input",
       style: {
         width: 270,
@@ -98,9 +96,12 @@ function Flow() {
           >
             <div
               className="flex justify-center pl-4 py-2"
-              style={{ borderRadius: "5px 5px 0px 0px", backgroundColor:"#A2ECC2"}}
+              style={{
+                borderRadius: "5px 5px 0px 0px",
+                backgroundColor: "#A2ECC2",
+              }}
             >
-               <SuccessBtn/>
+              <SuccessBtn />
             </div>
 
             <div className="flex justify-center mt-3  pl-4">
@@ -182,7 +183,8 @@ function Flow() {
   // const newIdNode = () => `randomnode_${+useRef(0)}`;
 
   const onAdd = () => {
-    yPos.current += 120;
+    yPos.current += 250;
+
     idNode.current += 1;
     // console.log(yPos)
     // console.log(yPos.current)
@@ -208,9 +210,12 @@ function Flow() {
           >
             <div
               className="flex justify-center pl-4 py-2"
-              style={{ borderRadius: "5px 5px 0px 0px",backgroundColor:"var(--info-3, #E08D8B)" }}
+              style={{
+                borderRadius: "5px 5px 0px 0px",
+                backgroundColor: "var(--info-3, #E08D8B)",
+              }}
             >
-              <InProcessBtn/>
+              <InProcessBtn />
             </div>
 
             <div className="flex justify-center mt-3  pl-4">
@@ -220,11 +225,6 @@ function Flow() {
               <img className="mr-3" src="src/img/unify.png" />
               <span className="text-base font-base">วว/ดด/ปป 12.00</span>
             </div>
-            {/* <div className="flex justify-end">
-              <span className="pl-3 font-semibold text-sm">
-                Node{idNode.current}
-              </span>
-            </div> */}
 
             <section
               className="flex flex-row border-2 border-green-pro bg-slate-500 mx-auto"
@@ -264,11 +264,6 @@ function Flow() {
                     </button>
                   </article>
                 </Menu.Target>
-
-                {/* <Menu.Dropdown>
-                
-                  
-                </Menu.Dropdown> */}
               </Menu>
             </section>
             <div></div>
@@ -276,7 +271,7 @@ function Flow() {
         ),
       },
       position: {
-        x: 550,
+        x: xPos.current,
         y: yPos.current,
       },
     };
@@ -293,7 +288,7 @@ function Flow() {
     <>
       <Navbar></Navbar>
       <main className="flex h-screen">
-        <section className="flex bg-zinc-200  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
+        <section className="flex bg-green-pro  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
           <div
             className="flex justify-center w-12 h-12 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-black hover:bg-zinc-300"
             onClick={open}
@@ -331,10 +326,7 @@ function Flow() {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-        >
-          <Background></Background>
-          <Controls></Controls>
-        </ReactFlow>
+        ></ReactFlow>
       </main>
     </>
   );
