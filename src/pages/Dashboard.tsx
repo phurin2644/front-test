@@ -3,14 +3,19 @@ import Navbar from "../components/Navbar";
 import { DatePickerInput } from '@mantine/dates';
 import { useState } from "react";
 import { IconCalendar } from "@tabler/icons-react";
+import { FaBedPulse, FaSkull, FaUserGroup, FaPersonWalking, FaClock } from "react-icons/fa6";
+import { TbReload } from "react-icons/tb";
+import { IconType } from "react-icons";
+import React from "react";
 
-const ActivityCard = (props: { title: string, detail: string, pic: string }) => {
-  const { title, detail, pic } = props;
+const ActivityCard = (props: { title: string, detail: string, icon: IconType, bg: string}) => {
+  const { title, detail, icon, bg } = props;
 
   return (
-    <div className="bg-slate-100 h-78 rounded-2xl mb-5 flex">
-      <div className=" h-88 w-36 rounded-l-2xl bg-cover bg-center"
-        style={{ backgroundImage: `url("${pic}")` }}>
+    <div className="bg-slate-100 h-88 rounded-2xl mb-4 flex">
+      <div className=" h-88 w-32 rounded-l-2xl flex justify-center items-center"
+        style={{ backgroundColor: bg}}>
+           {icon && React.createElement(icon, { size: 40,style: { color: "white" }})} {/* Render the icon */}
       </div>
       <div className="p-4 pl-8">
         <h1 className="text-base">{title}</h1>
@@ -69,7 +74,7 @@ function Dashboard() {
                     </Text>
                   }
                   sections={[
-                    { value: 40, color: 'cyan' },
+                    { value: 60, color: 'cyan' },
                     { value: 15, color: 'orange' },
                     { value: 15, color: 'grape' },
                   ]}
@@ -101,7 +106,7 @@ function Dashboard() {
                     </Text>
                   }
                   sections={[
-                    { value: 40, color: 'cyan' },
+                    { value: 35, color: 'cyan' },
                     { value: 15, color: 'orange' },
                     { value: 15, color: 'grape' },
                   ]}
@@ -139,13 +144,13 @@ function Dashboard() {
               <div className="bg-green-bar  flex p-4 justify-between font-medium rounded-t-lg text-white">
                 <h1 className="pl-7">Activity</h1>
               </div>
-              <div className="flex flex-col h-screen mx-16 m-5 mt-5">
-                <ActivityCard title="เคสทั้งหมด" detail="2 เคส" pic="/c-2.png" />
-                <ActivityCard title="เคสส่งตัวกลับ" detail="1 เคส" pic="/c-1.png" />
-                <ActivityCard title="เคสเสียชีวิต" detail="0 เคส" pic="/c-3.png" />
-                <ActivityCard title="เคสผ่าตัด" detail="1 เคส" pic="/c-4.png" />
-                <ActivityCard title="เคสไม่ต้องผ่าตัด" detail="0 เคส" pic="/c-5.png" />
-                <ActivityCard title="เคสตรงเวลา" detail="1 เคส" pic="/c-6.png" />
+              <div className="flex flex-col h-screen mx-16 m-5 mt-4">
+              <ActivityCard title="เคสทั้งหมด" detail="2 เคส" icon={FaUserGroup} bg="#9573e8" />
+                <ActivityCard title="เคสส่งตัวกลับ" detail="1 เคส" icon={TbReload} bg="#73cbe8" />
+                <ActivityCard title="เคสเสียชีวิต" detail="0 เคส" icon={FaSkull} bg="#95969b" />
+                <ActivityCard title="เคสผ่าตัด" detail="1 เคส" icon={FaBedPulse} bg="#cc657c" />
+                <ActivityCard title="เคสไม่ต้องผ่าตัด" detail="0 เคส" icon={FaPersonWalking}bg="#66cbb8" />
+                <ActivityCard title="เคสตรงเวลา" detail="1 เคส" icon={FaClock} bg="#e7c974" />
               </div>
             </div>
           </div>
