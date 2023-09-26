@@ -78,6 +78,7 @@ function Dashboard() {
                     { value: 15, color: 'orange' },
                     { value: 15, color: 'grape' },
                   ]}
+                  rootColor="yellow"
                 />
                 <div className="p-10 mt-10 flex space-x-5">
                   <div className="space-y-4">
@@ -110,6 +111,7 @@ function Dashboard() {
                     { value: 15, color: 'orange' },
                     { value: 15, color: 'grape' },
                   ]}
+                  rootColor="yellow"
                 />
                 <div className="p-10 mt-10 flex space-x-5">
                   <div className="space-y-4">
