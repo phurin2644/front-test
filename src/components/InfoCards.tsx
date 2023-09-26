@@ -7,18 +7,24 @@ export interface InfoCardProps {
   id: number;
   title: string;
   name: string;
-  timestamp: string;
+  timestamp: Date;
   Status: boolean;
 }
 
-export const InProcessBtn = () =>{
-  return(
-    <div className = "flex items-center justify-center p-0.5 px-3 text-sm rounded-2xl text-white" style = {{backgroundColor:"#cc413d"}}>
-       <div style = {{backgroundColor:"#7a2725"}} className = "h-1.5 w-1.5 rounded mr-2"></div>
-       <h1>In Process</h1>
+export const InProcessBtn = () => {
+  return (
+    <div
+      className="flex items-center justify-center p-0.5 px-3 text-sm rounded-2xl text-white"
+      style={{ backgroundColor: "#cc413d" }}
+    >
+      <div
+        style={{ backgroundColor: "#7a2725" }}
+        className="h-1.5 w-1.5 rounded mr-2"
+      ></div>
+      <h1>In Process</h1>
     </div>
-  )
-}
+  );
+};
 
 export const SuccessBtn = () => {
   return (
@@ -59,6 +65,7 @@ export const Active = (prop: { title: string }) => {
 };
 
 function InfoCard({ title, name, timestamp, Status }: InfoCardProps) {
+  const formattedTimestamp = timestamp.toLocaleString();
   return (
     <>
       <div className="bg-white shadow-sm h-44 w-64 rounded-md">
@@ -72,7 +79,7 @@ function InfoCard({ title, name, timestamp, Status }: InfoCardProps) {
               color={"#008C8C"}
               className="mr-2 "
             />
-            <h1 className="text-xs py-4">{timestamp}</h1>
+            <h1 className="text-xs py-4">{formattedTimestamp}</h1>
           </div>
           <div className="flex justify-center">
             <Button className="bg-green-light-1 hover:bg-green-g text-slate-400 rounded-r-none px-3 pr-5">

@@ -6,29 +6,63 @@ import { initialInfoCardsData } from "../data/Patient";
 function NewPatientList(props: { close: () => void }) {
   const { close } = props;
   const [fullNameInput, setFullNameInput] = useState("");
-  const [HnInput, sethnInput] = useState("");
+  const [HnInput, setHnInput] = useState("");
+
+  function convertToDate(dateString: string) {
+    const [datePart, timePart] = dateString.split(" ");
+    const [day, month, year] = datePart.split("/");
+    const [hours, minutes, seconds] = timePart.split(":");
+
+    // Month in JavaScript Date is 0-indexed, so we subtract 1 from the month
+    return new Date(
+      Number(`20${year}`),
+      Number(month) - 1,
+      Number(day),
+      Number(hours),
+      Number(minutes),
+      Number(seconds)
+    );
+  }
 
   const Add = () => {
     const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
-    const Sec = currentDate.getSeconds();
-    const day = currentDate.getDate();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const fullYear = currentDate.getFullYear();
-    const year = String(fullYear).slice(-2);
-    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${Sec}`;
+    const seconds = currentDate.getSeconds();
+
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+
     const newPatient: InfoCardProps = {
       id: initialInfoCardsData.length + 1,
       title: HnInput,
       name: fullNameInput,
-      timestamp: formattedDate,
+      timestamp: convertToDate(formattedDate),
       Status: false,
     };
+    addOrUpdateCard(newPatient);
     console.log(currentDate);
-    initialInfoCardsData.push(newPatient);
     close();
   };
+
+  function addOrUpdateCard(card: InfoCardProps) {
+    const index = initialInfoCardsData.findIndex((item) => item.id === card.id);
+
+    if (index !== -1) {
+      initialInfoCardsData[index] = card;
+    } else {
+      initialInfoCardsData.push(card);
+    }
+
+    // Sort the array based on the timestamp in descending order
+    initialInfoCardsData.sort((a, b) => {
+      const timestampA = new Date(a.timestamp);
+      const timestampB = new Date(b.timestamp);
+      return timestampB.getTime() - timestampA.getTime();
+    });
+  }
 
   return (
     <div className="mx-4">
@@ -38,7 +72,7 @@ function NewPatientList(props: { close: () => void }) {
         withAsterisk
         onChange={(event) => {
           const text = event.target.value;
-          sethnInput(text);
+          setHnInput(text);
           console.log(text);
         }}
         value={HnInput}

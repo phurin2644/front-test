@@ -10,35 +10,33 @@ import { initialInfoCardsData } from "../data/Patient";
 import { X } from "tabler-icons-react";
 import { InfoCardProps } from "../components/InfoCards";
 
-
 function InfoList() {
   const [searchText, setSearchText] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
 
   const lower = searchText.toLowerCase();
-  const filterList = initialInfoCardsData
-    .filter((Patient) => {
-      return (
-        (Patient.name.toLowerCase().includes(lower) ||
-          Patient.title.toLowerCase().includes(lower)) &&
-        (selectedStatus === null || Patient.Status === selectedStatus)
-      );
-    })
-    .sort(compareTimestamps);
+  const filterList = initialInfoCardsData.filter((Patient: InfoCardProps) => {
+    return (
+      (Patient.name.toLowerCase().includes(lower) ||
+        Patient.title.toLowerCase().includes(lower)) &&
+      (selectedStatus === null || Patient.Status === selectedStatus)
+    );
+  });
+  // .sort(compareTimestamps);
 
-  function compareTimestamps(a: InfoCardProps, b: InfoCardProps): number {
-    const timestampA = new Date(a.timestamp);
-    const timestampB = new Date(b.timestamp);
+  // function compareTimestamps(a: InfoCardProps, b: InfoCardProps): number {
+  //   const timestampA = new Date(a.timestamp);
+  //   const timestampB = new Date(b.timestamp);
 
-    if (timestampA < timestampB) {
-      return -1;
-    }
-    if (timestampA > timestampB) {
-      return 1;
-    }
-    return 0;
-  }
+  //   if (timestampA < timestampB) {
+  //     return 1; // Return 1 for descending order
+  //   }
+  //   if (timestampA > timestampB) {
+  //     return -1; // Return -1 for descending order
+  //   }
+  //   return 0;
+  // }
 
   return (
     <>
