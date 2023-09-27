@@ -18,11 +18,12 @@ function NewMember(props: { close: () => void }) {
         const year = String(fullYear).slice(-2);
         const formattedDate = `${day}/${month}/${year}`;
         const newMem: Userdata = {
+            title: "",
             id: `${userdata.length + 1}`,
             firstName: firstNameInput,
             lastName: lastNameInput,
-            status: adminInput,
-            deparment: departmentInput,
+            role: "adminInput",
+            department: departmentInput,
             date: formattedDate
         };
         console.log(currentDate)
