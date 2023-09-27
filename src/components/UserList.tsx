@@ -1,14 +1,7 @@
-
 import { Userdata } from "../data/Userdata";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import UserInfo from "./UserInfo";
-
-
-
-
-
-
 
 
 const UserList = (props: { value: string; }) => {
