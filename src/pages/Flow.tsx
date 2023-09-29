@@ -21,6 +21,8 @@ import { InProcessBtn } from "../components/InfoCards";
 //import components
 import Navbar from "../components/Navbar";
 import CaseInfo from "../components/CaseInfo";
+import { Icon } from "@iconify/react";
+
 
 // import TextUpdaterNode from './TextUpdaterNode';
 // import './text-updater-node.css';
@@ -35,7 +37,6 @@ function Flow() {
 
   const xPos: any = useRef(550);
   const yPos: any = useRef(50);
- 
 
   const idNode = useRef(1);
 
@@ -106,8 +107,8 @@ function Flow() {
                 จุดคัดกรอง
               </span>
             </div>
-            <div className="flex justi-start pt-3  pl-4 mb-6">
-              <img className="mr-3" src="src/img/unify.png" />
+            <div className="flex justify-start items-center pt-3  pl-4 mb-6">
+              <Icon icon="fa-solid:user-clock" color="#008c8c" className = "w-6 h-6 ml-3 mr-4"/>
               <span className="text-base">วว/ดด/ปป 12.00</span>
             </div>
 
@@ -123,8 +124,8 @@ function Flow() {
                       style={{ borderRadius: "5px" }}
                       onClick={handleOpen}
                     >
-                      <img className="mr-2" src="/addicon.png"></img>
-                      <p className="text-sm font-semibold">Add Task</p>
+                      <Icon icon="basil:add-outline" className = "h-7 w-7"/>
+                      <p className="text-sm font-semibold flex justify-center items-center">Add Task</p>
                     </button>
                   </article>
                 </Menu.Target>
