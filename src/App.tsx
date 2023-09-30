@@ -12,9 +12,6 @@ function App() {
   function handleLogin(){
     setLoggedIn(true)
   }
-  function handleLogout(){
-    setLoggedIn(false)
-  }
   console.log(loggedIn)
 
   return (
