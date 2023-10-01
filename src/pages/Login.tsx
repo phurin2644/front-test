@@ -17,7 +17,10 @@ export default function Login(props: { login: () => void }) {
       const response = await axios.post('/auth/signin',{
         username: emailInput,
         password: passwordInput,
-      });
+      },{
+        withCredentials: true
+      }
+      );
 
       if(response.status === 200){
         const userData = response.data;
