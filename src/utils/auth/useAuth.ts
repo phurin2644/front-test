@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../api/axios';
 
 import useAuthStore from './store';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ function useAuth() {
   const getAuth = async () => {
     setState('loading');
     try {
-      const res = await axios.get('http://localhost:5000/auth/me', { withCredentials: true });
+      const res = await axios.get('/auth/me', { withCredentials: true });
       setUser(res.data);
       setState('signedIn');
     } catch (err) {
@@ -26,7 +26,7 @@ function useAuth() {
 
   async function logOut() {
     axios
-      .get('http://localhost:5000/auth/logout', { withCredentials: true })
+      .get('/auth/logout', { withCredentials: true })
       .then(() => {
         setUser(null);
         setState('loggedOut');

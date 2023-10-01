@@ -1,12 +1,12 @@
 import { Button, Divider, PasswordInput, TextInput } from "@mantine/core";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios";
+import useAuth from "../utils/auth/useAuth";
 
 // type Props = {};
 
 export default function Login(props: { login: () => void }) {
-  const { login } = props;
   const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -14,7 +14,7 @@ export default function Login(props: { login: () => void }) {
 
   const handleClick = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/auth/signin',{
+      const response = await axios.post('/auth/signin',{
         username: emailInput,
         password: passwordInput,
       });
@@ -22,7 +22,7 @@ export default function Login(props: { login: () => void }) {
       if(response.status === 200){
         const userData = response.data;
         console.log('Login succesful',userData);
-        login();
+        
         navigate("/card");
       }else{
         console.error("Login failed");
