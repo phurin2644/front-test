@@ -6,34 +6,36 @@ import useAuth from "../utils/auth/useAuth";
 
 // type Props = {};
 
-export default function Login(props: { login: () => void }) {
+export default function Login() {
   const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [check, setCheck] = useState(false);
-
+  const { getAuth } = useAuth();
   const handleClick = async () => {
     try {
-      const response = await axios.post('/auth/signin',{
-        username: emailInput,
-        password: passwordInput,
-      },{
-        withCredentials: true
-      }
+      const response = await axios.post(
+        "/auth/signin",
+        {
+          username: emailInput,
+          password: passwordInput,
+        },
+        {
+          withCredentials: true,
+        }
       );
 
-      if(response.status === 200){
+      if (response.status === 200) {
         const userData = response.data;
-        console.log('Login succesful',userData);
-        
+        console.log("Login succesful", userData);
+
+        await getAuth();
         navigate("/card");
-      }else{
+      } else {
         console.error("Login failed");
       }
-
     } catch (error) {
-      console.error('Login error',error)
-      
+      console.error("Login error", error);
     }
   };
 
@@ -109,7 +111,7 @@ export default function Login(props: { login: () => void }) {
               type="button"
               className="mt-3 text-lg font-semibold bg-green-pro w-full text-white rounded-lg px-6  shadow-md hover:text-white hover:bg-green-c"
               onClick={handleClick}
-              disabled={!emailInput || !passwordInput }
+              disabled={!emailInput || !passwordInput}
             >
               Login
             </Button>

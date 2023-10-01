@@ -11,14 +11,20 @@ export interface InfoCardProps {
   Status: boolean;
 }
 
-export const InProcessBtn = () =>{
-  return(
-    <div className = "flex items-center justify-center p-0.5 px-3 text-sm rounded-2xl text-white" style = {{backgroundColor:"#cc413d"}}>
-       <div style = {{backgroundColor:"#7a2725"}} className = "h-1.5 w-1.5 rounded mr-2"></div>
-       <h1>In Process</h1>
+export const InProcessBtn = () => {
+  return (
+    <div
+      className="flex items-center justify-center p-0.5 px-3 text-sm rounded-2xl text-white"
+      style={{ backgroundColor: "#cc413d" }}
+    >
+      <div
+        style={{ backgroundColor: "#7a2725" }}
+        className="h-1.5 w-1.5 rounded mr-2"
+      ></div>
+      <h1>In Process</h1>
     </div>
-  )
-}
+  );
+};
 
 export const SuccessBtn = () => {
   return (
