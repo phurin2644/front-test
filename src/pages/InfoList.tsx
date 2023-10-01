@@ -1,27 +1,42 @@
 "use client";
 import InfoCard, { ActiveBtn, SuccessBtn } from "../components/InfoCards";
 import { ScrollArea, Button, Modal } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/Navbar";
 import { useDisclosure } from "@mantine/hooks";
 import NewPatientList from "../components/NewPatientList";
-import { initialInfoCardsData } from "../data/Patient";
 import { X } from "tabler-icons-react";
+import axios from "axios";
+import { InfoCardProps } from "../data/Patient";
 
 function InfoList() {
   const [searchText, setSearchText] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
 
+  const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/patients")
+      .then((res) => {
+        setInfoCard(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
   const lower = searchText.toLowerCase();
-  const filterList = initialInfoCardsData.filter((Patient) => {
+  const filterList = infoCard.filter((Patient) => {
     return (
-      (Patient.name.toLowerCase().includes(lower) ||
-        Patient.title.toLowerCase().includes(lower)) &&
+      (Patient.firstName.toLowerCase().includes(lower) ||
+        Patient.hospitalNumber.toLowerCase().includes(lower)) &&
       (selectedStatus === null || Patient.Status === selectedStatus)
     );
   });
+  console.log(infoCard);
 
   return (
     <>
@@ -85,9 +100,10 @@ function InfoList() {
               <div className="col-span-1">
                 <InfoCard
                   id={card.id}
-                  title={card.title}
-                  name={card.name}
-                  timestamp={card.timestamp}
+                  firstName={card.firstName}
+                  lastName={card.lastName}
+                  hospitalNumber={card.hospitalNumber}
+                  createdAt={card.createdAt}
                   Status={card.Status}
                 />
               </div>

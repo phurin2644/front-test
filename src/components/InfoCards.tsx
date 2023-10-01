@@ -1,15 +1,7 @@
-// import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mantine/core";
 import { Bolt, ClockEdit, Edit } from "tabler-icons-react";
-
-export interface InfoCardProps {
-  id: number;
-  title: string;
-  name: string;
-  timestamp: string;
-  Status: boolean;
-}
+import { InfoCardProps } from "../data/Patient";
 
 export const SuccessBtn = () => {
   return (
@@ -49,13 +41,27 @@ export const Active = (prop: { title: string }) => {
   );
 };
 
-function InfoCard({ title, name, timestamp, Status }: InfoCardProps) {
+function InfoCard({
+  firstName,
+  lastName,
+  hospitalNumber,
+  createdAt,
+  Status,
+}: InfoCardProps) {
+  const formattedDate = createdAt.toLocaleString();
+
   return (
     <>
       <div className="bg-white shadow-sm h-44 w-64 rounded-md">
-        {Status ? <Success title={title} /> : <Active title={title} />}
+        {Status ? (
+          <Success title={hospitalNumber} />
+        ) : (
+          <Active title={hospitalNumber} />
+        )}
         <div className="px-4 py-3">
-          <h1>{name}</h1>
+          <h1>
+            {firstName} {lastName}
+          </h1>
           <div className="flex items-center ">
             <ClockEdit
               size={20}
@@ -63,7 +69,7 @@ function InfoCard({ title, name, timestamp, Status }: InfoCardProps) {
               color={"#008C8C"}
               className="mr-2 "
             />
-            <h1 className="text-xs py-4">{timestamp}</h1>
+            <h1 className="text-xs py-4">{formattedDate}</h1>
           </div>
           <div className="flex justify-center">
             <Button className="bg-green-light-1 hover:bg-green-g text-slate-400 rounded-r-none px-3 pr-5">
