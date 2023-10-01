@@ -95,7 +95,7 @@ function InfoList() {
         </div>
         <ScrollArea className="w-full h-550 mt-7" type="scroll">
           {/* Default */}
-          <div className="grid justify-items-center grid-cols-5  gap-y-8">
+          <div className="grid justify-items-center grid-cols-4  gap-y-6 gap-x-1">
             {filterList.map((card) => (
               <div className="col-span-1">
                 <InfoCard

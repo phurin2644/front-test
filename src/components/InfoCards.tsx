@@ -48,7 +48,17 @@ function InfoCard({
   createdAt,
   Status,
 }: InfoCardProps) {
-  const formattedDate = createdAt.toLocaleString();
+  const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  });
+
+  const hours = String(new Date(createdAt).getHours()).padStart(2, "0");
+  const minutes = String(new Date(createdAt).getMinutes()).padStart(2, "0");
+  const seconds = String(new Date(createdAt).getSeconds()).padStart(2, "0");
+  const formattedTime = `${hours}:${minutes}:${seconds}`;
+  const fullFormattedDate = `${formattedDate} ${formattedTime}`;
 
   return (
     <>
@@ -69,7 +79,7 @@ function InfoCard({
               color={"#008C8C"}
               className="mr-2 "
             />
-            <h1 className="text-xs py-4">{formattedDate}</h1>
+            <h1 className="text-xs py-4">{fullFormattedDate}</h1>
           </div>
           <div className="flex justify-center">
             <Button className="bg-green-light-1 hover:bg-green-g text-slate-400 rounded-r-none px-3 pr-5">
