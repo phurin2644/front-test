@@ -60,7 +60,7 @@ function NewMember(props: { close: () => void }) {
                 label="Department"
                 placeholder="Department"
                 withAsterisk
-                data={['front-end', 'back-end', 'etc']}
+                data={['ER', 'OR', 'LAB','ANY']}
                 onChange={(event) => {
                     const text = event;
                     setDepartmentInput(text);
