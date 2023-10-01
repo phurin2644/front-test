@@ -1,20 +1,22 @@
 
 import { ScrollArea, Button, Modal} from "@mantine/core";
 import { UserPlus } from "tabler-icons-react";
-import UserList from "../components/UserInfo";
+import UserList from "../components/UserList";
 import SearchBar from "../components/SearchBar";
-import { useState } from "react";
+import { useState  } from "react";
 import { useDisclosure } from "@mantine/hooks";
-import userdata from "../data/Userdata";
 import NewMember from "../components/NewMember";
 import Navbar from "../components/Navbar";
+
 
 
 
 function Users() {
   const [searchText, setSearchText] = useState('');
   const [opened, { open, close }] = useDisclosure(false);
-  const numUser = userdata.length;
+  const numUser = 0;
+
+
 
 
   return (

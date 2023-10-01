@@ -10,17 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
     "@mantine/core": "^6.0.20",
     "@mantine/dates": "^6.0.20",
     "@mantine/hooks": "^6.0.20",
     "@tabler/icons-react": "^2.34.0",
+    "axios": "^1.5.1",
     "dayjs": "^1.11.9",
+    "lucide-react": "^0.279.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flow": "^1.0.3",
     "react-router-dom": "^6.15.0",
     "reactflow": "^11.8.2",
-    "tabler-icons-react": "^1.56.0"
+    "tabler-icons-react": "^1.56.0",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

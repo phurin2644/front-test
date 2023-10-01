@@ -1,15 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Menu } from "@mantine/core";
-import { IconLogout, IconSettings } from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
+import { Badge, Button, Menu } from "@mantine/core";
+import { FC, useEffect } from "react";
+import useAuth from "../utils/auth/useAuth";
+import { User } from "lucide-react";
 
 function Navbar() {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    // Use navigate to navigate to the '/App' route
-    navigate("/");
-  };
 
   return (
     <div className="navbar ">
@@ -37,7 +32,8 @@ function Navbar() {
           >
             <h1>Users</h1>
           </NavLink>
-          <Menu shadow="md" width={250} position="top-end">
+          <NavProfile />
+          {/* <Menu shadow="md" width={250} position="top-end">
             <Menu.Target>
               <div className=" px-5">
                 <img
@@ -76,10 +72,42 @@ function Navbar() {
                 log out
               </Menu.Item>
             </Menu.Dropdown>
-          </Menu>
+          </Menu> */}
         </div>
       </div>
     </div>
   );
 }
 export default Navbar;
+
+const NavProfile: FC = () => {
+  const { logOut, user, state } = useAuth();
+
+  console.log(state);
+  if (state === "none") {
+    return (
+      <>
+      </>
+    );
+  } else if (state === "signedIn") {
+    return (
+      <>
+        <Badge variant={"secondary"} className="flex gap-1 items-center">
+          <User size={15} />
+          <span>{user?.username.toUpperCase() || ""}</span>
+        </Badge>
+        <Button variant={"secondary"} onClick={() => logOut()}>
+          Log Out
+        </Button>
+      </>
+    );
+  } else if (state === "loggedOut") {
+    return (
+      <NavLink to="/">
+        <Button variant={"secondary"}>Sign in</Button>
+      </NavLink>
+    );
+  } else {
+    return <></>;
+  }
+};
