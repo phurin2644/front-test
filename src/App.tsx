@@ -1,5 +1,5 @@
 import React, { useEffect, type ReactElement } from "react";
-import { Route, Routes, Navigate, RouteProps, Outlet } from "react-router-dom";
+import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 import "./App.css";
 import Flow from "./pages/Flow";
 import Dashboard from "./pages/Dashboard";
@@ -21,15 +21,36 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route
           path="/card"
-          element={ <InfoList/>
-            // <ProtectedRoute>
-            //   <InfoList />
-            // </ProtectedRoute>
+          element={ 
+            <ProtectedRoute>
+              <InfoList />
+            </ProtectedRoute>
           }
         />
-        <Route path="/flow" element={<Flow />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/user" element={<Users />} />
+        <Route
+          path="/flow"
+          element={ 
+            <ProtectedRoute>
+              <Flow />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={ 
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user"
+          element={ 
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
@@ -41,7 +62,7 @@ const ProtectedRoute = ({ children }: { children: ReactElement }) => {
   const { state } = useAuth();
   if (state === "signedIn") {
     return children ? children : <Outlet />;
-  } else {
+  }else if (state === "loggedOut") {
     return <Navigate to="/" />;
   }
 };
