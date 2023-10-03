@@ -1,9 +1,21 @@
 export interface InfoCardProps {
   id: number;
-  title: string;
-  name: string;
-  timestamp: string;
+  hospitalNumber: string;
+  firstName: string;
+  lastName: string;
+  createdAt: Date;
   Status: boolean;
+}
+
+export type Entry = "WALKIN" | "REFER"
+
+export interface InfoCard{
+  hospitalNumber: string;
+  title:string;
+  firstName: string;
+  lastName: string;
+  entry: string;
+  destination: string
 }
 
 export const initialInfoCardsData: InfoCardProps[] = [

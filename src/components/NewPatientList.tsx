@@ -1,32 +1,48 @@
 import { Button, TextInput } from "@mantine/core";
-import { useState } from "react";
-import { InfoCardProps } from "./InfoCards";
-import { initialInfoCardsData } from "../data/Patient";
+import { useEffect, useState } from "react";
+import { Entry, InfoCard, InfoCardProps } from "../data/Patient";
+import axios from "axios";
 
 function NewPatientList(props: { close: () => void }) {
   const { close } = props;
   const [fullNameInput, setFullNameInput] = useState("");
   const [HnInput, sethnInput] = useState("");
+  const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
+  const [lastNameInput, setLastNameInput] = useState("");
 
-  const Add = () => {
-    var currentDate = new Date();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const Sec = currentDate.getSeconds();
-    const day = currentDate.getDate();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const fullYear = currentDate.getFullYear();
-    const year = String(fullYear).slice(-2);
-    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${Sec}`;
-    const newPatient: InfoCardProps = {
-      id: initialInfoCardsData.length + 1,
-      title: HnInput,
-      name: fullNameInput,
-      timestamp: formattedDate,
-      Status: false,
+  useEffect(() => {
+    
+  }, []);
+
+  const Add = async () => {
+    // var currentDate = new Date();
+    // const hours = currentDate.getHours();
+    // const minutes = currentDate.getMinutes();
+    // const Sec = currentDate.getSeconds();
+    // const day = currentDate.getDate();
+    // const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    // const fullYear = currentDate.getFullYear();
+    // const year = String(fullYear).slice(-2);
+    // const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${Sec}`;
+    const newPatient: InfoCard = {
+      title:"Mr.",
+      hospitalNumber: HnInput,
+      firstName: firstNameInput,
+      lastName: lastNameInput,
+      entry: "WALKIN",
+      destination:""
     };
-    console.log(currentDate);
-    initialInfoCardsData.push(newPatient);
+    await axios
+      .put("http://localhost:5000/taskgroups",{
+        ...newPatient
+      })
+      .then((res) => {
+        setInfoCard(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+    // console.log(currentDate);
     close();
   };
 

@@ -14,6 +14,20 @@ function InfoList() {
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
 
+  const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/patients")
+      .then((res) => {
+        setInfoCard(res.data);
+        console.log(res.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
   const lower = searchText.toLowerCase();
   const filterList = initialInfoCardsData.filter((Patient) => {
     return (
@@ -22,6 +36,7 @@ function InfoList() {
       (selectedStatus === null || Patient.Status === selectedStatus)
     );
   });
+  // console.log(infoCard);
 
   return (
     <>
@@ -84,6 +99,7 @@ function InfoList() {
             {filterList.map((card) => (
               <div className="col-span-1">
                 <InfoCard
+                  key= {card.id}
                   id={card.id}
                   title={card.title}
                   name={card.name}
