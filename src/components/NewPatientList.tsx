@@ -1,49 +1,48 @@
 import { Button, TextInput } from "@mantine/core";
-import { useState } from "react";
-import { InfoCardProps } from "./InfoCards";
-import { initialInfoCardsData } from "../data/Patient";
+import { useEffect, useState } from "react";
+import { Entry, InfoCard, InfoCardProps } from "../data/Patient";
+import axios from "axios";
 
 function NewPatientList(props: { close: () => void }) {
   const { close } = props;
-  const [fullNameInput, setFullNameInput] = useState("");
-  const [HnInput, setHnInput] = useState("");
+  const [firstNameInput, setFirstNameInput] = useState("");
+  const [lastNameInput, setLastNameInput] = useState("");
+  const [HnInput, sethnInput] = useState("");
+  const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
 
-  function convertToDate(dateString: string) {
-    const [datePart, timePart] = dateString.split(" ");
-    const [day, month, year] = datePart.split("/");
-    const [hours, minutes, seconds] = timePart.split(":");
+  useEffect(() => {
+    
+  }, []);
 
-    // Month in JavaScript Date is 0-indexed, so we subtract 1 from the month
-    return new Date(
-      Number(`20${year}`),
-      Number(month) - 1,
-      Number(day),
-      Number(hours),
-      Number(minutes),
-      Number(seconds)
-    );
-  }
-
-  const Add = () => {
-    const currentDate = new Date();
-    const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1;
-    const year = currentDate.getFullYear();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-
-    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-
-    const newPatient: InfoCardProps = {
-      id: initialInfoCardsData.length + 1,
-      title: HnInput,
-      name: fullNameInput,
-      timestamp: convertToDate(formattedDate),
-      Status: false,
+  const Add = async () => {
+    // var currentDate = new Date();
+    // const hours = currentDate.getHours();
+    // const minutes = currentDate.getMinutes();
+    // const Sec = currentDate.getSeconds();
+    // const day = currentDate.getDate();
+    // const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    // const fullYear = currentDate.getFullYear();
+    // const year = String(fullYear).slice(-2);
+    // const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${Sec}`;
+    const newPatient: InfoCard = {
+      title:"Mr.",
+      hospitalNumber: HnInput,
+      firstName: firstNameInput,
+      lastName: lastNameInput,
+      entry: "WALKIN",
+      destination:""
     };
-    addOrUpdateCard(newPatient);
-    console.log(currentDate);
+    await axios
+      .put("http://localhost:5000/taskgroups",{
+        ...newPatient
+      })
+      .then((res) => {
+        setInfoCard(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+    // console.log(currentDate);
     close();
   };
 
@@ -83,16 +82,27 @@ function NewPatientList(props: { close: () => void }) {
         withAsterisk
         onChange={(event) => {
           const text = event.target.value;
-          setFullNameInput(text);
+          setFirstNameInput(text);
           console.log(text);
         }}
-        value={fullNameInput}
+        value={firstNameInput}
+      />
+      <TextInput
+        placeholder="First name"
+        label="First name"
+        withAsterisk
+        onChange={(event) => {
+          const text = event.target.value;
+          setLastNameInput(text);
+          console.log(text);
+        }}
+        value={lastNameInput}
       />
       <div className="flex justify-center">
         <Button
           className="bg-green-pro rounded-lg px-4 text-base text-white flex items-center hover:bg-green-c my-4 w-80 justify-center"
           onClick={Add}
-          disabled={!fullNameInput || !HnInput}
+          disabled={!firstNameInput || !HnInput || !lastNameInput}
         >
           Create
         </Button>

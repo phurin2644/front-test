@@ -1,4 +1,4 @@
-import React, { useEffect, type ReactElement } from "react";
+import { useEffect, type ReactElement } from "react";
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 import "./App.css";
 import Flow from "./pages/Flow";
