@@ -1,24 +1,7 @@
-// import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mantine/core";
 import { Bolt, ClockEdit, Edit } from "tabler-icons-react";
-
-export interface InfoCardProps {
-  id: number;
-  title: string;
-  name: string;
-  timestamp: string;
-  Status: boolean;
-}
-
-export const InProcessBtn = () =>{
-  return(
-    <div className = "flex items-center justify-center p-0.5 px-3 text-sm rounded-2xl text-white" style = {{backgroundColor:"#cc413d"}}>
-       <div style = {{backgroundColor:"#7a2725"}} className = "h-1.5 w-1.5 rounded mr-2"></div>
-       <h1>In Process</h1>
-    </div>
-  )
-}
+import { InfoCardProps } from "../data/Patient";
 
 export const SuccessBtn = () => {
   return (
@@ -58,13 +41,37 @@ export const Active = (prop: { title: string }) => {
   );
 };
 
-function InfoCard({ title, name, timestamp, Status }: InfoCardProps) {
+function InfoCard({
+  firstName,
+  lastName,
+  hospitalNumber,
+  createdAt,
+  Status,
+}: InfoCardProps) {
+  const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  });
+
+  const hours = String(new Date(createdAt).getHours()).padStart(2, "0");
+  const minutes = String(new Date(createdAt).getMinutes()).padStart(2, "0");
+  const seconds = String(new Date(createdAt).getSeconds()).padStart(2, "0");
+  const formattedTime = `${hours}:${minutes}:${seconds}`;
+  const fullFormattedDate = `${formattedDate} ${formattedTime}`;
+
   return (
     <>
       <div className="bg-white shadow-sm h-44 w-64 rounded-md">
-        {Status ? <Success title={title} /> : <Active title={title} />}
+        {Status ? (
+          <Success title={hospitalNumber} />
+        ) : (
+          <Active title={hospitalNumber} />
+        )}
         <div className="px-4 py-3">
-          <h1>{name}</h1>
+          <h1>
+            {firstName} {lastName}
+          </h1>
           <div className="flex items-center ">
             <ClockEdit
               size={20}
@@ -72,7 +79,7 @@ function InfoCard({ title, name, timestamp, Status }: InfoCardProps) {
               color={"#008C8C"}
               className="mr-2 "
             />
-            <h1 className="text-xs py-4">{timestamp}</h1>
+            <h1 className="text-xs py-4">{fullFormattedDate}</h1>
           </div>
           <div className="flex justify-center">
             <Button className="bg-green-light-1 hover:bg-green-g text-slate-400 rounded-r-none px-3 pr-5">

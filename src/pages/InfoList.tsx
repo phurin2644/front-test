@@ -1,13 +1,14 @@
 "use client";
 import InfoCard, { ActiveBtn, SuccessBtn } from "../components/InfoCards";
 import { ScrollArea, Button, Modal } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/Navbar";
 import { useDisclosure } from "@mantine/hooks";
 import NewPatientList from "../components/NewPatientList";
-import { initialInfoCardsData } from "../data/Patient";
 import { X } from "tabler-icons-react";
+import axios from "axios";
+import { InfoCardProps } from "../data/Patient";
 
 function InfoList() {
   const [searchText, setSearchText] = useState("");
@@ -21,7 +22,6 @@ function InfoList() {
       .get("http://localhost:5000/patients")
       .then((res) => {
         setInfoCard(res.data);
-        console.log(res.data)
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -29,14 +29,14 @@ function InfoList() {
   }, []);
 
   const lower = searchText.toLowerCase();
-  const filterList = initialInfoCardsData.filter((Patient) => {
+  const filterList = infoCard.filter((Patient) => {
     return (
-      (Patient.name.toLowerCase().includes(lower) ||
-        Patient.title.toLowerCase().includes(lower)) &&
+      (Patient.firstName.toLowerCase().includes(lower) ||
+        Patient.hospitalNumber.toLowerCase().includes(lower)) &&
       (selectedStatus === null || Patient.Status === selectedStatus)
     );
   });
-  // console.log(infoCard);
+  console.log(infoCard);
 
   return (
     <>
@@ -48,7 +48,7 @@ function InfoList() {
             <SearchBar value={searchText} onChange={setSearchText} />
             {/* Create Button */}
             <div className="flex justify-end ml-10">
-              <div className="flex border-2 border-dashed rounded-md border-zinc-400 px-2 gap-3 items-center justify-center">
+              <div className="flex border-2 border-dashed rounded-md border-zinc-600 px-2 gap-3 items-center justify-center">
                 <Button
                   className="p-0 hover:bg-transparent"
                   onClick={() => setSelectedStatus(true)}
@@ -95,15 +95,15 @@ function InfoList() {
         </div>
         <ScrollArea className="w-full h-550 mt-7" type="scroll">
           {/* Default */}
-          <div className="grid justify-items-center grid-cols-5  gap-y-8">
+          <div className="grid justify-items-center grid-cols-4  gap-y-6 gap-x-1">
             {filterList.map((card) => (
               <div className="col-span-1">
                 <InfoCard
-                  key= {card.id}
                   id={card.id}
-                  title={card.title}
-                  name={card.name}
-                  timestamp={card.timestamp}
+                  firstName={card.firstName}
+                  lastName={card.lastName}
+                  hospitalNumber={card.hospitalNumber}
+                  createdAt={card.createdAt}
                   Status={card.Status}
                 />
               </div>

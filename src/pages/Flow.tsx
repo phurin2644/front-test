@@ -13,15 +13,14 @@ import ReactFlow, {
 } from "reactflow";
 import { useDisclosure } from "@mantine/hooks";
 import { Button, Drawer } from "@mantine/core";
-import { Input, Tooltip, Select } from "@mantine/core";
+
 import { Edit } from "tabler-icons-react";
 import { IconInfoOctagon } from "@tabler/icons-react";
 import { Menu } from "@mantine/core";
-import { IconSettings } from "@tabler/icons-react";
-import { IconLogout } from "@tabler/icons-react";
+
 import { useNavigate } from "react-router-dom";
-import { SuccessBtn } from "../components/InfoCards";
-import { InProcessBtn } from "../components/InfoCards";
+
+import {ActiveBtn} from "../components/InfoCards";
 //import components
 import Navbar from "../components/Navbar";
 import CaseInfo from "../components/CaseInfo";
@@ -100,7 +99,7 @@ function Flow() {
               className="flex justify-center pl-4 py-2"
               style={{ borderRadius: "5px 5px 0px 0px", backgroundColor:"#A2ECC2"}}
             >
-               <SuccessBtn/>
+               <ActiveBtn/>
             </div>
 
             <div className="flex justify-center mt-3  pl-4">
@@ -210,7 +209,7 @@ function Flow() {
               className="flex justify-center pl-4 py-2"
               style={{ borderRadius: "5px 5px 0px 0px",backgroundColor:"var(--info-3, #E08D8B)" }}
             >
-              <InProcessBtn/>
+              <ActiveBtn/>
             </div>
 
             <div className="flex justify-center mt-3  pl-4">

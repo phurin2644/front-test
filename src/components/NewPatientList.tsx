@@ -5,10 +5,10 @@ import axios from "axios";
 
 function NewPatientList(props: { close: () => void }) {
   const { close } = props;
-  const [fullNameInput, setFullNameInput] = useState("");
+  const [firstNameInput, setFirstNameInput] = useState("");
+  const [lastNameInput, setLastNameInput] = useState("");
   const [HnInput, sethnInput] = useState("");
   const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
-  const [lastNameInput, setLastNameInput] = useState("");
 
   useEffect(() => {
     
@@ -65,16 +65,27 @@ function NewPatientList(props: { close: () => void }) {
         withAsterisk
         onChange={(event) => {
           const text = event.target.value;
-          setFullNameInput(text);
+          setFirstNameInput(text);
           console.log(text);
         }}
-        value={fullNameInput}
+        value={firstNameInput}
+      />
+      <TextInput
+        placeholder="First name"
+        label="First name"
+        withAsterisk
+        onChange={(event) => {
+          const text = event.target.value;
+          setLastNameInput(text);
+          console.log(text);
+        }}
+        value={lastNameInput}
       />
       <div className="flex justify-center">
         <Button
           className="bg-green-pro rounded-lg px-4 text-base text-white flex items-center hover:bg-green-c my-4 w-80 justify-center"
           onClick={Add}
-          disabled={!fullNameInput || !HnInput}
+          disabled={!firstNameInput || !HnInput || !lastNameInput}
         >
           Create
         </Button>
