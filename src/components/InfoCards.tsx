@@ -14,11 +14,13 @@ export const InProcessBtn = () =>{
 
 export const SuccessBtn = () => {
   return (
-    <div className="flex items-center justify-center bg-green-Suscess-2 p-0.5 px-3 text-sm rounded-2xl text-white">
+    <button className="flex flex-row justify-center items-center bg-green-Suscess-2 p-0.5 px-3 text-sm rounded-2xl text-white" style = {{width:"100px"}}>
       <div className="bg-green-Suscess-3 h-1.5 w-1.5 rounded mr-2"></div>
 
-      <h1>Success</h1>
-    </div>
+      <h1 className = "flex justify-center self-center">Success</h1>
+      
+     
+    </button>
   );
 };
 
