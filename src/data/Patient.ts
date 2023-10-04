@@ -7,6 +7,17 @@ export interface InfoCardProps {
   Status: boolean;
 }
 
+export type Entry = "WALKIN" | "REFER";
+
+export interface InfoCard {
+  hospitalNumber: string;
+  title: string;
+  firstName: string;
+  lastName: string;
+  entry: string;
+  destination: string;
+}
+
 // export const initialInfoCardsData: InfoCardProps[] = [
 //   {
 //     id: 1,
