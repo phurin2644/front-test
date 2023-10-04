@@ -81,7 +81,7 @@ function InfoList() {
                   blur: 1,
                 }}
               >
-                <NewPatientList close={close} />
+                <NewPatientList close={close} setInfoCard={setInfoCard} />
               </Modal>
               <Button
                 style={{ width: 100 }}

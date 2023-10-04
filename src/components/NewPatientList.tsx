@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { InfoCard, InfoCardProps } from "../data/Patient";
 import axios from "axios";
 
-function NewPatientList(props: { close: () => void }) {
-  const { close } = props;
+function NewPatientList(props: {
+  close: () => void;
+  setInfoCard: React.Dispatch<React.SetStateAction<InfoCardProps[]>>;
+}) {
+  const { close, setInfoCard } = props;
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
   const [HnInput, sethnInput] = useState("");
-  const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
 
   useEffect(() => {}, []);
 
@@ -30,13 +32,19 @@ function NewPatientList(props: { close: () => void }) {
       entry: "WALKIN",
       destination: "",
     };
+
     try {
-      const response = await axios.put("http://localhost:5000/taskgroups", {
+      await axios.put("http://localhost:5000/taskgroups", {
         ...newPatient,
       });
-
-      // Update the infoCard state with the new data
-      setInfoCard([...infoCard, response.data]);
+      await axios
+        .get("http://localhost:5000/patients")
+        .then((res) => {
+          setInfoCard(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -86,8 +94,8 @@ function NewPatientList(props: { close: () => void }) {
         value={firstNameInput}
       />
       <TextInput
-        placeholder="First name"
-        label="First name"
+        placeholder="Last name"
+        label="Last name"
         withAsterisk
         onChange={(event) => {
           const text = event.target.value;
