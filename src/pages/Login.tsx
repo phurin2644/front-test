@@ -88,7 +88,7 @@ export default function Login(props: { login: () => void }) {
               type="button"
               className="mt-3 text-lg font-semibold bg-green-pro w-full text-white rounded-lg px-6  shadow-md hover:text-white hover:bg-green-c"
               onClick={handleClick}
-              disabled={!emailInput || !passwordInput || !check}
+              disabled={!emailInput || !passwordInput }
             >
               Login
             </Button>
