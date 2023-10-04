@@ -18,11 +18,12 @@ function NewMember(props: { close: () => void }) {
         const year = String(fullYear).slice(-2);
         const formattedDate = `${day}/${month}/${year}`;
         const newMem: Userdata = {
+            title: "",
             id: `${userdata.length + 1}`,
             firstName: firstNameInput,
             lastName: lastNameInput,
-            status: adminInput,
-            deparment: departmentInput,
+            role: "adminInput",
+            department: departmentInput,
             date: formattedDate
         };
         console.log(currentDate)
@@ -59,7 +60,7 @@ function NewMember(props: { close: () => void }) {
                 label="Department"
                 placeholder="Department"
                 withAsterisk
-                data={['front-end', 'back-end', 'etc']}
+                data={['ER', 'OR', 'LAB','ANY']}
                 onChange={(event) => {
                     const text = event;
                     setDepartmentInput(text);
