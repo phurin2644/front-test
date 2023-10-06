@@ -4,16 +4,17 @@ export interface InfoCardProps {
   firstName: string;
   lastName: string;
   createdAt: Date;
-  Status: boolean;
 }
 
 export type Entry = "WALKIN" | "REFER";
+export type TaskStatus = "PENDING" | "SUCCESS"| "CANCELLED";
 
-export interface InfoCard {
+export interface TaskGroup {
   hospitalNumber: string;
   title: string;
   firstName: string;
   lastName: string;
   entry: string;
   destination: string;
+  status: string;
 }

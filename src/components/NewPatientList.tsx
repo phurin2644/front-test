@@ -1,6 +1,6 @@
 import { Button, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { InfoCard, InfoCardProps } from "../data/Patient";
+import { TaskGroup, InfoCardProps } from "../data/Patient";
 import axios from "axios";
 
 function NewPatientList(props: {
@@ -24,13 +24,14 @@ function NewPatientList(props: {
     // const fullYear = currentDate.getFullYear();
     // const year = String(fullYear).slice(-2);
     // const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${Sec}`;
-    const newPatient: InfoCard = {
+    const newPatient: TaskGroup = {
       title: "Mr.",
       hospitalNumber: HnInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
       entry: "WALKIN",
       destination: "",
+      status: "PENDING",
     };
 
     try {
