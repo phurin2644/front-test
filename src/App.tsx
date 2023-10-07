@@ -1,5 +1,5 @@
 import { useEffect, type ReactElement } from "react";
-import { Route, Routes, Navigate, Outlet } from "react-router-dom";
+import { Route, Routes, Navigate, Outlet, useNavigate } from "react-router-dom";
 import "./App.css";
 import Flow from "./pages/Flow";
 import Dashboard from "./pages/Dashboard";
@@ -9,16 +9,17 @@ import Login from "./pages/Login";
 import useAuth from "./utils/auth/useAuth";
 
 function App() {
-  const { state, getAuth } = useAuth();
-
+  const { getAuth,state } = useAuth();
+  const navigate = useNavigate();
   useEffect(() => {
     getAuth();
   }, []);
 
   return (
-    <>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={
+          state === "signedIn"? (<Navigate to= "/card" />
+          ): (<Login/>)} />
         <Route
           path="/card"
           element={ 
@@ -46,23 +47,38 @@ function App() {
         <Route
           path="/user"
           element={ 
-            <ProtectedRoute>
+            <ProtectedRoute requireRole={"SUPER_ADMIN"}>
               <Users />
             </ProtectedRoute>
           }
         />
+        <Route
+          path="*"
+          element={<Navigate to="/card" replace />}
+        />
       </Routes>
-    </>
   );
 }
 
 export default App;
 
-const ProtectedRoute = ({ children }: { children: ReactElement }) => {
-  const { state } = useAuth();
+
+const ProtectedRoute = ({ children,requireRole }: { 
+  children: ReactElement;
+  requireRole: string; 
+}) => {
+  const { state,user } = useAuth();
+
   if (state === "signedIn") {
+    if (requireRole && user?.role !== requireRole) {
+      // If a required role is specified and the user doesn't have it, prevent access
+      return <Navigate to="/card" />;
+    }
+
     return children ? children : <Outlet />;
-  }else if (state === "loggedOut") {
+  }
+  else if (state === "loggedOut") {
     return <Navigate to="/" />;
   }
+  return null;
 };

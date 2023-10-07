@@ -5,7 +5,7 @@ import useAuth from "../utils/auth/useAuth";
 import { User } from "lucide-react";
 
 function Navbar() {
-
+const {user} = useAuth();
   return (
     <div className="navbar ">
       <div className="flex justify-between gradient w-full">
@@ -24,7 +24,8 @@ function Navbar() {
           >
             <h1>Dashboard</h1>
           </NavLink>
-          <NavLink
+          {user?.role === "SUPER_ADMIN" &&
+          (<NavLink
             to="/user"
             className={({ isActive }) =>
               isActive ? "nav-active" : "nav-hover"
@@ -32,47 +33,8 @@ function Navbar() {
           >
             <h1>Users</h1>
           </NavLink>
+          )}
           <NavProfile />
-          {/* <Menu shadow="md" width={250} position="top-end">
-            <Menu.Target>
-              <div className=" px-5">
-                <img
-                  src="/profile.png"
-                  alt=""
-                  className="mt-2 w-11 h-11 rounded-full mx-auto object-cover"
-                />
-              </div>
-            </Menu.Target>
-
-            <Menu.Dropdown>
-              <Menu.Label className="text-sm">User Profile</Menu.Label>
-              <Menu.Label>
-                <div className="flex p-1">
-                  <div>
-                    <img
-                      src="/profile.png"
-                      alt=""
-                      className=" w-11 h-11 rounded-full mx-auto object-cover"
-                    />
-                  </div>
-                  <div className="ml-4 pt-1">
-                    <h1>Phurin Prasit</h1>
-                    <h1>front-end</h1>
-                  </div>
-                </div>
-              </Menu.Label>
-              <Menu.Divider />
-              <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
-              <Menu.Divider />
-              <Menu.Item
-                color="red"
-                icon={<IconLogout size={14} />}
-                onClick={handleClick}
-              >
-                log out
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu> */}
         </div>
       </div>
     </div>

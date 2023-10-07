@@ -1,5 +1,5 @@
-import { Button, Divider, PasswordInput, TextInput } from "@mantine/core";
-import { useContext, useState } from "react";
+import { Button, Divider, PasswordInput, TextInput, Notification } from "@mantine/core";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import useAuth from "../utils/auth/useAuth";
@@ -12,6 +12,7 @@ export default function Login() {
   const [passwordInput, setPasswordInput] = useState("");
   const [check, setCheck] = useState(false);
   const { getAuth } = useAuth();
+
   const handleClick = async () => {
     try {
       const response = await axios.post(
@@ -30,6 +31,10 @@ export default function Login() {
         console.log("Login succesful", userData);
 
         await getAuth();
+        // <Notification color="violet" title="Login succesful">
+        //   Welcome to Emergency stroke fasttrack!
+        // </Notification>
+        
         navigate("/card");
       } else {
         console.error("Login failed");
