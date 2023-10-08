@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { Badge, Button, Menu } from "@mantine/core";
+import { Button, Menu } from "@mantine/core";
 import { FC, useEffect } from "react";
 import useAuth from "../utils/auth/useAuth";
-import { User } from "lucide-react";
-import { IconLogout, IconSettings } from "@tabler/icons-react";
+import { IconLogout } from "@tabler/icons-react";
 
 function Navbar() {
   const { user } = useAuth();
