@@ -21,7 +21,9 @@ function InfoList() {
     axios
       .get("http://localhost:5000/patients")
       .then((res) => {
-        setInfoCard(res.data);
+        const fetchedInfoCard = res.data;
+        const sortedInfoCard = sortCardsByTimestamp(fetchedInfoCard);
+        setInfoCard(sortedInfoCard);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -31,11 +33,20 @@ function InfoList() {
   const lower = searchText.toLowerCase();
   const filterList = infoCard.filter((Patient) => {
     return (
-      (Patient.firstName.toLowerCase().includes(lower) ||
-        Patient.hospitalNumber.toLowerCase().includes(lower)) &&
-      (selectedStatus === null || Patient.Status === selectedStatus)
+      Patient.firstName.toLowerCase().includes(lower) ||
+      Patient.hospitalNumber.toLowerCase().includes(lower)
+      // &&(selectedStatus === null || Patient.Status === selectedStatus)
     );
   });
+  function sortCardsByTimestamp(cards: InfoCardProps[]): InfoCardProps[] {
+    const sortedCards = cards.slice().sort((a, b) => {
+      const timestampA = new Date(a.createdAt).getTime();
+      const timestampB = new Date(b.createdAt).getTime();
+      return timestampB - timestampA;
+    });
+
+    return sortedCards;
+  }
   console.log(infoCard);
 
   return (
@@ -99,6 +110,7 @@ function InfoList() {
             {filterList.map((card) => (
               <div className="md:col-span-1">
                 <InfoCard
+                  key={card.id}
                   id={card.id}
                   firstName={card.firstName}
                   lastName={card.lastName}
