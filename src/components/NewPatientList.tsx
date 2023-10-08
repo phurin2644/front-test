@@ -10,7 +10,7 @@ function NewPatientList(props: {
   const { close, setInfoCard } = props;
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
-  const [HnInput, sethnInput] = useState("");
+  const [HnInput, setHnInput] = useState("");
   const [blueprintInput, setBlueprintInput] = useState("");
 
   useEffect(() => {}, []);
