@@ -1,13 +1,16 @@
 import { Input } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 
-function SearchBar(props: { value: string; onChange: (value: string) => void }) {
-  const {value ,onChange} = props;
-  
+function SearchBar(props: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const { value, onChange } = props;
+
   return (
     <div className="justify-center">
       <Input
-        style={{ width: 600 }}
+        className="w-full sm:w-64 md:w-80 lg:w-96"
         icon={<IconSearch className="h-5" />}
         variant="filled"
         placeholder="Search"
@@ -23,4 +26,4 @@ function SearchBar(props: { value: string; onChange: (value: string) => void }) 
     </div>
   );
 }
-export default SearchBar
+export default SearchBar;
