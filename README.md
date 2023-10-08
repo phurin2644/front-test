@@ -3,4 +3,5 @@ yarn
 <!-- run -->
 yarn dev
 
-ใช้ ER-backend ของไอว่านนะจุ๊บๆ
+ใช้ stroke-backend
+https://github.com/stroke-suandok/stroke-backend.git
