@@ -1,4 +1,4 @@
-import { Button, TextInput } from "@mantine/core";
+import { Autocomplete, Button, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { TaskGroup, InfoCardProps } from "../data/Patient";
 import axios from "axios";
@@ -11,24 +11,17 @@ function NewPatientList(props: {
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
   const [HnInput, sethnInput] = useState("");
+  const [blueprintInput, setBlueprintInput] = useState("");
 
   useEffect(() => {}, []);
 
   const Add = async () => {
-    // var currentDate = new Date();
-    // const hours = currentDate.getHours();
-    // const minutes = currentDate.getMinutes();
-    // const Sec = currentDate.getSeconds();
-    // const day = currentDate.getDate();
-    // const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    // const fullYear = currentDate.getFullYear();
-    // const year = String(fullYear).slice(-2);
-    // const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${Sec}`;
     const newPatient: TaskGroup = {
       title: "Mr.",
       hospitalNumber: HnInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
+      blueprintType: blueprintInput,
       entry: "WALKIN",
       destination: "",
       status: "PENDING",
@@ -38,37 +31,25 @@ function NewPatientList(props: {
       await axios.put("http://localhost:5000/taskgroups", {
         ...newPatient,
       });
-      await axios
-        .get("http://localhost:5000/patients")
-        .then((res) => {
-          setInfoCard(res.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
+      // await axios
+      //   .get("http://localhost:5000/patients")
+      //   .then((res) => {
+      //     const fetchedInfoCard = res.data;
+      //     const sortedInfoCard = sortCardsByTimestamp(fetchedInfoCard);
+      //     setInfoCard(sortedInfoCard);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error fetching user data:", error);
+      //   });
+      
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
 
+    window.location.reload();
     close();
   };
 
-  // function addOrUpdateCard(card: InfoCardProps) {
-  //   const index = initialInfoCardsData.findIndex((item) => item.id === card.id);
-
-  //   if (index !== -1) {
-  //     initialInfoCardsData[index] = card;
-  //   } else {
-  //     initialInfoCardsData.push(card);
-  //   }
-
-  //   // Sort the array based on the timestamp in descending order
-  //   initialInfoCardsData.sort((a, b) => {
-  //     const timestampA = new Date(a.timestamp);
-  //     const timestampB = new Date(b.timestamp);
-  //     return timestampB.getTime() - timestampA.getTime();
-  //   });
-  // }
 
   return (
     <div className="mx-4">
@@ -104,6 +85,18 @@ function NewPatientList(props: {
           console.log(text);
         }}
         value={lastNameInput}
+      />
+      <Autocomplete
+        label="Blueprint"
+        placeholder="Blueprint"
+        withAsterisk
+        data={["suandok1", "suandok2"]}
+        onChange={(event) => {
+          const text = event;
+          setBlueprintInput(text);
+          console.log(text);
+        }}
+        value={blueprintInput}
       />
       <div className="flex justify-center">
         <Button
