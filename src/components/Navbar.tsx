@@ -3,6 +3,7 @@ import { Badge, Button, Menu } from "@mantine/core";
 import { FC, useEffect } from "react";
 import useAuth from "../utils/auth/useAuth";
 import { User } from "lucide-react";
+import { IconLogout, IconSettings } from "@tabler/icons-react";
 
 function Navbar() {
 const {user} = useAuth();
@@ -43,7 +44,9 @@ const {user} = useAuth();
 export default Navbar;
 
 const NavProfile: FC = () => {
-  const { logOut, user, state } = useAuth();
+  const { logOut, user, state } = useAuth(); 
+  const name = user?.username;
+  
 
   console.log(state);
   if (state === "none") {
@@ -53,14 +56,53 @@ const NavProfile: FC = () => {
     );
   } else if (state === "signedIn") {
     return (
+      
       <>
-        <Badge variant={"secondary"} className="flex gap-1 items-center">
+        {/* <Badge variant={"secondary"} className="flex gap-1 items-center">
           <User size={15} />
           <span>{user?.username.toUpperCase() || ""}</span>
         </Badge>
         <Button variant={"secondary"} onClick={() => logOut()}>
           Log Out
-        </Button>
+        </Button> */}
+        <Menu shadow="md" width={250} position="top-end">
+            <Menu.Target>
+              <div className=" px-5">
+                <div className="mt-2 w-11 h-11 rounded-full mx-auto bg-slate-300 items-center flex justify-center">
+                  <h1>{user?.username[0]}</h1>
+                </div>
+              </div>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              <Menu.Label className="text-sm">User Profile</Menu.Label>
+              <Menu.Label>
+                <div className="flex p-1">
+                  <div>
+                    <img
+                      src="/profile.png"
+                      alt=""
+                      className=" w-11 h-11 rounded-full mx-auto object-cover"
+                    />
+                  </div>
+                  <div className="ml-4 pt-1">
+                    <h1>{user?.username.toUpperCase() || ""}</h1>
+                    <h1>{user?.department}</h1>
+                  </div>
+                </div>
+              </Menu.Label>
+              <Menu.Divider />
+              <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
+              <Menu.Divider />
+              <Menu.Item
+                color="red"
+                icon={<IconLogout size={14} />}
+                onClick={() => logOut()}
+              >
+                log out
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
       </>
     );
   } else if (state === "loggedOut") {
