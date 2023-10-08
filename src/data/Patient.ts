@@ -7,52 +7,13 @@ export interface InfoCardProps {
   Status: boolean;
 }
 
-export type Entry = "WALKIN" | "REFER"
+export type Entry = "WALKIN" | "REFER";
 
-export interface InfoCard{
+export interface InfoCard {
   hospitalNumber: string;
-  title:string;
+  title: string;
   firstName: string;
   lastName: string;
   entry: string;
-  destination: string
+  destination: string;
 }
-
-// export const initialInfoCardsData: InfoCardProps[] = [
-//   {
-//     id: 1,
-//     title: "Card 1",
-//     name: "Phurin",
-//     timestamp: "2023-09-10 10:00:00",
-//     Status: false,
-//   },
-
-//   {
-//     id: 2,
-//     title: "Card 2",
-//     name: "Suwichada",
-//     timestamp: "2023-09-10 11:00:00",
-//     Status: true,
-//   },
-//   {
-//     id: 3,
-//     title: "Card 3",
-//     name: "Peera",
-//     timestamp: "2023-09-10 11:00:00",
-//     Status: true,
-//   },
-//   {
-//     id: 4,
-//     title: "Card 4",
-//     name: "Piyaphat",
-//     timestamp: "2023-09-10 11:00:00",
-//     Status: true,
-//   },
-//   {
-//     id: 5,
-//     title: "Card 4",
-//     name: "Chonlanan",
-//     timestamp: "2023-09-10 11:00:00",
-//     Status: true,
-//   },
-// ];
