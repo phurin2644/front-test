@@ -1,18 +1,18 @@
 import { Button, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { Entry, InfoCard, InfoCardProps } from "../data/Patient";
+import { InfoCard, InfoCardProps } from "../data/Patient";
 import axios from "axios";
 
-function NewPatientList(props: { close: () => void }) {
-  const { close } = props;
+function NewPatientList(props: {
+  close: () => void;
+  setInfoCard: React.Dispatch<React.SetStateAction<InfoCardProps[]>>;
+}) {
+  const { close, setInfoCard } = props;
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
   const [HnInput, sethnInput] = useState("");
-  const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
 
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   const Add = async () => {
     // var currentDate = new Date();
@@ -25,43 +25,49 @@ function NewPatientList(props: { close: () => void }) {
     // const year = String(fullYear).slice(-2);
     // const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${Sec}`;
     const newPatient: InfoCard = {
-      title:"Mr.",
+      title: "Mr.",
       hospitalNumber: HnInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
       entry: "WALKIN",
-      destination:""
+      destination: "",
     };
-    await axios
-      .put("http://localhost:5000/taskgroups",{
-        ...newPatient
-      })
-      .then((res) => {
-        setInfoCard(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
+
+    try {
+      await axios.put("http://localhost:5000/taskgroups", {
+        ...newPatient,
       });
-    // console.log(currentDate);
+      await axios
+        .get("http://localhost:5000/patients")
+        .then((res) => {
+          setInfoCard(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+
     close();
   };
 
-  function addOrUpdateCard(card: InfoCardProps) {
-    const index = initialInfoCardsData.findIndex((item) => item.id === card.id);
+  // function addOrUpdateCard(card: InfoCardProps) {
+  //   const index = initialInfoCardsData.findIndex((item) => item.id === card.id);
 
-    if (index !== -1) {
-      initialInfoCardsData[index] = card;
-    } else {
-      initialInfoCardsData.push(card);
-    }
+  //   if (index !== -1) {
+  //     initialInfoCardsData[index] = card;
+  //   } else {
+  //     initialInfoCardsData.push(card);
+  //   }
 
-    // Sort the array based on the timestamp in descending order
-    initialInfoCardsData.sort((a, b) => {
-      const timestampA = new Date(a.timestamp);
-      const timestampB = new Date(b.timestamp);
-      return timestampB.getTime() - timestampA.getTime();
-    });
-  }
+  //   // Sort the array based on the timestamp in descending order
+  //   initialInfoCardsData.sort((a, b) => {
+  //     const timestampA = new Date(a.timestamp);
+  //     const timestampB = new Date(b.timestamp);
+  //     return timestampB.getTime() - timestampA.getTime();
+  //   });
+  // }
 
   return (
     <div className="mx-4">
@@ -88,8 +94,8 @@ function NewPatientList(props: { close: () => void }) {
         value={firstNameInput}
       />
       <TextInput
-        placeholder="First name"
-        label="First name"
+        placeholder="Last name"
+        label="Last name"
         withAsterisk
         onChange={(event) => {
           const text = event.target.value;

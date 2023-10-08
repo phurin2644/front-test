@@ -30,66 +30,68 @@ function NewMember(props: { close: () => void }) {
     close();
   };
 
-  return (
-    <div className="mx-4">
-      <TextInput
-        placeholder="First name"
-        label="First name"
-        withAsterisk
-        onChange={(event) => {
-          const text = event.target.value;
-          setFirstNameInput(text);
-          console.log(text);
-        }}
-        value={firstNameInput}
-      />
-      <TextInput
-        placeholder="Last name"
-        label="Last name"
-        withAsterisk
-        onChange={(event) => {
-          const text = event.target.value;
-          setLastNameInput(text);
-          console.log(text);
-        }}
-        value={lastNameInput}
-      />
-      <Autocomplete
-        label="Department"
-        placeholder="Department"
-        withAsterisk
-        data={["front-end", "back-end", "etc"]}
-        onChange={(event) => {
-          const text = event;
-          setDepartmentInput(text);
-          console.log(text);
-        }}
-        value={departmentInput}
-      />
-      <Checkbox
-        label="Select to Admin"
-        color="green"
-        radius="xl"
-        className="my-4"
-        checked={adminInput}
-        onChange={(event) => {
-          setAdminInput(event.currentTarget.checked);
-          console.log(event.currentTarget.checked);
-        }}
-        value={departmentInput}
-      />
-      <Button
-        className="bg-green-pro rounded-lg px-4 text-base text-white flex items-center hover:bg-green-c my-4"
-        onClick={Add}
-        disabled={!firstNameInput || !lastNameInput || !departmentInput}
-      >
-        <div className="mr-2">
-          <UserPlus size={20} strokeWidth={2} color={"white"} />
+    return (
+        <div className="mx-4">
+            <TextInput
+                placeholder="First name"
+                label="First name"
+                withAsterisk
+                onChange={(event) => {
+                    const text = event.target.value;
+                    setFirstNameInput(text);
+                    console.log(text);
+                }}
+                value={firstNameInput}
+            />
+            <TextInput
+                placeholder="Last name"
+                label="Last name"
+                withAsterisk
+                onChange={(event) => {
+                    const text = event.target.value;
+                    setLastNameInput(text);
+                    console.log(text);
+                }}
+                value={lastNameInput}
+            />
+            <Autocomplete
+                label="Department"
+                placeholder="Department"
+                withAsterisk
+                data={['ER', 'OR', 'LAB','ANY']}
+                onChange={(event) => {
+                    const text = event;
+                    setDepartmentInput(text);
+                    console.log(text);
+                }}
+                value={departmentInput}
+            />
+            <Checkbox
+                label="Select to Admin"
+                color="green"
+                radius="xl"
+                className="my-4"
+                checked={adminInput}
+                onChange={(event) => {
+                    setAdminInput(event.currentTarget.checked);
+                    console.log(event.currentTarget.checked);
+                }}
+                value={departmentInput}
+            />
+            <Button className="bg-green-pro rounded-lg px-4 text-base text-white flex items-center hover:bg-green-c my-4"
+                onClick={Add}
+                disabled={!firstNameInput || !lastNameInput || !departmentInput}>
+                <div className="mr-2">
+                    <UserPlus
+                        size={20}
+                        strokeWidth={2}
+                        color={'white'}
+                    />
+                </div>
+                New Member
+            </Button>
         </div>
-        New Member
-      </Button>
-    </div>
-  );
+    );
 }
 
 export default NewMember;

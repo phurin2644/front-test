@@ -3,10 +3,12 @@ import { ScrollArea, Button, Modal} from "@mantine/core";
 import { UserPlus } from "tabler-icons-react";
 import UserList from "../components/UserList";
 import SearchBar from "../components/SearchBar";
-import { useState  } from "react";
+import { useEffect, useState  } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import NewMember from "../components/NewMember";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import { Userdata } from "../data/Userdata";
 
 
 
@@ -14,8 +16,18 @@ import Navbar from "../components/Navbar";
 function Users() {
   const [searchText, setSearchText] = useState('');
   const [opened, { open, close }] = useDisclosure(false);
-  const numUser = 0;
+  const [userData, setUserData] = useState<Userdata[]>([]);
+  const numUser = userData.length;
 
+  useEffect (()=>{axios.get("http://localhost:5000/users")
+    .then((res)=>{
+      setUserData(res.data);
+      
+    })
+    .catch((error) => {
+      console.error("Error fetching user data:", error);
+    });
+      },[])
 
 
 
