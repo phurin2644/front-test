@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+
 import { Button } from "@mantine/core";
 import { Bolt, ClockEdit, Edit } from "tabler-icons-react";
 import { InfoCardProps } from "../data/Patient";
+import useWorkingStore from '../utils/stores/working';
+import { useNavigate } from "react-router-dom";
 
 export const InProcessBtn = () =>{
   return(
@@ -58,13 +60,17 @@ function InfoCard({
   hospitalNumber,
   createdAt,
   Status,
+  id,
 }: InfoCardProps) {
   const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
     day: "numeric",
     month: "numeric",
     year: "numeric",
   });
-
+  const [setCurrentTaskGroupId] = useWorkingStore((state) => [
+    state.setCurrentTaskGroupId,
+  ]);
+  const navigate = useNavigate();
   const hours = String(new Date(createdAt).getHours()).padStart(2, "0");
   const minutes = String(new Date(createdAt).getMinutes()).padStart(2, "0");
   const seconds = String(new Date(createdAt).getSeconds()).padStart(2, "0");
@@ -96,17 +102,20 @@ function InfoCard({
             <Button className="bg-green-light-1 hover:bg-green-g text-slate-400 rounded-r-none px-3 pr-5">
               <div className="flex items-center justify-center ">
                 <Edit size={20} strokeWidth={2} className="mr-2" />
-                <h1>Edit</h1>
+                <h1>Delete</h1>
               </div>
             </Button>
-            <Link to="/flow">
+            <div onClick={() => {
+              setCurrentTaskGroupId(id)
+              navigate("/flow")
+            }}>
               <Button className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5">
                 <div className="flex items-center justify-center ">
                   <h1>Fast Track</h1>
                   <Bolt size={20} strokeWidth={2} className="ml-2" />
                 </div>
               </Button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
