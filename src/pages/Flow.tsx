@@ -24,6 +24,7 @@ import { InProcessBtn } from "../components/InfoCards";
 import Navbar from "../components/Navbar";
 import CaseInfo from "../components/CaseInfo";
 import { Icon } from "@iconify/react";
+import useWorkingStore from "../utils/stores/working";
 
 // import TextUpdaterNode from './TextUpdaterNode';
 // import './text-updater-node.css';
@@ -35,6 +36,9 @@ function Flow() {
   // var hours = currentTime.getHours();
   // var minutes = currentTime.getMinutes();
   // var seconds = currentTime.getSeconds(); time
+  const [currentTaskGroupId] = useWorkingStore((state) => [
+    state.currentTaskGroupId,
+  ]);
 
   var currentDate = new Date();
   
