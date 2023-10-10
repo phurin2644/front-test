@@ -1,10 +1,10 @@
-import axios from '../../api/axios';
+import axios from "../../api/axios";
 
-import useAuthStore from './store';
-import { useNavigate } from 'react-router-dom';
+import useAuthStore from "./store";
+import { useNavigate } from "react-router-dom";
 
 function useAuth() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [user, setUser, state, setState] = useAuthStore((state) => [
     state.user,
     state.setUser,
@@ -12,25 +12,30 @@ function useAuth() {
     state.setState,
   ]);
 
-  const getAuth = async () => {
-    setState('loading');
+  const getAuth = async (delay: boolean) => {
+    setState("loading");
     try {
-      const res = await axios.get('/auth/me', { withCredentials: true });
+      const res = await axios.get("/auth/me", { withCredentials: true });
       setUser(res.data);
-      setState('signedIn');
+      setTimeout(
+        () => {
+          setState("signedIn");
+        },
+        delay ? 1500 : 0
+      );
     } catch (err) {
       console.log(err);
-      setState('loggedOut');
+      setState("loggedOut");
     }
   };
 
   async function logOut() {
     axios
-      .get('/auth/logout', { withCredentials: true })
+      .get("/auth/logout", { withCredentials: true })
       .then(() => {
         setUser(null);
-        setState('loggedOut');
-        navigate('/')
+        setState("loggedOut");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);

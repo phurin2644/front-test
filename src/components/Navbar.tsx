@@ -3,6 +3,8 @@ import { Button, Menu } from "@mantine/core";
 import { FC, useEffect } from "react";
 import useAuth from "../utils/auth/useAuth";
 import { IconLogout } from "@tabler/icons-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const { user } = useAuth();
@@ -82,10 +84,30 @@ const NavProfile: FC = () => {
               </div>
             </Menu.Label>
             <Menu.Divider />
+
             <Menu.Item
               color="red"
               icon={<IconLogout size={14} />}
-              onClick={() => logOut()}
+              onClick={() => {
+                // แสดง Notification ก่อน log out
+                toast.info("Successfully logged out", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 600, 
+                  style: {
+                    backgroundColor: "#DAFFFB",
+                    color: "#04364A",
+                    border: "3px solid #64CCC5",
+                  },
+                  progressStyle: {
+                    background: "#64CCC5", // กำหนดสีของ progress bar ที่นี่
+                  },
+                });
+
+                // ทำการ log out หลังจากแสดง Notification
+                setTimeout(() => {
+                  logOut();
+                }, 1500); 
+              }}
             >
               log out
             </Menu.Item>

@@ -7,22 +7,26 @@ import Users from "./pages/Users";
 import InfoList from "./pages/InfoList";
 import Login from "./pages/Login";
 import useAuth from "./utils/auth/useAuth";
+import { ToastContainer } from "react-toastify";
 
 function App() {
-  const { getAuth,state } = useAuth();
+  const { getAuth, state } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    getAuth();
+    getAuth(false);
   }, []);
 
   return (
+    <>
+      <ToastContainer />
       <Routes>
-        <Route path="/" element={
-          state === "signedIn"? (<Navigate to= "/card" />
-          ): (<Login/>)} />
+        <Route
+          path="/"
+          element={state === "signedIn" ? <Navigate to="/card" /> : <Login />}
+        />
         <Route
           path="/card"
-          element={ 
+          element={
             <ProtectedRoute>
               <InfoList />
             </ProtectedRoute>
@@ -30,7 +34,7 @@ function App() {
         />
         <Route
           path="/flow"
-          element={ 
+          element={
             <ProtectedRoute>
               <Flow />
             </ProtectedRoute>
@@ -38,7 +42,7 @@ function App() {
         />
         <Route
           path="/dashboard"
-          element={ 
+          element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
@@ -46,28 +50,28 @@ function App() {
         />
         <Route
           path="/user"
-          element={ 
+          element={
             <ProtectedRoute requireRole={"SUPER_ADMIN"}>
               <Users />
             </ProtectedRoute>
           }
         />
-        <Route
-          path="*"
-          element={<Navigate to="/card" replace />}
-        />
+        <Route path="*" element={<Navigate to="/card" replace />} />
       </Routes>
+    </>
   );
 }
 
 export default App;
 
-
-const ProtectedRoute = ({ children,requireRole }: { 
+const ProtectedRoute = ({
+  children,
+  requireRole,
+}: {
   children: ReactElement;
-  requireRole: string; 
+  requireRole: string;
 }) => {
-  const { state,user } = useAuth();
+  const { state, user } = useAuth();
 
   if (state === "signedIn") {
     if (requireRole && user?.role !== requireRole) {
@@ -76,8 +80,7 @@ const ProtectedRoute = ({ children,requireRole }: {
     }
 
     return children ? children : <Outlet />;
-  }
-  else if (state === "loggedOut") {
+  } else if (state === "loggedOut") {
     return <Navigate to="/" />;
   }
   return null;

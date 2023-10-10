@@ -1,8 +1,16 @@
-import { Button, Divider, PasswordInput, TextInput, Notification } from "@mantine/core";
+import {
+  Button,
+  Divider,
+  PasswordInput,
+  TextInput,
+  Notification,
+} from "@mantine/core";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import useAuth from "../utils/auth/useAuth";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 // type Props = {};
 
@@ -28,19 +36,54 @@ export default function Login() {
 
       if (response.status === 200) {
         const userData = response.data;
-        console.log("Login succesful", userData);
+        console.log("Login successful", userData);
 
-        await getAuth();
-        // <Notification color="violet" title="Login succesful">
-        //   Welcome to Emergency stroke fasttrack!
-        // </Notification>
-        
-        navigate("/card");
+        await getAuth(true);
+
+        // แสดง Notification สำเร็จ
+        toast.success("Login successful", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 600,
+          style: {
+            backgroundColor: "#DAFFFB",
+            color: "#04364A",
+            border: "3px solid #64CCC5",
+          },
+          progressStyle: {
+            background: "#64CCC5", // กำหนดสีของ progress bar ที่นี่
+          },
+        });
       } else {
         console.error("Login failed");
+        // แสดง Notification ข้อผิดพลาด
+        toast.error("Login failed", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+          style: {
+            backgroundColor: "#FFE4D6",
+            color: "#CD1818",
+            border: "3px solid #F78CA2",
+          },
+          progressStyle: {
+            background: "#F78CA2", // กำหนดสีของ progress bar ที่นี่
+          },
+        });
       }
     } catch (error) {
       console.error("Login error", error);
+      // แสดง Notification ข้อผิดพลาด
+      toast.error("Incorrect username / password combination.", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+        style: {
+          backgroundColor: "#FFE4D6",
+          color: "#CD1818",
+          border: "3px solid #F78CA2",
+        },
+        progressStyle: {
+          background: "#F78CA2", // กำหนดสีของ progress bar ที่นี่
+        },
+      });
     }
   };
 
