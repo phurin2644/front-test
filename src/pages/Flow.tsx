@@ -22,7 +22,7 @@ import { flowdata, FlowData } from "../data/Flowdata 2";
 import CustomNode, { NodeData } from "../components/CustomNode 2";
 import useWorkingStore from "../utils/stores/working";
 import axios from "axios";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from "react-router-dom";
 import { CaseInfo } from "../data/Patient";
 import { IconInfoOctagon } from "@tabler/icons-react";
 
@@ -35,8 +35,8 @@ const nodeTypes = {
 // const newIdNode = () => `randomnode_${+useRef(0)}`;
 
 function Flow() {
-  const navigate = useNavigate()
-  const [patient,setPatient] = useState<CaseInfo>();
+  const navigate = useNavigate();
+  const [patient, setPatient] = useState<CaseInfo>();
   const [flow, setFlow] = useState({ nodes: [], edges: [] });
 
   const [currentTaskGroupId] = useWorkingStore((state) => [
@@ -44,58 +44,61 @@ function Flow() {
   ]);
 
   useEffect(() => {
-    if(currentTaskGroupId === null){
-      navigate('/card')
+    if (currentTaskGroupId === null) {
+      navigate("/card");
     }
     const fetchTaskgroup = async () => {
-      const tasks = await axios
-        .post("http://localhost:5000/patients/taskgroups", {
+      const tasks = await axios.post(
+        "http://localhost:5000/patients/taskgroups",
+        {
           id: currentTaskGroupId,
-        })
-        const res = await axios
-        .post("http://localhost:5000/graph/tasks", {
-          taskGroupId: tasks.data[0].id,
-            })
+        }
+      );
+      const res = await axios.post("http://localhost:5000/graph/tasks", {
+        taskGroupId: tasks.data[0].id,
+      });
 
+      console.log(res.data);
+      const data = res.data;
+      setPatient(tasks.data[0].patient);
+      const nodes = data.nodes.map((node: any) => ({
+        ...node,
+        id: node.elementId,
+        type: "custom",
+        data: {
+          title: node.title,
+          createdAt: node.createdAt,
+          status: node.status,
+        },
+      }));
 
-        
-          console.log(res.data)
-          const data = res.data;
-          setPatient(tasks.data[0].patient)
-          const nodes = data.nodes.map((node: any) => ({
-            ...node,
-            id: node.elementId,
-            type: "custom",
-            data: {  title: node.title ,createdAt:node.createdAt, status:node.status},
-          }));
-
-          const edges = data.edges.map((edge: any) => ({
-            ...edge,
-            id: edge.elementId,
-            type: "BezierEdge",
-            markerEnd: { type: "arrow" },
-            animated: edge.required,
-            style: { stroke: edge.required ? "red" : "gray" },
-          }));
-          setFlow({ nodes, edges }) ;
-        
+      const edges = data.edges.map((edge: any) => ({
+        ...edge,
+        id: edge.elementId,
+        type: "BezierEdge",
+        markerEnd: { type: "arrow" },
+        animated: edge.required,
+        style: { stroke: edge.required ? "red" : "gray" },
+      }));
+      setFlow({ nodes, edges });
     };
     fetchTaskgroup();
   }, []);
-  console.log(flow)
+  console.log(flow);
 
-  
   const onAddFirstClick = () => {
     onAdd();
   };
-  const onTrack = (props: { id: string}) => {
-    const {id} = props;
+  const onTrack = (props: { id: string }) => {
+    const { id } = props;
     console.log("Clicked node id:", id);
-  }
+  };
   const updateNodeStatus = (nodeId: string, newStatus: any) => {
     setNodes((prevNodes) =>
       prevNodes.map((node) =>
-        node.id === nodeId ? { ...node, data: { ...node.data, Status: newStatus } } : node
+        node.id === nodeId
+          ? { ...node, data: { ...node.data, Status: newStatus } }
+          : node
       )
     );
   };
@@ -137,9 +140,7 @@ function Flow() {
   const yPos = useRef(70);
   const idNode = useRef(1);
 
-
   const onAdd = useCallback(() => {
-    
     yPos.current += 200;
     idNode.current += 1;
     var currentDate = new Date();
@@ -191,11 +192,11 @@ function Flow() {
           blur: 1,
         }}
       >
-        <CustomDrawer patient={patient}/>
+        <CustomDrawer patient={patient} />
       </Drawer>
       <Navbar></Navbar>
       <div className="bg-slate-50 h-screen flex">
-      <section className="flex bg-green-light-3  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
+        <section className="flex bg-green-light-3  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
           <div
             className="flex justify-center w-12 h-12 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-black hover:bg-zinc-300"
             onClick={open}
@@ -212,8 +213,7 @@ function Flow() {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           nodeTypes={nodeTypes}
-        >
-        </ReactFlow>
+        ></ReactFlow>
       </div>
     </>
   );
