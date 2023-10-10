@@ -26,7 +26,7 @@ function Navbar() {
           >
             <h1>Dashboard</h1>
           </NavLink>
-          {user?.role === "SUPER_ADMIN" && (
+          {(user?.role === "SUPER_ADMIN" || user?.role === "ADMIN")  && (
             <NavLink
               to="/user"
               className={({ isActive }) =>
@@ -80,6 +80,7 @@ const NavProfile: FC = () => {
                 <div className="ml-4 pt-1">
                   <h1>{user?.username.toUpperCase() || ""}</h1>
                   <h1>{user?.department}</h1>
+                  <h1 className={user?.role === 'ADMIN' ? 'text-green-500' : (user?.role === 'SUPER_ADMIN' ? 'text-red-500' : '')}>{user?.role}</h1>
                 </div>
               </div>
             </Menu.Label>

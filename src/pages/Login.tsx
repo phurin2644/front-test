@@ -5,7 +5,7 @@ import {
   TextInput,
   Notification,
 } from "@mantine/core";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import useAuth from "../utils/auth/useAuth";
@@ -16,17 +16,27 @@ import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [emailInput, setEmailInput] = useState("");
+  const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [check, setCheck] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const { getAuth } = useAuth();
+
+  useEffect(() => {
+    const savedUsername = localStorage.getItem("username");
+    const savedRememberMe = localStorage.getItem("rememberMe");
+
+    if (savedRememberMe === "true" && savedUsername) {
+      setRememberMe(true);
+      setUsernameInput(savedUsername);
+    }
+  }, []);
 
   const handleClick = async () => {
     try {
       const response = await axios.post(
         "/auth/signin",
         {
-          username: emailInput,
+          username: usernameInput,
           password: passwordInput,
         },
         {
@@ -36,7 +46,17 @@ export default function Login() {
 
       if (response.status === 200) {
         const userData = response.data;
-        console.log("Login successful", userData);
+        console.log("Login successsful", userData);
+
+        if (rememberMe) {
+          // Save username and "Remember Me" state to local storage
+          localStorage.setItem("username", usernameInput);
+          localStorage.setItem("rememberMe", "true");
+        } else {
+          // Clear local storage if "Remember Me" is not checked
+          localStorage.removeItem("username");
+          localStorage.removeItem("rememberMe");
+        }
 
         await getAuth(true);
 
@@ -99,18 +119,17 @@ export default function Login() {
             <div className="mb-6 font-bold text-3xl text-green-pro">Login</div>
             <div className="py-2">
               <TextInput
-                label="Your email"
-                placeholder="Your email"
-                description="Please enter your email"
+                label="Username"
+                placeholder="Username"
+                description="Please enter your username."
                 size="md"
                 withAsterisk
                 inputWrapperOrder={["label", "error", "input", "description"]}
                 onChange={(event) => {
                   const text = event.target.value;
-                  setEmailInput(text);
-                  console.log(text);
+                  setUsernameInput(text);
                 }}
-                value={emailInput}
+                value={usernameInput}
               />
             </div>
             <div className="py-2">
@@ -118,14 +137,13 @@ export default function Login() {
                 <PasswordInput
                   placeholder="Password"
                   label="Password"
-                  description="It must be a combination of minimum 8 letters, numbers, and symbols."
+                  description="Please enter your password."
                   size="md"
                   withAsterisk
                   inputWrapperOrder={["label", "error", "input", "description"]}
                   onChange={(event) => {
                     const text = event.target.value;
                     setPasswordInput(text);
-                    console.log(text);
                   }}
                   value={passwordInput}
                 />
@@ -137,21 +155,14 @@ export default function Login() {
                   type="checkbox"
                   className="leading-loose text-pink-600"
                   onChange={(event) => {
-                    setCheck(event.currentTarget.checked);
+                    setRememberMe(event.currentTarget.checked);
                     console.log(event.currentTarget.checked);
                   }}
+                  checked={rememberMe}
                 />
                 <span className="py-2 ml-2 text-sm text-gray-600 leading-snug">
                   Remember Me
                 </span>
-              </label>
-              <label className="block text-gray-500  my-4">
-                <a
-                  href="#"
-                  className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
-                >
-                  <span>Forgot Password?</span>
-                </a>
               </label>
             </div>
             <Button
@@ -159,17 +170,11 @@ export default function Login() {
               type="button"
               className="mt-3 text-lg font-semibold bg-green-pro w-full text-white rounded-lg px-6  shadow-md hover:text-white hover:bg-green-c"
               onClick={handleClick}
-              disabled={!emailInput || !passwordInput}
+              disabled={!usernameInput || !passwordInput}
             >
               Login
             </Button>
-            <Divider my="sm" className="mt-10 mb-7" />
-            <a
-              href="#"
-              className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
-            >
-              <span>No account yet? Sign Up</span>
-            </a>
+      
           </div>
         </form>
       </div>
