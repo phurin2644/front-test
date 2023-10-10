@@ -9,6 +9,7 @@ import NewMember from "../components/NewMember";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { Userdata } from "../data/Userdata";
+import useAuth from "../utils/auth/useAuth";
 
 
 
@@ -18,6 +19,7 @@ function Users() {
   const [opened, { open, close }] = useDisclosure(false);
   const [userData, setUserData] = useState<Userdata[]>([]);
   const numUser = userData.length;
+  const {user} = useAuth();
 
   useEffect (()=>{axios.get("http://localhost:5000/users")
     .then((res)=>{
@@ -49,7 +51,10 @@ function Users() {
             }}>
               <NewMember close={close} />
             </Modal>
-            <Button className="bg-green-pro rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-c" onClick={open}>
+            <Button 
+              className="bg-green-pro rounded-lg px-4 text-sm text-white flex items-center hover:bg-green-c" 
+              onClick={open}
+              disabled={user?.role !== "SUPER_ADMIN"}>
               <div className="mr-2">
                 <UserPlus
                   size={20}

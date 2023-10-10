@@ -47,7 +47,7 @@ function App() {
         <Route
           path="/user"
           element={ 
-            <ProtectedRoute requireRole={"SUPER_ADMIN"}>
+            <ProtectedRoute requireRole={["SUPER_ADMIN", "ADMIN"]}>
               <Users />
             </ProtectedRoute>
           }
@@ -65,12 +65,12 @@ export default App;
 
 const ProtectedRoute = ({ children,requireRole }: { 
   children: ReactElement;
-  requireRole: string; 
+  requireRole: string[]; 
 }) => {
   const { state,user } = useAuth();
 
   if (state === "signedIn") {
-    if (requireRole && user?.role !== requireRole) {
+    if (requireRole && !requireRole.includes(user?.role ?? "")) {
       // If a required role is specified and the user doesn't have it, prevent access
       return <Navigate to="/card" />;
     }
