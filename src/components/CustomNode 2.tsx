@@ -17,7 +17,7 @@ export interface NodeData {
   name: string;
   title: string;
   createdAt: string;
-  Status: boolean;
+  status: string;
   id: string;
   Addtask: string;
   fn1: () => void;
@@ -26,7 +26,7 @@ export interface NodeData {
 
 function CustomNode(props: { data: NodeData }) {
   const { data } = props;
-  const [status, setStatus] = useState(data.Status);
+  const [status, setStatus] = useState(data.status);
   const nodeId = useNodeId();
   const xI = useNodes();
   const c = useNodesInitialized();
@@ -46,7 +46,7 @@ function CustomNode(props: { data: NodeData }) {
       <div className="flex justify-center bg-green-Suscess-1 px-4 py-2 pr-2 rounded-t-md">
         <div className="flex items-center justify-center bg-green-Suscess-2 p-0.5 px-3 text-sm rounded-2xl text-white">
           <div className="bg-green-Suscess-3 h-1.5 w-1.5 rounded mr-2"></div>
-          <h1>Seccess</h1>
+          <h1>Success</h1>
         </div>
       </div>
     );
@@ -68,7 +68,7 @@ function CustomNode(props: { data: NodeData }) {
         className="w-16 !bg-teal-500"
       />
       <div className="bg-white shadow-sm h-44 w-64 rounded-md">
-        {data.Status ? <Seccess /> : <InProcess />}
+        {data.status ==='SUCCESS' ? <Seccess /> : <InProcess />}
         <div className="px-4 py-3">
           <h1 className="flex justify-center">
             {data.title} 
@@ -102,12 +102,7 @@ function CustomNode(props: { data: NodeData }) {
             </Menu>
 
             <Button
-              onClick={() => {
-                console.log(data.id);
-                console.log(status);
-                console.log(xI);
-                setStatus(!status); // Update the state variable
-              }}
+              
               className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5"
             >
               <div className="flex items-center justify-center ">

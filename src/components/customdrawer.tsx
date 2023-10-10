@@ -1,7 +1,9 @@
 import { Button, Input, Tooltip } from "@mantine/core";
 import { Edit } from "tabler-icons-react";
+import { CaseInfo } from "../data/Patient";
 
-function CustomDrawer() {
+function CustomDrawer({patient}:{patient:CaseInfo | undefined}) {
+
     return(
         <div className="px-4">
                     <div className="flex justify-end">
@@ -18,6 +20,7 @@ function CustomDrawer() {
                                 <Input
                                     style={{ borderBottomColor: "#434343" }}
                                     variant="filled"
+                                    value={patient?.createdAt}
                                     placeholder="Placeholder"
                                     rightSection={
                                         <Tooltip label="This is public" position="top-end" withArrow>
@@ -31,6 +34,7 @@ function CustomDrawer() {
                                 <Input
                                     style={{ borderBottomColor: "#434343" }}
                                     variant="filled"
+                                    value={patient?.visitNumber}
                                     placeholder="Placeholder"
                                     rightSection={
                                         <Tooltip label="This is public" position="top-end" withArrow>
@@ -45,6 +49,7 @@ function CustomDrawer() {
                         <Input
                             style={{ borderBottomColor: "#434343" }}
                             variant="filled"
+                            value={patient?.hospitalNumber}
                             placeholder="Placeholder"
                             rightSection={
                                 <Tooltip label="This is public" position="top-end" withArrow>
@@ -58,6 +63,7 @@ function CustomDrawer() {
                                 <Input
                                     style={{ borderBottomColor: "#434343" }}
                                     variant="filled"
+                                    value={patient?.firstName}
                                     placeholder="Placeholder"
                                     rightSection={
                                         <Tooltip label="This is public" position="top-end" withArrow>
@@ -71,6 +77,7 @@ function CustomDrawer() {
                                 <Input
                                     style={{ borderBottomColor: "#434343" }}
                                     variant="filled"
+                                    value={patient?.lastName}
                                     placeholder="Placeholder"
                                     rightSection={
                                         <Tooltip label="This is public" position="top-end" withArrow>
@@ -138,6 +145,7 @@ function CustomDrawer() {
                         <Input
                             style={{ borderBottomColor: "#434343" }}
                             variant="filled"
+                            value={patient?.createdAt}
                             placeholder="Placeholder"
                             rightSection={
                                 <Tooltip label="This is public" position="top-end" withArrow>
@@ -149,6 +157,7 @@ function CustomDrawer() {
                         <Input
                             style={{ borderBottomColor: "#434343" }}
                             variant="filled"
+                            value={patient?.updatedAt}
                             placeholder="Placeholder"
                             rightSection={
                                 <Tooltip label="This is public" position="top-end" withArrow>

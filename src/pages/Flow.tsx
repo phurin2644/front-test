@@ -23,6 +23,7 @@ import CustomNode, { NodeData } from "../components/CustomNode 2";
 import useWorkingStore from "../utils/stores/working";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
+import { CaseInfo } from "../data/Patient";
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 const nodeTypes = {
@@ -34,7 +35,7 @@ const nodeTypes = {
 
 function Flow() {
   const navigate = useNavigate()
-
+  const [patient,setPatient] = useState<CaseInfo>();
   const [flow, setFlow] = useState({ nodes: [], edges: [] });
 
   const [currentTaskGroupId] = useWorkingStore((state) => [
@@ -59,11 +60,12 @@ function Flow() {
         
           console.log(res.data)
           const data = res.data;
+          setPatient(tasks.data[0].patient)
           const nodes = data.nodes.map((node: any) => ({
             ...node,
             id: node.elementId,
             type: "custom",
-            data: {  title: node.title ,createdAt:node.createdAt},
+            data: {  title: node.title ,createdAt:node.createdAt, status:node.status},
           }));
 
           const edges = data.edges.map((edge: any) => ({
@@ -188,7 +190,7 @@ function Flow() {
           blur: 1,
         }}
       >
-        <CustomDrawer />
+        <CustomDrawer patient={patient}/>
       </Drawer>
       <Navbar></Navbar>
       <div className="bg-slate-50 h-screen flex">
