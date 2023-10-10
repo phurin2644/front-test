@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import ReactFlow, {
   Controls,
   Background,
@@ -20,6 +20,8 @@ import Navbar from "../components/Navbar";
 import CustomDrawer from "../components/customdrawer";
 import { flowdata, FlowData } from "../data/Flowdata 2";
 import CustomNode, { NodeData } from "../components/CustomNode 2";
+import useWorkingStore from "../utils/stores/working";
+import axios from "axios";
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 const nodeTypes = {
@@ -30,6 +32,22 @@ const nodeTypes = {
 // const newIdNode = () => `randomnode_${+useRef(0)}`;
 
 function Flow() {
+
+
+  const [currentTaskGroupId] = useWorkingStore((state) => [
+    state.currentTaskGroupId,
+  ]);
+
+  useEffect(() => {
+    const fetchTaskgroup = async () => {
+    await axios
+      .post("http://localhost:5000/patients/taskgroups", {
+        id: currentTaskGroupId,
+      })
+      .then((res) => console.log(res.data));
+    }
+    fetchTaskgroup();
+  },[]);
 
   const onAddFirstClick = () => {
     onAdd();
