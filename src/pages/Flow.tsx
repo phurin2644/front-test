@@ -15,6 +15,7 @@ import "reactflow/dist/base.css";
 // import TextUpdaterNode from './TextUpdaterNode';
 // import './text-updater-node.css';
 import { useDisclosure } from "@mantine/hooks";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { Drawer } from "@mantine/core";
 import Navbar from "../components/Navbar";
 import CustomDrawer from "../components/customdrawer";
@@ -196,13 +197,13 @@ function Flow() {
       </Drawer>
       <Navbar></Navbar>
       <div className="bg-slate-50 h-screen flex">
-        <section className="flex bg-green-light-3  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
+        <section className="flex bg-green-light-3  h-14 w-17 ml-6 mt-8 p-1 py-9 rounded-md justify-center items-center">
           <div
-            className="flex justify-center w-12 h-12 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-black hover:bg-zinc-300"
+            className="flex justify-center w-12 h-12 p-1 mx-2 bg-white inline-block rounded-xl border-spacing-1.5 border-black hover:bg-slate-200"
             onClick={open}
           >
             <button>
-              <IconInfoOctagon />
+              <AiOutlineExclamationCircle style={{ fontSize: '1.6em' }}/>
             </button>
           </div>
         </section>
