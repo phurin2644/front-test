@@ -8,18 +8,18 @@ import useAuth from "../utils/auth/useAuth";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [emailInput, setEmailInput] = useState("");
+  const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const { getAuth } = useAuth();
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem("email");
+    const savedUsername = localStorage.getItem("username");
     const savedRememberMe = localStorage.getItem("rememberMe");
 
-    if (savedRememberMe === "true" && savedEmail) {
+    if (savedRememberMe === "true" && savedUsername) {
       setRememberMe(true);
-      setEmailInput(savedEmail);
+      setUsernameInput(savedUsername);
     }
   }, []);
 
@@ -28,7 +28,7 @@ export default function Login() {
       const response = await axios.post(
         "/auth/signin",
         {
-          username: emailInput,
+          username: usernameInput,
           password: passwordInput,
         },
         {
@@ -41,12 +41,12 @@ export default function Login() {
         console.log("Login successful", userData);
 
         if (rememberMe) {
-          // Save email and "Remember Me" state to local storage
-          localStorage.setItem("email", emailInput);
+          // Save username and "Remember Me" state to local storage
+          localStorage.setItem("username", usernameInput);
           localStorage.setItem("rememberMe", "true");
         } else {
           // Clear local storage if "Remember Me" is not checked
-          localStorage.removeItem("email");
+          localStorage.removeItem("username");
           localStorage.removeItem("rememberMe");
         }
 
@@ -80,10 +80,9 @@ export default function Login() {
                 inputWrapperOrder={["label", "error", "input", "description"]}
                 onChange={(event) => {
                   const text = event.target.value;
-                  setEmailInput(text);
-                  console.log(text);
+                  setUsernameInput(text);
                 }}
-                value={emailInput}
+                value={usernameInput}
               />
             </div>
             <div className="py-2">
@@ -98,7 +97,6 @@ export default function Login() {
                   onChange={(event) => {
                     const text = event.target.value;
                     setPasswordInput(text);
-                    console.log(text);
                   }}
                   value={passwordInput}
                 />
@@ -125,7 +123,7 @@ export default function Login() {
               type="button"
               className="mt-3 text-lg font-semibold bg-green-pro w-full text-white rounded-lg px-6  shadow-md hover:text-white hover:bg-green-c"
               onClick={handleClick}
-              disabled={!emailInput || !passwordInput}
+              disabled={!usernameInput || !passwordInput}
             >
               Login
             </Button>
