@@ -1,5 +1,5 @@
-import { Button, Divider, PasswordInput, TextInput, Notification } from "@mantine/core";
-import { useState } from "react";
+import { Button, PasswordInput, TextInput } from "@mantine/core";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import useAuth from "../utils/auth/useAuth";
@@ -10,8 +10,18 @@ export default function Login() {
   const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [check, setCheck] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const { getAuth } = useAuth();
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("email");
+    const savedRememberMe = localStorage.getItem("rememberMe");
+
+    if (savedRememberMe === "true" && savedEmail) {
+      setRememberMe(true);
+      setEmailInput(savedEmail);
+    }
+  }, []);
 
   const handleClick = async () => {
     try {
@@ -28,13 +38,19 @@ export default function Login() {
 
       if (response.status === 200) {
         const userData = response.data;
-        console.log("Login succesful", userData);
+        console.log("Login successful", userData);
+
+        if (rememberMe) {
+          // Save email and "Remember Me" state to local storage
+          localStorage.setItem("email", emailInput);
+          localStorage.setItem("rememberMe", "true");
+        } else {
+          // Clear local storage if "Remember Me" is not checked
+          localStorage.removeItem("email");
+          localStorage.removeItem("rememberMe");
+        }
 
         await getAuth();
-        // <Notification color="violet" title="Login succesful">
-        //   Welcome to Emergency stroke fasttrack!
-        // </Notification>
-        
         navigate("/card");
       } else {
         console.error("Login failed");
@@ -56,9 +72,9 @@ export default function Login() {
             <div className="mb-6 font-bold text-3xl text-green-pro">Login</div>
             <div className="py-2">
               <TextInput
-                label="Your email"
-                placeholder="Your email"
-                description="Please enter your email"
+                label="Username"
+                placeholder="Username"
+                description="Please enter your username."
                 size="md"
                 withAsterisk
                 inputWrapperOrder={["label", "error", "input", "description"]}
@@ -75,7 +91,7 @@ export default function Login() {
                 <PasswordInput
                   placeholder="Password"
                   label="Password"
-                  description="It must be a combination of minimum 8 letters, numbers, and symbols."
+                  description="Please enter your password."
                   size="md"
                   withAsterisk
                   inputWrapperOrder={["label", "error", "input", "description"]}
@@ -94,21 +110,14 @@ export default function Login() {
                   type="checkbox"
                   className="leading-loose text-pink-600"
                   onChange={(event) => {
-                    setCheck(event.currentTarget.checked);
+                    setRememberMe(event.currentTarget.checked);
                     console.log(event.currentTarget.checked);
                   }}
+                  checked={rememberMe}
                 />
                 <span className="py-2 ml-2 text-sm text-gray-600 leading-snug">
                   Remember Me
                 </span>
-              </label>
-              <label className="block text-gray-500  my-4">
-                <a
-                  href="#"
-                  className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
-                >
-                  <span>Forgot Password?</span>
-                </a>
               </label>
             </div>
             <Button
@@ -120,13 +129,7 @@ export default function Login() {
             >
               Login
             </Button>
-            <Divider my="sm" className="mt-10 mb-7" />
-            <a
-              href="#"
-              className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
-            >
-              <span>No account yet? Sign Up</span>
-            </a>
+      
           </div>
         </form>
       </div>
