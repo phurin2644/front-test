@@ -25,6 +25,7 @@ import Navbar from "../components/Navbar";
 import CaseInfo from "../components/CaseInfo";
 import { Icon } from "@iconify/react";
 import useWorkingStore from "../utils/stores/working";
+import axios from "axios";
 
 // import TextUpdaterNode from './TextUpdaterNode';
 // import './text-updater-node.css';
@@ -36,10 +37,22 @@ function Flow() {
   // var hours = currentTime.getHours();
   // var minutes = currentTime.getMinutes();
   // var seconds = currentTime.getSeconds(); time
+  
+
   const [currentTaskGroupId] = useWorkingStore((state) => [
     state.currentTaskGroupId,
   ]);
 
+  useEffect(() => {
+    const fetchTaskgroup = async () => {
+    await axios
+      .post("http://localhost:5000/patients/taskgroups", {
+        id: currentTaskGroupId,
+      })
+      .then((res) => console.log(res.data));
+    }
+    fetchTaskgroup();
+  },[]);
   var currentDate = new Date();
   
   var DayOfMonth = currentDate.getDate();
