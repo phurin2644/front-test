@@ -31,6 +31,18 @@ function CustomNode(props: { data: NodeData }) {
   const xI = useNodes();
   const c = useNodesInitialized();
 
+  const formattedDate = new Date(data.createdAt).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  });
+  const hours = String(new Date(data.createdAt).getHours()).padStart(2, "0");
+  const minutes = String(new Date(data.createdAt).getMinutes()).padStart(2, "0");
+  const seconds = String(new Date(data.createdAt).getSeconds()).padStart(2, "0");
+  const formattedTime = `${hours}:${minutes}:${seconds}`;
+  const fullFormattedDate = `${formattedDate} ${formattedTime}`;
+
+
   const InProcess = () => {
     return (
       <div className="flex justify-center bg-red-process-3 px-4 py-2 pr-2 rounded-t-md">
@@ -80,7 +92,7 @@ function CustomNode(props: { data: NodeData }) {
               color={"#008C8C"}
               className="mr-2 "
             />
-            <h1 className="text-xs py-4">{data.createdAt}</h1>
+            <h1 className="text-xs py-4">{fullFormattedDate}</h1>
           </div>
           <div className="flex justify-center">
             <Menu shadow="md" width={130} position="bottom-end">
