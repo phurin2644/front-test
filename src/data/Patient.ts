@@ -1,5 +1,5 @@
 export interface InfoCardProps {
-  id: number;
+  id: string;
   hospitalNumber: string;
   firstName: string;
   lastName: string;
@@ -7,7 +7,7 @@ export interface InfoCardProps {
   Status: boolean;
 }
 
-export type Entry = "WALKIN" | "REFER";
+export type Entry = "WALKIN" | "REFER"; 
 
 export interface InfoCard {
   hospitalNumber: string;
