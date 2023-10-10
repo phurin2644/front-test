@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactFlow, {
   Controls,
   Background,
@@ -33,6 +33,7 @@ const nodeTypes = {
 
 function Flow() {
 
+  const [flow, setFlow] = useState({ nodes: [], edges: [] });
 
   const [currentTaskGroupId] = useWorkingStore((state) => [
     state.currentTaskGroupId,
@@ -40,15 +41,42 @@ function Flow() {
 
   useEffect(() => {
     const fetchTaskgroup = async () => {
-    await axios
-      .post("http://localhost:5000/patients/taskgroups", {
-        id: currentTaskGroupId,
-      })
-      .then((res) => console.log(res.data));
-    }
-    fetchTaskgroup();
-  },[]);
+      const tasks = await axios
+        .post("http://localhost:5000/patients/taskgroups", {
+          id: currentTaskGroupId,
+        })
+        const res = await axios
+        .post("http://localhost:5000/graph/tasks", {
+          taskGroupId: tasks.data[0].id,
+            })
 
+
+        
+          console.log(res.data)
+          const data = res.data;
+          const nodes = data.nodes.map((node: any) => ({
+            ...node,
+            id: node.elementId,
+            type: "custom",
+            data: { id: node.title },
+          }));
+
+          const edges = data.edges.map((edge: any) => ({
+            ...edge,
+            id: edge.elementId,
+            type: "BezierEdge",
+            markerEnd: { type: "arrow" },
+            animated: edge.required,
+            style: { stroke: edge.required ? "red" : "gray" },
+          }));
+          setFlow({ nodes, edges }) ;
+        
+    };
+    fetchTaskgroup();
+  }, []);
+  console.log(flow)
+
+  
   const onAddFirstClick = () => {
     onAdd();
   };
@@ -168,8 +196,8 @@ function Flow() {
           </div>
         </div>
         <ReactFlow
-          nodes={nodes}
-          edges={edges}
+          nodes={flow.nodes}
+          edges={flow.edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
