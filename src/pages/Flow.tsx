@@ -24,6 +24,7 @@ import useWorkingStore from "../utils/stores/working";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { CaseInfo } from "../data/Patient";
+import { IconInfoOctagon } from "@tabler/icons-react";
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 const nodeTypes = {
@@ -194,14 +195,16 @@ function Flow() {
       </Drawer>
       <Navbar></Navbar>
       <div className="bg-slate-50 h-screen flex">
-        <div className=" inline-block bg-green-light-3 h-11 w-32 ml-6 mt-8 p-1 rounded-md space-y-5">
+      <section className="flex bg-green-light-3  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
           <div
-            className="w-24 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-transparent hover:border-green-pro"
+            className="flex justify-center w-12 h-12 p-1 mx-2 bg-white inline-block rounded-lg border-2 border-black hover:bg-zinc-300"
             onClick={open}
           >
-            <button>ข้อมูล</button>
+            <button>
+              <IconInfoOctagon />
+            </button>
           </div>
-        </div>
+        </section>
         <ReactFlow
           nodes={flow.nodes}
           edges={flow.edges}
