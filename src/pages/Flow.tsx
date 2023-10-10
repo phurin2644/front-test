@@ -1,4 +1,5 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
 import "reactflow/dist/style.css";
 //import library
 import ReactFlow, {
@@ -9,15 +10,16 @@ import ReactFlow, {
   Edge,
   // Panel,
 } from "reactflow";
+
 import { useDisclosure } from "@mantine/hooks";
 import { Button, Drawer } from "@mantine/core";
-
+import { Input, Tooltip, Select } from "@mantine/core";
 import { Edit } from "tabler-icons-react";
 import { IconInfoOctagon } from "@tabler/icons-react";
 import { Menu } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-
-import {ActiveBtn} from "../components/InfoCards";
+import { SuccessBtn } from "../components/InfoCards";
+import { InProcessBtn } from "../components/InfoCards";
 //import components
 import Navbar from "../components/Navbar";
 import CaseInfo from "../components/CaseInfo";
@@ -34,26 +36,43 @@ function Flow() {
   // var minutes = currentTime.getMinutes();
   // var seconds = currentTime.getSeconds(); time
 
+  var currentDate = new Date();
+  
+  var DayOfMonth = currentDate.getDate();
+  var Month = currentDate.getMonth() + 1; //
+  var Year = currentDate.getFullYear();
+  var Hour = currentDate.getHours();
+  var Minute = currentDate.getMinutes();
+  var Second = currentDate.getSeconds();
+
   const xPos: any = useRef(550);
   const yPos: any = useRef(50);
 
-  const [isTrack,setIsTrack] = useState(false);
-
-  const handleTrack = () =>{
-    setIsTrack(!isTrack);
-  }
-
   const idNode = useRef(1);
+  var IdNodePointer: any = useRef(1);
 
-  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const handleOpen = () => {
-    setIsDropDownOpen(!isDropDownOpen);
-    // onAdd();
+  const [nodesState, setNodesState] = useState<boolean[]>([
+    true,
+    false,
+    false,
+    false,
+  ]);
+
+  const nodeOnAdd = () => {
+    onAdd();
+    const newNodesState = [...nodesState, false];
+    setNodesState(newNodesState);
   };
 
-  const firstClickAddNode = () => {
-    onAdd();
+  const handleTrack: any = (nodeId: number) => {
+    IdNodePointer += 1;
+    if (nodesState[nodeId - 1] === false) {
+      const updatedNodesState = [...nodesState];
+      updatedNodesState[nodeId - 1] = true;
+      setNodesState(updatedNodesState);
+    }
   };
 
   const navigate = useNavigate();
@@ -123,7 +142,7 @@ function Flow() {
                 icon="basil:user-clock-solid"
                 color="#008c8c"
                 className="w-6 h-6 ml-3 mr-4"
-                style = {{width:"24px",height:"24px"}}
+                style={{ width: "24px", height: "24px" }}
               />
               <span className="text-lg font-medium">วว/ดด/ปป 12.00</span>
             </div>
@@ -136,12 +155,11 @@ function Flow() {
                 <Menu.Target>
                   <div
                     className="flex flex-row items-center bg-white pl-2"
-                    style={{ width: "138px",borderRadius: "4px 0px 0px 4px"}}
+                    style={{ width: "138px", borderRadius: "4px 0px 0px 4px" }}
                   >
                     <button
                       className="flex flex-row justify-start w-24 inline-block border-2 border-transparent text-sm bg-white aboslute"
                       style={{ borderRadius: "5px" }}
-                      onClick={handleOpen}
                     >
                       <div>
                         <Icon
@@ -159,7 +177,7 @@ function Flow() {
                   </div>
                 </Menu.Target>
 
-                <Menu.Dropdown onClick={firstClickAddNode}>
+                <Menu.Dropdown>
                   {options.map((x) => (
                     <Menu.Item>
                       <p>{x.label}</p>
@@ -176,7 +194,6 @@ function Flow() {
                     <button
                       className="flex flex-row w-24 inline-block border--2 border-transparent gap-x-4 pl-5"
                       style={{ borderRadius: "5px" }}
-                      onClick = {handleTrack}
                     >
                       <div className="flex items-center">
                         <p className="text-sm text-white font-semibold my-auto">
@@ -224,12 +241,7 @@ function Flow() {
     yPos.current += 250;
 
     idNode.current += 1;
-    // console.log(yPos)
-    // console.log(yPos.current)
-    // console.log(getNodeId())
-    // console.log(getNodeId)
-    // console.log(idNode)
-    // console.log(newIdNode)
+
     const newNode = {
       id: `${idNode.current}`,
 
@@ -248,7 +260,6 @@ function Flow() {
             className="flex flex-col justify-center"
             style={{ width: "270px" }}
           >
-            
             <div
               className="flex justify-center pl-4 py-2"
               style={{
@@ -258,9 +269,12 @@ function Flow() {
                 height: "49px",
               }}
             >
-              <ActiveBtn/>
+              {nodesState[IdNodePointer] === true ? (
+                <SuccessBtn />
+              ) : (
+                <InProcessBtn />
+              )}
             </div>
-
 
             <div
               className="flex justify-center items-center mt-4"
@@ -275,11 +289,11 @@ function Flow() {
                 icon="basil:user-clock-solid"
                 color="#008c8c"
                 className="w-6 h-6 ml-3 mr-4"
-                style = {{width:"24px",height:"24px"}}
+                style={{ width: "24px", height: "24px" }}
               />
+
               <span className="text-lg font-medium">วว/ดด/ปป 12.00</span>
             </div>
-
 
             <section
               className="flex flex-row justify-center border-2 border-green-pro bg-slate-500 ml-6"
@@ -289,13 +303,11 @@ function Flow() {
                 <Menu.Target>
                   <div
                     className="flex flex-row items-center bg-white pl-2"
-                  
-                    style={{ width: "138px",borderRadius: "4px 0px 0px 4px"}}
+                    style={{ width: "138px", borderRadius: "4px 0px 0px 4px" }}
                   >
                     <button
                       className="flex flex-row justify-start w-24 inline-block border-2 border-transparent text-sm bg-white aboslute"
                       style={{ borderRadius: "5px" }}
-                      onClick={handleOpen}
                     >
                       <div>
                         <Icon
@@ -313,7 +325,7 @@ function Flow() {
                   </div>
                 </Menu.Target>
 
-                <Menu.Dropdown onClick={firstClickAddNode}>
+                <Menu.Dropdown onClick={nodeOnAdd}>
                   {options.map((x) => (
                     <Menu.Item>
                       <p>{x.label}</p>
@@ -330,6 +342,7 @@ function Flow() {
                     <button
                       className="flex flex-row w-24 inline-block border--2 border-transparent gap-x-4 pl-5"
                       style={{ borderRadius: "5px" }}
+                      onClick={handleTrack(IdNodePointer.current)}
                     >
                       <div className="flex items-center">
                         <p className="text-sm text-white font-semibold my-auto">
@@ -350,7 +363,6 @@ function Flow() {
                 </Menu.Target>
               </Menu>
             </section>
-           
           </main>
         ),
       },
@@ -370,6 +382,13 @@ function Flow() {
 
   return (
     <>
+      {useEffect(() => {
+        if (count < 2) {
+          setCount(count + 1);
+          nodeOnAdd();
+        }
+      }, [count])}
+
       <Navbar></Navbar>
       <main className="flex h-screen">
         <section className="flex bg-green-pro  h-14 w-17 ml-6 mt-8 p-1 rounded-md">
@@ -398,10 +417,7 @@ function Flow() {
                 <Edit size={20} strokeWidth={2} className="p-0 m-0" />
               </Button>
             </div>
-
-            {/* Drawer content */}
             <CaseInfo />
-            {/* {Drawer content end} */}
           </div>
         </Drawer>
         <ReactFlow
