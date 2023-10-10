@@ -10,14 +10,13 @@ import {
 import { Click, ClockEdit, SquarePlus } from "tabler-icons-react";
 import { Button, Menu } from "@mantine/core";
 import InfoCard from "./InfoCards";
-import { FlowData } from "../data/Flowdata";
 import Flow from "../pages/Flow";
 import { IconLogout, IconSettings } from "@tabler/icons-react";
 
 export interface NodeData {
   name: string;
   title: string;
-  timestamp: string;
+  createdAt: string;
   Status: boolean;
   id: string;
   Addtask: string;
@@ -72,7 +71,7 @@ function CustomNode(props: { data: NodeData }) {
         {data.Status ? <Seccess /> : <InProcess />}
         <div className="px-4 py-3">
           <h1 className="flex justify-center">
-            {data.title} {nodeId}
+            {data.title} 
           </h1>
           <div className="flex items-center justify-center ">
             <ClockEdit
@@ -81,7 +80,7 @@ function CustomNode(props: { data: NodeData }) {
               color={"#008C8C"}
               className="mr-2 "
             />
-            <h1 className="text-xs py-4">{data.timestamp}</h1>
+            <h1 className="text-xs py-4">{data.createdAt}</h1>
           </div>
           <div className="flex justify-center">
             <Menu shadow="md" width={130} position="bottom-end">

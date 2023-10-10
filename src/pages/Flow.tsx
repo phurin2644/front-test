@@ -22,6 +22,7 @@ import { flowdata, FlowData } from "../data/Flowdata 2";
 import CustomNode, { NodeData } from "../components/CustomNode 2";
 import useWorkingStore from "../utils/stores/working";
 import axios from "axios";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 const nodeTypes = {
@@ -32,6 +33,7 @@ const nodeTypes = {
 // const newIdNode = () => `randomnode_${+useRef(0)}`;
 
 function Flow() {
+  const navigate = useNavigate()
 
   const [flow, setFlow] = useState({ nodes: [], edges: [] });
 
@@ -40,6 +42,9 @@ function Flow() {
   ]);
 
   useEffect(() => {
+    if(currentTaskGroupId === null){
+      navigate('/card')
+    }
     const fetchTaskgroup = async () => {
       const tasks = await axios
         .post("http://localhost:5000/patients/taskgroups", {
@@ -58,7 +63,7 @@ function Flow() {
             ...node,
             id: node.elementId,
             type: "custom",
-            data: { id: node.title },
+            data: {  title: node.title ,createdAt:node.createdAt},
           }));
 
           const edges = data.edges.map((edge: any) => ({
