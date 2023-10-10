@@ -17,17 +17,20 @@ export default {
         "purple-Active-1": "#CDA9D9",
         "purple-Active-2": "#852FA2",
         "purple-Active-3": "#501C61",
+        'red-process-1': '#7A2725',
+        'red-process-2': '#CC413D',
+        'red-process-3': '#E08D8B'
       },
       backgroundColor: {
         default: "#F6FAFA",
       },
       height: {
-        670: 670,
-        320: 320,
+        670: 870,
+        320: 420,
         450: 450,
         550: 500,
-        966: 766,
-        78: 78,
+        966: 966,
+        88: 88,
       },
       width: {
         650: 650,
