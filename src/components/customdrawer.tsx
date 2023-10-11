@@ -3,6 +3,18 @@ import { Edit } from "tabler-icons-react";
 import { CaseInfo } from "../data/Patient";
 
 function CustomDrawer({patient}:{patient:CaseInfo | undefined}) {
+    const formattedDate = new Date(patient?.createdAt || "").toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+      });
+
+      const hours = String(new Date(patient?.createdAt || "").getHours()).padStart(2, "0");
+      const minutes = String(new Date(patient?.createdAt || "").getMinutes()).padStart(2, "0");
+      const seconds = String(new Date(patient?.createdAt || "").getSeconds()).padStart(2, "0");
+      const formattedTime = `${hours}:${minutes}:${seconds}`;
+      const fullFormattedDate = `${formattedDate} ${formattedTime}`;
+    
 
     return(
         <div className="px-4">
@@ -20,7 +32,7 @@ function CustomDrawer({patient}:{patient:CaseInfo | undefined}) {
                                 <Input
                                     style={{ borderBottomColor: "#434343" }}
                                     variant="filled"
-                                    value={patient?.createdAt}
+                                    value={fullFormattedDate}
                                     placeholder="Placeholder"
                                     rightSection={
                                         <Tooltip label="This is public" position="top-end" withArrow>
@@ -145,7 +157,7 @@ function CustomDrawer({patient}:{patient:CaseInfo | undefined}) {
                         <Input
                             style={{ borderBottomColor: "#434343" }}
                             variant="filled"
-                            value={patient?.createdAt}
+                            value={fullFormattedDate}
                             placeholder="Placeholder"
                             rightSection={
                                 <Tooltip label="This is public" position="top-end" withArrow>

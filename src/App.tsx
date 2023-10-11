@@ -1,5 +1,5 @@
 import { useEffect, type ReactElement } from "react";
-import { Route, Routes, Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Route, Routes, Navigate, Outlet,} from "react-router-dom";
 import "./App.css";
 import Flow from "./pages/Flow";
 import Dashboard from "./pages/Dashboard";
@@ -11,7 +11,6 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   const { getAuth, state } = useAuth();
-  const navigate = useNavigate();
   useEffect(() => {
     getAuth(false);
   }, []);

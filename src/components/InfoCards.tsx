@@ -5,23 +5,30 @@ import { InfoCardProps } from "../data/Patient";
 import useWorkingStore from '../utils/stores/working';
 import { useNavigate } from "react-router-dom";
 
-export const InProcessBtn = () =>{
-  return(
-    <div className = "flex items-center justify-center p-0.5 px-3 text-sm rounded-2xl text-white" style = {{backgroundColor:"#cc413d"}}>
-       <div style = {{backgroundColor:"#7a2725"}} className = "h-1.5 w-1.5 rounded mr-2"></div>
-       <h1>In Process</h1>
+export const InProcessBtn = () => {
+  return (
+    <div
+      className="flex items-center justify-center p-0.5 px-3 text-sm rounded-2xl text-white"
+      style={{ backgroundColor: "#cc413d" }}
+    >
+      <div
+        style={{ backgroundColor: "#7a2725" }}
+        className="h-1.5 w-1.5 rounded mr-2"
+      ></div>
+      <h1>In Process</h1>
     </div>
-  )
-}
+  );
+};
 
 export const SuccessBtn = () => {
   return (
-    <button className="flex flex-row justify-center items-center bg-green-Suscess-2 p-0.5 px-3 text-sm rounded-2xl text-white" style = {{width:"100px"}}>
+    <button
+      className="flex flex-row justify-center items-center bg-green-Suscess-2 p-0.5 px-3 text-sm rounded-2xl text-white"
+      style={{ width: "100px" }}
+    >
       <div className="bg-green-Suscess-3 h-1.5 w-1.5 rounded mr-2"></div>
 
-      <h1 className = "flex justify-center self-center">Success</h1>
-      
-     
+      <h1 className="flex justify-center self-center">Success</h1>
     </button>
   );
 };
@@ -79,7 +86,7 @@ function InfoCard({
 
   return (
     <>
-      <div className="bg-white shadow-sm h-44 w-64 rounded-md">
+      <div className="bg-white shadow-sm w-full sm:max-w-md md:max-w-lg lg:max-w-xl rounded-md">
         {Status ? (
           <Success title={hospitalNumber} />
         ) : (
@@ -99,8 +106,8 @@ function InfoCard({
             <h1 className="text-xs py-4">{fullFormattedDate}</h1>
           </div>
           <div className="flex justify-center">
-            <Button className="bg-green-light-1 hover:bg-green-g text-slate-400 rounded-r-none px-3 pr-5">
-              <div className="flex items-center justify-center ">
+            <Button className="bg-green-light-1 hover:bg-green-light-7 text-slate-500 rounded-r-none px-3 pr-5 hover:text-slate-100">
+              <div className="flex justify-center items-center">
                 <Trash size={20} strokeWidth={2} className="mr-2" />
                 <h1>Delete</h1>
               </div>
@@ -110,7 +117,7 @@ function InfoCard({
               navigate("/flow")
             }}>
               <Button className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5">
-                <div className="flex items-center justify-center ">
+                <div className="flex justify-center items-center">
                   <h1>Fast Track</h1>
                   <Bolt size={20} strokeWidth={2} className="ml-2" />
                 </div>

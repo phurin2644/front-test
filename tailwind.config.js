@@ -9,6 +9,8 @@ export default {
         "green-g": "rgba(0, 161, 69, 0.2)",
         "green-c": "#005454",
         "green-light-3": "#E4F0EF",
+        "green-light-5": "#D2E6E4",
+        "green-light-7": "#ACCDCD",
         "green-light-1": "#cce8e8",
         "green-bar": "#48BABA",
         "green-Suscess-1": "#A2ECC2",
