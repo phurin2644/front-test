@@ -1,6 +1,6 @@
 
 import { Button } from "@mantine/core";
-import { Bolt, ClockEdit, Edit } from "tabler-icons-react";
+import { Bolt, ClockEdit, Trash } from "tabler-icons-react";
 import { InfoCardProps } from "../data/Patient";
 import useWorkingStore from '../utils/stores/working';
 import { useNavigate } from "react-router-dom";
@@ -108,7 +108,7 @@ function InfoCard({
           <div className="flex justify-center">
             <Button className="bg-green-light-1 hover:bg-green-light-7 text-slate-500 rounded-r-none px-3 pr-5 hover:text-slate-100">
               <div className="flex justify-center items-center">
-                <Edit size={20} strokeWidth={2} className="mr-2" />
+                <Trash size={20} strokeWidth={2} className="mr-2" />
                 <h1>Delete</h1>
               </div>
             </Button>
