@@ -5,11 +5,12 @@ import userdata, { Userdata } from "../data/Userdata";
 
 function NewMember(props: { close: () => void }) {
   const { close } = props;
+  const [titleInput,setTitleInput] = useState("");
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
   const [departmentInput, setDepartmentInput] = useState("");
-  const [adminInput, setAdminInput] = useState(false);
-  const roleOptions = ["Admin", "Super Admin"];
+  const roleOptions = ["ADMIN", "SUPER_ADMIN","USER"];
+  const titleOptions = ["Dr", "Mr", "Mrs", "Ms"];
   const [roleInput, setRoleInput] = useState("");
 
   const Add = () => {
@@ -21,11 +22,12 @@ function NewMember(props: { close: () => void }) {
     const formattedDate = `${day}/${month}/${year}`;
     const newMem: Userdata = {
       id: `${userdata.length + 1}`,
+      title: titleInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
-      status: adminInput,
-      deparment: departmentInput,
-      date: formattedDate,
+      role: roleInput,
+      department: departmentInput,
+      createdAt: formattedDate,
     };
     console.log(currentDate);
     userdata.push(newMem);
@@ -34,6 +36,18 @@ function NewMember(props: { close: () => void }) {
 
     return (
         <div className="mx-4">
+            <Select // Added
+                data={titleOptions}
+                label="Title"
+                placeholder="Select Title"
+                withAsterisk
+                onChange={(event) => {
+                const text = event;
+                setTitleInput(text);
+                console.log(text);
+                }}
+                value={titleInput}
+            />
             <TextInput
                 placeholder="First name"
                 label="First name"
