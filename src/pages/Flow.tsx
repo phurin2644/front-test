@@ -67,6 +67,7 @@ function Flow() {
         id: node.elementId,
         type: "custom",
         data: {
+          id: node.id,
           title: node.title,
           createdAt: node.createdAt,
           status: node.status,
