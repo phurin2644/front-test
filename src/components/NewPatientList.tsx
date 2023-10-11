@@ -34,7 +34,16 @@ function NewPatientList(props: {
       await axios.put("http://localhost:5000/taskgroups", {
         ...newPatient,
       });
-      
+      // await axios
+      //   .get("http://localhost:5000/patients")
+      //   .then((res) => {
+      //     const fetchedInfoCard = res.data;
+      //     const sortedInfoCard = sortCardsByTimestamp(fetchedInfoCard);
+      //     setInfoCard(sortedInfoCard);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error fetching user data:", error);
+      //   });
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -42,7 +51,6 @@ function NewPatientList(props: {
     window.location.reload();
     close();
   };
-
 
   return (
     <div className="mx-4">

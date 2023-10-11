@@ -106,8 +106,8 @@ function InfoCard({
             <h1 className="text-xs py-4">{fullFormattedDate}</h1>
           </div>
           <div className="flex justify-center">
-            <Button className="bg-green-light-1 hover:bg-green-g text-slate-400 rounded-r-none px-3 pr-5">
-              <div className="flex items-center justify-center ">
+            <Button className="bg-green-light-1 hover:bg-green-light-7 text-slate-500 rounded-r-none px-3 pr-5 hover:text-slate-100">
+              <div className="flex justify-center items-center">
                 <Edit size={20} strokeWidth={2} className="mr-2" />
                 <h1>Delete</h1>
               </div>
@@ -117,7 +117,7 @@ function InfoCard({
               navigate("/flow")
             }}>
               <Button className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5">
-                <div className="flex items-center justify-center ">
+                <div className="flex justify-center items-center">
                   <h1>Fast Track</h1>
                   <Bolt size={20} strokeWidth={2} className="ml-2" />
                 </div>
