@@ -63,7 +63,7 @@ function NewPatientList(props: {
         onChange={(event) => {
           const text = event.target.value;
           if (/[^0-9]/.test(text)) {
-            toast.error("HN can't exceed 7 characters", {
+            toast.error("HN can be only numbers", {
               position: toast.POSITION.TOP_CENTER,
               autoClose: 1000,
               style: {

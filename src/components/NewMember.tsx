@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Checkbox, TextInput } from "@mantine/core";
+import { Autocomplete, Button, Select, TextInput } from "@mantine/core";
 import { useState } from "react";
 import { UserPlus } from "tabler-icons-react";
 import userdata, { Userdata } from "../data/Userdata";
@@ -9,6 +9,8 @@ function NewMember(props: { close: () => void }) {
   const [lastNameInput, setLastNameInput] = useState("");
   const [departmentInput, setDepartmentInput] = useState("");
   const [adminInput, setAdminInput] = useState(false);
+  const roleOptions = ["Admin", "Super Admin"];
+  const [roleInput, setRoleInput] = useState("");
 
   const Add = () => {
     const currentDate = new Date();
@@ -66,17 +68,17 @@ function NewMember(props: { close: () => void }) {
                 }}
                 value={departmentInput}
             />
-            <Checkbox
-                label="Select to Admin"
-                color="green"
-                radius="xl"
-                className="my-4"
-                checked={adminInput}
+            <Select // Added
+                data={roleOptions}
+                label="Role"
+                placeholder="Select Role"
+                withAsterisk
                 onChange={(event) => {
-                    setAdminInput(event.currentTarget.checked);
-                    console.log(event.currentTarget.checked);
+                const text = event;
+                setRoleInput(text);
+                console.log(text);
                 }}
-                value={departmentInput}
+                value={roleInput}
             />
             <Button className="bg-green-pro rounded-lg px-4 text-base text-white flex items-center hover:bg-green-c my-4"
                 onClick={Add}
