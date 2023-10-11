@@ -8,8 +8,16 @@ import {
 } from "tabler-icons-react";
 import { Userdata } from "../data/Userdata";
 import { Divider } from "@mantine/core";
+import axios from "../api/axios";
 
 function UserInfo(props: Userdata) {
+  // const deleted = () => {
+  //   axios.delete(`http://localhost:5000/users`, {
+  //     id: props.id,
+  //   })
+  // }
+
+
   const formattedDate = new Date(props.createdAt).toLocaleDateString("en-US", {
     day: "numeric",
     month: "numeric",

@@ -15,14 +15,21 @@ function InfoList() {
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
   const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
+  const [infoCardStatus, setInfoCardStatus] = useState([]);
 
+  
   useEffect(() => {
     axios
-      .get("/api/patients")
-      .then((res) => {
-        const fetchedInfoCard = res.data;
+      .get("/api/taskgroups/details")
+      .then(async (res) => {
+        const status = res.data[0]
+        const response = await axios.get('/api/patients')
+        const fetchedInfoCard = response.data;
         const sortedInfoCard = sortCardsByTimestamp(fetchedInfoCard);
         setInfoCard(sortedInfoCard);
+        console.log(status.patient);
+        console.log(fetchedInfoCard[0])
+        setInfoCardStatus(status)
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
