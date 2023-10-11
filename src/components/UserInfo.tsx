@@ -72,10 +72,11 @@ function UserInfo(props: Userdata) {
           <div className="flex items-center w-40  ">
             <h1>{fullFormattedDate}</h1>
           </div>
+
           <div className="flex w-44 justify-between">
             <div className="flex">
-              <div className="mr-2 bg-slate-200 h-8 w-8 flex items-center justify-center rounded-md">
-                <FilePencil size={20} strokeWidth={2} color={"#79a1d2"} />
+              <div className="mr-2 h-8 w-8 flex items-center justify-center rounded-md">
+                {props.title}
               </div>
               <div className="bg-slate-200 h-8 w-8 flex items-center justify-center rounded-md">
                 <Modal
