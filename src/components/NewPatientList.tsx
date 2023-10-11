@@ -19,7 +19,7 @@ function NewPatientList(props: {
   useEffect(() => {}, []);
 
   const Add = async () => {
-    const newPatient = {
+    const newPatient: TaskGroup = {
       title: titleInput,
       hospitalNumber: HnInput,
       firstName: firstNameInput,

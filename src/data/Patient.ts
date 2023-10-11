@@ -26,5 +26,4 @@ export interface TaskGroup {
   blueprintType: string;
   entry: string;
   destination: string;
-  status: string;
 }
