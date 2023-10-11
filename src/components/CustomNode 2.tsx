@@ -19,6 +19,11 @@ export interface NodeData {
   title: string;
   createdAt: string;
   status: string;
+  setFlow: React.Dispatch<React.SetStateAction<{
+    nodes: never[];
+    edges: never[];
+}>>;
+taskGroupId: any;
   id: string;
   Addtask: string;
   fn1: () => void;
@@ -70,8 +75,36 @@ function CustomNode(props: { data: NodeData }) {
         id: data.id,
         status: "SUCCESS",
       })
-      .then((response) => {
-        window.location.reload()
+      .then(async (response) => {
+        
+        const res = await axios.post("http://localhost:5000/graph/tasks", {
+        taskGroupId: data.taskGroupId,
+      });
+
+      const dataRes = res.data;
+      const nodes = dataRes.nodes.map((node: any) => ({
+        ...node,
+        id: node.elementId,
+        type: "custom",
+        data: {
+          setFlow: data.setFlow,
+          id: node.id,
+          title: node.title,
+          createdAt: node.createdAt,
+          status: node.status,
+          taskGroupId:data.taskGroupId
+        },
+      }));
+
+      const edges = dataRes.edges.map((edge: any) => ({
+        ...edge,
+        id: edge.elementId,
+        type: "BezierEdge",
+        markerEnd: { type: "arrow" },
+        animated: edge.required,
+        style: { stroke: edge.required ? "red" : "gray" },
+      }));
+      data.setFlow({ nodes, edges });
         // Check the response and update the status if needed
         // if (response.status === 200) {
         // }
