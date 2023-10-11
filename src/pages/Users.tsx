@@ -21,7 +21,7 @@ function Users() {
   const numUser = userData.length;
   const {user} = useAuth();
 
-  useEffect (()=>{axios.get("http://localhost:5000/users")
+  useEffect (()=>{axios.get("/users")
     .then((res)=>{
       setUserData(res.data);
       

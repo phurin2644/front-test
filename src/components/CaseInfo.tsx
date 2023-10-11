@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Input } from '@mantine/core';
 import { Tooltip } from '@mantine/core';
 

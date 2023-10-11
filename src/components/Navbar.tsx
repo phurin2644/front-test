@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Button, Menu } from "@mantine/core";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import useAuth from "../utils/auth/useAuth";
 import { IconLogout } from "@tabler/icons-react";
 import { toast } from "react-toastify";

@@ -1,12 +1,9 @@
 import {
   Button,
-  Divider,
   PasswordInput,
   TextInput,
-  Notification,
 } from "@mantine/core";
 import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import useAuth from "../utils/auth/useAuth";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +12,6 @@ import { toast } from "react-toastify";
 // type Props = {};
 
 export default function Login() {
-  const navigate = useNavigate();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [rememberMe, setRememberMe] = useState(false);

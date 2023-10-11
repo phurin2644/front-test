@@ -1,4 +1,4 @@
-import { Autocomplete, Button, TextInput } from "@mantine/core";
+import { Autocomplete, Button, Select, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { TaskGroup, InfoCardProps } from "../data/Patient";
 import axios from "axios";
@@ -12,12 +12,15 @@ function NewPatientList(props: {
   const [lastNameInput, setLastNameInput] = useState("");
   const [HnInput, setHnInput] = useState("");
   const [blueprintInput, setBlueprintInput] = useState("");
+  //add by Thian
+  const [titleInput,setTitleInput] = useState("")
+  const titleOptions = ["Mr.", "Mrs."];
 
   useEffect(() => {}, []);
 
   const Add = async () => {
     const newPatient: TaskGroup = {
-      title: "Mr.",
+      title: titleInput, //fixed  
       hospitalNumber: HnInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
@@ -31,16 +34,6 @@ function NewPatientList(props: {
       await axios.put("http://localhost:5000/taskgroups", {
         ...newPatient,
       });
-      // await axios
-      //   .get("http://localhost:5000/patients")
-      //   .then((res) => {
-      //     const fetchedInfoCard = res.data;
-      //     const sortedInfoCard = sortCardsByTimestamp(fetchedInfoCard);
-      //     setInfoCard(sortedInfoCard);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error fetching user data:", error);
-      //   });
       
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -64,6 +57,18 @@ function NewPatientList(props: {
         }}
         value={HnInput}
       />
+      <Select // Added
+        data={titleOptions}
+        label="Title"
+        placeholder="Select Title"
+        withAsterisk
+        onChange={(event) => {
+          const text = event;
+          setTitleInput(text);
+          console.log(text);
+        }}
+        value={titleInput}
+      />
       <TextInput
         placeholder="First name"
         label="First name"
@@ -86,7 +91,7 @@ function NewPatientList(props: {
         }}
         value={lastNameInput}
       />
-      <Autocomplete
+      <Select
         label="Blueprint"
         placeholder="Blueprint"
         withAsterisk
