@@ -4,11 +4,24 @@ import { TaskGroup } from "../data/Patient";
 import axios from "axios";
 import { AlertOctagon, Trash, CircleLetterX } from "tabler-icons-react";
 
-function DeletePatient(props: { close: () => void }) {
-  const { close } = props;
+function DeletePatient(props: { close: () => void , id: string}) {
+  const { close,id } = props;
 
-  const Add = async () => {};
-
+  console.log('ID:', id); // Add this line to check the value of 'id'
+  const  handleDelete = async () => {
+    await axios
+      .delete('/api/patients',{
+        data: {id:id}
+      })
+      .then(() => {
+        window.location.reload();
+        close();
+      })
+      .catch((error) => {
+        console.error('Error deleting patient:', error);
+        // Handle error as needed
+      });
+  };
   return (
     <div className="flex flex-col items-center">
       <div className="grid grid-cols-2">
@@ -25,7 +38,7 @@ function DeletePatient(props: { close: () => void }) {
       <div className="flex space-x-8">
         <Button
           className="bg-red-600 rounded-lg px-4 text-base text-white hover:bg-red-200 w-40 hover:text-red-600 "
-          onClick={close}
+          onClick={handleDelete}
         >
           <Trash size={22} strokeWidth={2} className="mr-1" />
           Delete
@@ -40,6 +53,6 @@ function DeletePatient(props: { close: () => void }) {
       </div>
     </div>
   );
-}
+  }
 
 export default DeletePatient;

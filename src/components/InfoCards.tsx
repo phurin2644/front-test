@@ -120,7 +120,7 @@ function InfoCard({
                 blur: 2,
               }}
             >
-              <DeletePatient close={close} />
+              <DeletePatient close={close} id={id} />
             </Modal>
             <Button
               className="bg-green-light-1 hover:bg-green-light-7 text-slate-500 rounded-r-none px-3 pr-5 hover:text-slate-100"

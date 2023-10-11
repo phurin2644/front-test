@@ -87,8 +87,8 @@ const NavProfile: FC = () => {
                       user?.role === "ADMIN"
                         ? "text-green-500"
                         : user?.role === "SUPER_ADMIN"
-                        ? "text-red-500"
-                        : ""
+                        ? "text-yellow-400"
+                        : "text-red-500"
                     }
                   >
                     {user?.role}
