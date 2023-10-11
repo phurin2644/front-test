@@ -14,13 +14,13 @@ function NewPatientList(props: {
   const [blueprintInput, setBlueprintInput] = useState("");
   //add by Thian
   const [titleInput,setTitleInput] = useState("")
-  const titleOptions = ["Mr.", "Mrs."];
+  const titleOptions = ['Dr', 'Mr', 'Mrs', 'Ms'];
 
   useEffect(() => {}, []);
 
   const Add = async () => {
     const newPatient: TaskGroup = {
-      title: titleInput, //fixed  
+      title: titleInput,  
       hospitalNumber: HnInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
@@ -31,7 +31,7 @@ function NewPatientList(props: {
     };
 
     try {
-      await axios.put("http://localhost:5000/taskgroups", {
+      await axios.put("/api/taskgroups", {
         ...newPatient,
       });
       

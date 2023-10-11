@@ -46,7 +46,7 @@ function Flow() {
   useEffect(() => {
     const fetchTaskgroup = async () => {
     await axios
-      .post("http://localhost:5000/patients/taskgroups", {
+      .post("/api/patients/taskgroups", {
         id: currentTaskGroupId,
       })
       .then((res) => console.log(res.data));

@@ -19,7 +19,7 @@ function InfoList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/patients")
+      .get("/api/patients")
       .then((res) => {
         const fetchedInfoCard = res.data;
         const sortedInfoCard = sortCardsByTimestamp(fetchedInfoCard);
@@ -93,6 +93,7 @@ function InfoList() {
                 }}
               >
                 <NewPatientList close={close} setInfoCard={setInfoCard} />
+                {/* ref */}
               </Modal>
               <Button
                 style={{ width: 100 }}
