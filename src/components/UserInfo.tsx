@@ -75,9 +75,9 @@ function UserInfo(props: Userdata) {
 
           <div className="flex w-44 justify-between">
             <div className="flex">
-              <div className="mr-2 h-8 w-8 flex items-center justify-center rounded-md">
+              {/* <div className="mr-2 h-8 w-8 flex items-center justify-center rounded-md">
                 {props.title}
-              </div>
+              </div> */}
               <div className="bg-slate-200 h-8 w-8 flex items-center justify-center rounded-md">
                 <Modal
                   style={{ width: "80%" }}
@@ -93,9 +93,9 @@ function UserInfo(props: Userdata) {
                 >
                   <DeleteUser close={close} id={props.id} />
                 </Modal>
-                <Button className="bg-green-light-1 hover:bg-green-light-7 text-slate-500  hover:text-slate-100"
-              onClick={open}>
-                <Trash size={20} strokeWidth={2} color={"#79a1d2"} /></Button>
+                <div className="bg-slate-200 h-8 w-8 flex items-center justify-center rounded-md" onClick={open}>
+                <Trash size={20} strokeWidth={2} color={"#79a1d2"} />
+              </div>
               </div>
             </div>
 

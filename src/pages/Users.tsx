@@ -79,7 +79,7 @@ function Users() {
                 <h1>Created</h1>
               </div>
               <div className="flex w-44 ">
-                <h1>Title</h1>
+                <h1>Edit</h1>
               </div>
             </div>
           </div>
