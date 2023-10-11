@@ -1,6 +1,4 @@
-import { Autocomplete, Button } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { TaskGroup } from "../data/Patient";
+import { Button } from "@mantine/core";
 import axios from "axios";
 import { AlertOctagon, Trash, CircleLetterX } from "tabler-icons-react";
 
