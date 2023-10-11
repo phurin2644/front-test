@@ -95,7 +95,7 @@ function UserInfo(props: Userdata) {
                 >
                   <DeleteUser close={close} id={props.id} />
                 </Modal>
-                <Button className="bg-slate-200 hover:bg-slate-300 h-8 w-8 flex items-center justify-center rounded-md" onClick={open} disabled={user?.role === "SUPER_ADMIN"}> 
+                <Button className="bg-slate-200 hover:bg-slate-300 h-8 w-8 flex items-center justify-center rounded-md" onClick={open} disabled={user?.role !== "SUPER_ADMIN"}> 
                 <Trash size={20} strokeWidth={2} color={"#79a1d2"} />
                 </Button >
               </div>
