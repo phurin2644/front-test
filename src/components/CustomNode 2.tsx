@@ -162,7 +162,10 @@ function CustomNode(props: { data: NodeData }) {
               onClick={handleTrackClick} // Add onClick handler to trigger the update
               className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5"
             >
-              <div className="flex items-center justify-center ">
+              <div className="flex items-center justify-center " onClick={() => {
+              setCurrentTaskGroupId(id)
+              
+            }}>
                 <h1 className="mr-2">Track</h1>
                 <Click size={20} strokeWidth={2} />
               </div>
