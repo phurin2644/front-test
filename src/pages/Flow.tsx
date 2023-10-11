@@ -53,6 +53,20 @@ function Flow() {
     }
     fetchTaskgroup();
   },[]);
+
+  // useEffect(() => {
+  //   const fetchTaskgroup = async () => {
+  //   await axios
+  //     .post("/api/patients/taskgroups", {
+  //       id: currentTaskGroupId,
+  //     })
+  //     .then((res) => setFetchedData(res.data));
+  //   }
+  //   fetchTaskgroup();
+  // },[]);
+
+  const [fetchedData,setFetchedData] = useState([]);
+
   var currentDate = new Date();
   
   var DayOfMonth = currentDate.getDate();
@@ -399,12 +413,16 @@ function Flow() {
 
   return (
     <>
-      {useEffect(() => {
+      {/* {useEffect(() => {
         if (count < 2) {
           setCount(count + 1);
           nodeOnAdd();
         }
-      }, [count])}
+      }, [count])} */}
+      {/* <div>
+      {fetchedData}
+      </div> */}
+    
 
       <Navbar></Navbar>
       <main className="flex h-screen">
