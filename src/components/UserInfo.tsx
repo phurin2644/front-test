@@ -1,4 +1,5 @@
 import {
+  Award,
   CircleCheck,
   CircleLetterX,
   Dots,
@@ -8,8 +9,13 @@ import {
 import { Userdata } from "../data/Userdata";
 import { Divider } from "@mantine/core";
 
-
 function UserInfo(props: Userdata) {
+  const SuperAdmin = () => (
+    <div className="bg-yellow-300 h-6 w-6 flex items-center justify-center rounded-lg">
+      <Award size={20} strokeWidth={2} color={"#FFFFFF"} />
+    </div>
+  );
+
   const Admin = () => (
     <div className="bg-green-400 h-6 w-6 flex items-center justify-center rounded-lg">
       <CircleCheck size={20} strokeWidth={2} color={"#FFFFFF"} />
@@ -21,12 +27,6 @@ function UserInfo(props: Userdata) {
       <CircleLetterX size={20} strokeWidth={2} color={"#FFFFFF"} />
     </div>
   );
-
- 
-
-    
-    
-  
 
   return (
     <div>
@@ -43,7 +43,13 @@ function UserInfo(props: Userdata) {
             <h1>{props.department}</h1>
           </div>
           <div className="flex items-center w-40 pl-2">
-            {props.role=== "ADMIN" ? <Admin /> : <Normal />}
+            {props.role === "SUPER_ADMIN" ? (
+              <SuperAdmin />
+            ) : props.role === "ADMIN" ? (
+              <Admin />
+            ) : (
+              <Normal />
+            )}
           </div>
           <div className="flex items-center w-40 ">
             <h1>{props.date}</h1>
@@ -66,6 +72,5 @@ function UserInfo(props: Userdata) {
       </div>
     </div>
   );
-
 }
 export default UserInfo;
