@@ -46,6 +46,7 @@ function CustomNode(props: { data: NodeData }) {
   const seconds = String(new Date(data.createdAt).getSeconds()).padStart(2, "0");
   const formattedTime = `${hours}:${minutes}:${seconds}`;
   const fullFormattedDate = `${formattedDate} ${formattedTime}`;
+  const [newDate,setNewDate] = useState(fullFormattedDate);
 
   const InProcess = () => {
     return (
@@ -69,6 +70,18 @@ function CustomNode(props: { data: NodeData }) {
   };
 
   const handleTrackClick = () => {
+    const newDate = new Date().toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+    });
+    const hours = String(new Date().getHours()).padStart(2, "0");
+    const minutes = String(new Date().getMinutes()).padStart(2, "0");
+    const seconds = String(new Date().getSeconds()).padStart(2, "0");
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+    const fullFormattednewDate = `${newDate} ${formattedTime}`;
+
+
     // Make an Axios PATCH request to update the node's status to "SUCCESS"
     axios
       .patch(`http://localhost:5000/tasks`, {
@@ -112,6 +125,7 @@ function CustomNode(props: { data: NodeData }) {
       .catch((error) => {
         console.error("Error updating node status:", error);
       });
+      setNewDate(fullFormattednewDate);
   };
 
   return (
@@ -137,7 +151,7 @@ function CustomNode(props: { data: NodeData }) {
               color={"#008C8C"}
               className="mr-2 "
             />
-            <h1 className="text-xs py-4">{fullFormattedDate}</h1>
+            <h1 className="text-xs py-4">{newDate}</h1>
           </div>
           <div className="flex justify-center">
             <Menu shadow="md" width={130} position="bottom-end">
