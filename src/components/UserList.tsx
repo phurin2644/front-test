@@ -9,7 +9,7 @@ const UserList = (props: { value: string; }) => {
   const [userData, setUserData] = useState<Userdata[]>([]);
   
   
-  useEffect (()=>{axios.get("http://localhost:5000/users")
+  useEffect (()=>{axios.get("/api/users")
     .then((res)=>{
       setUserData(res.data);
       

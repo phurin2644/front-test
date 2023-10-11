@@ -111,6 +111,7 @@ function InfoList() {
                 }}
               >
                 <NewPatientList close={close} setInfoCard={setInfoCard} />
+                {/* ref */}
               </Modal>
               <Button
                 className="bg-green-pro  hover:bg-green-c p-1 rounded-md ml-7 sm:w-32 md:w-48 lg:w-64"
