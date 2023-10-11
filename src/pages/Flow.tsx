@@ -217,6 +217,7 @@ function Flow() {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           nodeTypes={nodeTypes}
+       fitView
         ></ReactFlow>
       </div>
     </>
