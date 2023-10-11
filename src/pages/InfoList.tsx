@@ -110,7 +110,7 @@ function InfoList() {
                   blur: 1,
                 }}
               >
-                <NewPatientList close={close} setInfoCard={setInfoCard} />
+                <NewPatientList close={close} />
                 {/* ref */}
               </Modal>
               <Button
