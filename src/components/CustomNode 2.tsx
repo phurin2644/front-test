@@ -12,6 +12,7 @@ import { Button, Menu } from "@mantine/core";
 import InfoCard from "./InfoCards";
 import Flow from "../pages/Flow";
 import { IconLogout, IconSettings } from "@tabler/icons-react";
+import useWorkingStore from "../utils/stores/working";
 
 export interface NodeData {
   name: string;
@@ -24,12 +25,15 @@ export interface NodeData {
   fn2: Function;
 }
 
-function CustomNode(props: { data: NodeData }) {
-  const { data } = props;
-  const [status, setStatus] = useState(data.status);
-  const nodeId = useNodeId();
-  const xI = useNodes();
-  const c = useNodesInitialized();
+function CustomNode(props: { data: NodeData,id:string }) {
+  const { data,id } = props;
+  // const [status, setStatus] = useState(data.status);
+  // const nodeId = useNodeId();
+  // const xI = useNodes();
+  // const c = useNodesInitialized();
+  const [setCurrentTaskGroupId] = useWorkingStore((state) => [
+    state.setCurrentTaskGroupId,
+  ]);
 
   const formattedDate = new Date(data.createdAt).toLocaleDateString("en-US", {
     day: "numeric",
@@ -117,7 +121,10 @@ function CustomNode(props: { data: NodeData }) {
               
               className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5"
             >
-              <div className="flex items-center justify-center ">
+              <div className="flex items-center justify-center " onClick={() => {
+              setCurrentTaskGroupId(id)
+              
+            }}>
                 <h1 className="mr-2">Track</h1>
                 <Click size={20} strokeWidth={2} />
               </div>
