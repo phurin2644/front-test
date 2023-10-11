@@ -1,7 +1,7 @@
 import {
-  Award,
   CircleCheck,
   CircleLetterX,
+  Crown,
   Dots,
   FilePencil,
   Trash,
@@ -11,8 +11,8 @@ import { Divider } from "@mantine/core";
 
 function UserInfo(props: Userdata) {
   const SuperAdmin = () => (
-    <div className="bg-yellow-300 h-6 w-6 flex items-center justify-center rounded-lg">
-      <Award size={20} strokeWidth={2} color={"#FFFFFF"} />
+    <div className="bg-yellow-400 h-6 w-6 flex items-center justify-center rounded-lg">
+      <Crown size={20} strokeWidth={2} color={"#FFFFFF"} />
     </div>
   );
 
