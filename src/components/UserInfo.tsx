@@ -7,9 +7,12 @@ import {
   Trash,
 } from "tabler-icons-react";
 import { Userdata } from "../data/Userdata";
-import { Divider } from "@mantine/core";
+import { Button, Divider, Modal } from "@mantine/core";
+import DeleteUser from "./DeleteUser";
+import { useDisclosure } from "@mantine/hooks";
 
 function UserInfo(props: Userdata) {
+  const [opened, { open, close }] = useDisclosure(false);
   const formattedDate = new Date(props.createdAt).toLocaleDateString("en-US", {
     day: "numeric",
     month: "numeric",
@@ -75,7 +78,23 @@ function UserInfo(props: Userdata) {
                 <FilePencil size={20} strokeWidth={2} color={"#79a1d2"} />
               </div>
               <div className="bg-slate-200 h-8 w-8 flex items-center justify-center rounded-md">
-                <Trash size={20} strokeWidth={2} color={"#79a1d2"} />
+                <Modal
+                  style={{ width: "80%" }}
+                  opened={opened}
+                  onClose={close}
+                  withCloseButton={false}
+                  centered
+                  overlayProps={{
+                    color: "#dee2e6",
+                    opacity: 0.2,
+                    blur: 2,
+                  }}
+                >
+                  <DeleteUser close={close} id={props.id} />
+                </Modal>
+                <Button className="bg-green-light-1 hover:bg-green-light-7 text-slate-500  hover:text-slate-100"
+              onClick={open}>
+                <Trash size={20} strokeWidth={2} color={"#79a1d2"} /></Button>
               </div>
             </div>
 
