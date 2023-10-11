@@ -26,7 +26,7 @@ function Navbar() {
           >
             <h1>Dashboard</h1>
           </NavLink>
-          {(user?.role === "SUPER_ADMIN" || user?.role === "ADMIN")  && (
+          {(user?.role === "SUPER_ADMIN" || user?.role === "ADMIN") && (
             <NavLink
               to="/user"
               className={({ isActive }) =>
@@ -58,8 +58,8 @@ const NavProfile: FC = () => {
             <div className=" px-5">
               <div className="mt-2 w-11 h-11 rounded-full mx-auto bg-slate-300 items-center flex justify-center">
                 <h1>
-                  {user?.username[0].toUpperCase()}
-                  {user?.username.charAt(user?.username.length - 1)}
+                  {user?.firstName[0].toUpperCase()}
+                  {user?.lastName[0].toUpperCase()}
                 </h1>
               </div>
             </div>
@@ -72,15 +72,27 @@ const NavProfile: FC = () => {
                 <div>
                   <div className="mt-2 w-11 h-11 rounded-full mx-auto bg-slate-200 items-center flex justify-center">
                     <h1>
-                      {user?.username[0].toUpperCase()}
-                      {user?.username.charAt(user?.username.length - 1)}
+                      {user?.firstName[0].toUpperCase()}
+                      {user?.lastName[0].toUpperCase()}
                     </h1>
                   </div>
                 </div>
                 <div className="ml-4 pt-1">
-                  <h1>{user?.username.toUpperCase() || ""}</h1>
+                  <h1>
+                    {user?.firstName || ""} {user?.lastName || ""}
+                  </h1>
                   <h1>{user?.department}</h1>
-                  <h1 className={user?.role === 'ADMIN' ? 'text-green-500' : (user?.role === 'SUPER_ADMIN' ? 'text-red-500' : '')}>{user?.role}</h1>
+                  <h1
+                    className={
+                      user?.role === "ADMIN"
+                        ? "text-green-500"
+                        : user?.role === "SUPER_ADMIN"
+                        ? "text-red-500"
+                        : ""
+                    }
+                  >
+                    {user?.role}
+                  </h1>
                 </div>
               </div>
             </Menu.Label>
@@ -93,7 +105,7 @@ const NavProfile: FC = () => {
                 // แสดง Notification ก่อน log out
                 toast.info("Successfully logged out", {
                   position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 600, 
+                  autoClose: 600,
                   style: {
                     backgroundColor: "#DAFFFB",
                     color: "#04364A",
@@ -107,7 +119,7 @@ const NavProfile: FC = () => {
                 // ทำการ log out หลังจากแสดง Notification
                 setTimeout(() => {
                   logOut();
-                }, 1500); 
+                }, 1500);
               }}
             >
               log out
