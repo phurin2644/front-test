@@ -13,21 +13,20 @@ function NewPatientList(props: {
   const [HnInput, setHnInput] = useState("");
   const [blueprintInput, setBlueprintInput] = useState("");
   //add by Thian
-  const [titleInput,setTitleInput] = useState("")
-  const titleOptions = ['Dr', 'Mr', 'Mrs', 'Ms'];
+  const [titleInput, setTitleInput] = useState("");
+  const titleOptions = ["Dr", "Mr", "Mrs", "Ms"];
 
   useEffect(() => {}, []);
 
   const Add = async () => {
-    const newPatient: TaskGroup = {
-      title: titleInput,  
+    const newPatient = {
+      title: titleInput,
       hospitalNumber: HnInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
       blueprintType: blueprintInput,
       entry: "WALKIN",
       destination: "",
-      status: "PENDING",
     };
 
     try {
