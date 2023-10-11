@@ -14,7 +14,6 @@ function InfoList() {
   const [searchText, setSearchText] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
-
   const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
 
   useEffect(() => {

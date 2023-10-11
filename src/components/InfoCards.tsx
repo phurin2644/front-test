@@ -1,9 +1,10 @@
-
-import { Button } from "@mantine/core";
+import { Button, Modal } from "@mantine/core";
 import { Bolt, ClockEdit, Trash } from "tabler-icons-react";
 import { InfoCardProps } from "../data/Patient";
-import useWorkingStore from '../utils/stores/working';
+import useWorkingStore from "../utils/stores/working";
 import { useNavigate } from "react-router-dom";
+import DeletePatient from "../components/DeletePatient";
+import { useDisclosure } from "@mantine/hooks";
 
 export const InProcessBtn = () => {
   return (
@@ -83,6 +84,7 @@ function InfoCard({
   const seconds = String(new Date(createdAt).getSeconds()).padStart(2, "0");
   const formattedTime = `${hours}:${minutes}:${seconds}`;
   const fullFormattedDate = `${formattedDate} ${formattedTime}`;
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
@@ -106,16 +108,35 @@ function InfoCard({
             <h1 className="text-xs py-4">{fullFormattedDate}</h1>
           </div>
           <div className="flex justify-center">
-            <Button className="bg-green-light-1 hover:bg-green-light-7 text-slate-500 rounded-r-none px-3 pr-5 hover:text-slate-100">
+            <Modal
+              style={{ width: "80%" }}
+              opened={opened}
+              onClose={close}
+              withCloseButton={false}
+              centered
+              overlayProps={{
+                color: "#dee2e6",
+                opacity: 0.2,
+                blur: 2,
+              }}
+            >
+              <DeletePatient close={close} />
+            </Modal>
+            <Button
+              className="bg-green-light-1 hover:bg-green-light-7 text-slate-500 rounded-r-none px-3 pr-5 hover:text-slate-100"
+              onClick={open}
+            >
               <div className="flex justify-center items-center">
                 <Trash size={20} strokeWidth={2} className="mr-2" />
                 <h1>Delete</h1>
               </div>
             </Button>
-            <div onClick={() => {
-              setCurrentTaskGroupId(id)
-              navigate("/flow")
-            }}>
+            <div
+              onClick={() => {
+                setCurrentTaskGroupId(id);
+                navigate("/flow");
+              }}
+            >
               <Button className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5">
                 <div className="flex justify-center items-center">
                   <h1>Fast Track</h1>

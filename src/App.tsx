@@ -1,5 +1,5 @@
 import { useEffect, type ReactElement } from "react";
-import { Route, Routes, Navigate, Outlet,} from "react-router-dom";
+import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 import "./App.css";
 import Flow from "./pages/Flow";
 import Dashboard from "./pages/Dashboard";
@@ -49,7 +49,7 @@ function App() {
         />
         <Route
           path="/user"
-          element={ 
+          element={
             <ProtectedRoute requireRole={["SUPER_ADMIN", "ADMIN"]}>
               <Users />
             </ProtectedRoute>
@@ -68,7 +68,7 @@ const ProtectedRoute = ({
   requireRole,
 }: {
   children: ReactElement;
-  requireRole: string[]; 
+  requireRole: string[];
 }) => {
   const { state, user } = useAuth();
 
