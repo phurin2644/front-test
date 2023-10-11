@@ -13,13 +13,16 @@ import { InfoCardProps } from "../data/Patient";
 function InfoList() {
   const [searchText, setSearchText] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
-  const [selectedStatus, setSelectedStatus] = useState<null | boolean>(null);
+
+  type StatusType = "PENDING" | "SUCCESS" | "CANCEL";
+
+  const [selectedStatus, setSelectedStatus] = useState<StatusType | null>(null);
 
   const [infoCard, setInfoCard] = useState<InfoCardProps[]>([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/patients")
+      .get("http://localhost:5000/taskgroups/details")
       .then((res) => {
         const fetchedInfoCard = res.data;
         const sortedInfoCard = sortCardsByTimestamp(fetchedInfoCard);
@@ -32,11 +35,22 @@ function InfoList() {
 
   const lower = searchText.toLowerCase();
   const filterList = infoCard.filter((Patient) => {
-    return (
-      Patient.firstName.toLowerCase().includes(lower) ||
-      Patient.hospitalNumber.toLowerCase().includes(lower)
-      // &&(selectedStatus === null || Patient.Status === selectedStatus)
-    );
+    const matchesFirstName = Patient.patient?.firstName
+      .toLowerCase()
+      .includes(lower);
+    const matchesHospitalNumber = Patient.patient?.hospitalNumber
+      .toLowerCase()
+      .includes(lower);
+
+    if (selectedStatus === null) {
+      return matchesFirstName || matchesHospitalNumber;
+    } else {
+      const hasMatchingStatus = Patient.currentTasks.some(
+        (task) => task.status === selectedStatus
+      );
+
+      return (matchesFirstName || matchesHospitalNumber) && hasMatchingStatus;
+    }
   });
 
   function sortCardsByTimestamp(cards: InfoCardProps[]): InfoCardProps[] {
@@ -65,13 +79,13 @@ function InfoList() {
               <div className="flex border-2 border-dashed rounded-md border-zinc-400 px-2 gap-3 items-center justify-center">
                 <Button
                   className="p-0 hover:bg-transparent"
-                  onClick={() => setSelectedStatus(true)}
+                  onClick={() => setSelectedStatus("SUCCESS")}
                 >
                   <SuccessBtn />
                 </Button>
                 <Button
                   className="p-0 hover:bg-transparent"
-                  onClick={() => setSelectedStatus(false)}
+                  onClick={() => setSelectedStatus("PENDING")}
                 >
                   <ActiveBtn />
                 </Button>
@@ -112,15 +126,15 @@ function InfoList() {
 
           <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-y-6 gap-x-16">
             {filterList.map((card) => (
-              <div className="sm:col-span-full md:col-span-1 lg:col-span-1">
+              <div
+                key={card.id}
+                className="sm:col-span-full md:col-span-1 lg:col-span-1"
+              >
                 <InfoCard
-                  key={card.id}
-                  id={card.id}
-                  firstName={card.firstName}
-                  lastName={card.lastName}
-                  hospitalNumber={card.hospitalNumber}
                   createdAt={card.createdAt}
-                  Status={card.Status}
+                  id={card.id}
+                  patient={card.patient}
+                  currentTasks={card.currentTasks}
                 />
               </div>
             ))}
