@@ -5,7 +5,7 @@ export interface Userdata {
     lastName: string;
     role: string;
     department: string;
-    date: string;
+    createdAt: string;
 }
 
 const  userdata : Userdata[] = [

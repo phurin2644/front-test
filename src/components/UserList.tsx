@@ -38,7 +38,7 @@ const UserList = (props: { value: string; }) => {
             lastName={user.lastName}
             role={user.role}
             department={user.department}
-            date={user.date}
+            createdAt={user.createdAt}
           />
       ))}
     </div>
