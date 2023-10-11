@@ -54,12 +54,14 @@ function InfoList() {
       <Navbar></Navbar>
       <div className="bg-slate-50 p-7 h-screen">
         <div className="flex items-center justify-center py-7">
-          <div className="flex  ">
+          <div className="flex flex-col lg:flex-row items-center">
             {/* Search Input */}
+
             <SearchBar value={searchText} onChange={setSearchText} />
+
             {/* Create Button */}
-            <div className="flex justify-end ml-10">
-              <div className="flex border-2 border-dashed rounded-md border-zinc-600 px-2 gap-3 items-center justify-center">
+            <div className="flex justify-center lg:justify-end mt-3 lg:mt-0 lg:ml-10">
+              <div className="flex border-2 border-dashed rounded-md border-zinc-400 px-2 gap-3 items-center justify-center">
                 <Button
                   className="p-0 hover:bg-transparent"
                   onClick={() => setSelectedStatus(true)}
@@ -82,6 +84,7 @@ function InfoList() {
               </div>
 
               <Modal
+                style={{ width: "80%" }}
                 opened={opened}
                 onClose={close}
                 withCloseButton={false}
@@ -95,8 +98,7 @@ function InfoList() {
                 <NewPatientList close={close} setInfoCard={setInfoCard} />
               </Modal>
               <Button
-                style={{ width: 100 }}
-                className="bg-green-pro  hover:bg-green-c p-1 rounded-md ml-7"
+                className="bg-green-pro  hover:bg-green-c p-1 rounded-md ml-7 sm:w-32 md:w-48 lg:w-64"
                 onClick={open}
               >
                 Create
@@ -106,9 +108,10 @@ function InfoList() {
         </div>
         <ScrollArea className="w-full h-550 mt-7" type="scroll">
           {/* Default */}
-          <div className="grid justify-items-center grid-cols-4  gap-y-6 gap-x-1">
+
+          <div className="grid sm:grid-cols-full md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-y-6 gap-x-1">
             {filterList.map((card) => (
-              <div className="md:col-span-1">
+              <div className="sm:col-span-full md:col-span-1 lg:col-span-1">
                 <InfoCard
                   key={card.id}
                   id={card.id}
