@@ -2,6 +2,8 @@ import { Autocomplete, Button, Select, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { TaskGroup, InfoCardProps } from "../data/Patient";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function NewPatientList(props: {
   close: () => void;
@@ -13,14 +15,14 @@ function NewPatientList(props: {
   const [HnInput, setHnInput] = useState("");
   const [blueprintInput, setBlueprintInput] = useState("");
   //add by Thian
-  const [titleInput,setTitleInput] = useState("")
-  const titleOptions = ['Dr', 'Mr', 'Mrs', 'Ms'];
+  const [titleInput, setTitleInput] = useState("");
+  const titleOptions = ["Dr", "Mr", "Mrs", "Ms"];
 
   useEffect(() => {}, []);
 
   const Add = async () => {
     const newPatient: TaskGroup = {
-      title: titleInput,  
+      title: titleInput,
       hospitalNumber: HnInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
@@ -60,7 +62,37 @@ function NewPatientList(props: {
         withAsterisk
         onChange={(event) => {
           const text = event.target.value;
-          setHnInput(text);
+          if (/[^0-9]/.test(text)) {
+            toast.error("HN can't exceed 7 characters", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1000,
+              style: {
+                backgroundColor: "#FFE4D6",
+                color: "#CD1818",
+                border: "3px solid #F78CA2",
+              },
+              progressStyle: {
+                background: "#F78CA2",
+              },
+            });
+          } else {
+            if (text.length <= 7) {
+              setHnInput(text);
+            } else {
+              toast.error("HN can't exceed 7 characters", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1000,
+                style: {
+                  backgroundColor: "#FFE4D6",
+                  color: "#CD1818",
+                  border: "3px solid #F78CA2",
+                },
+                progressStyle: {
+                  background: "#F78CA2",
+                },
+              });
+            }
+          }
           console.log(text);
         }}
         value={HnInput}
