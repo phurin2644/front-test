@@ -41,7 +41,6 @@ function NewPatientList(props: {
       //   .catch((error) => {
       //     console.error("Error fetching user data:", error);
       //   });
-      
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -49,7 +48,6 @@ function NewPatientList(props: {
     window.location.reload();
     close();
   };
-
 
   return (
     <div className="mx-4">

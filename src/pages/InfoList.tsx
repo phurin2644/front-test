@@ -38,6 +38,7 @@ function InfoList() {
       // &&(selectedStatus === null || Patient.Status === selectedStatus)
     );
   });
+
   function sortCardsByTimestamp(cards: InfoCardProps[]): InfoCardProps[] {
     const sortedCards = cards.slice().sort((a, b) => {
       const timestampA = new Date(a.createdAt).getTime();
@@ -106,10 +107,10 @@ function InfoList() {
             </div>
           </div>
         </div>
-        <ScrollArea className="w-full h-550 mt-7" type="scroll">
+        <ScrollArea className="w-full h-550 mt-7 px-20" type="scroll">
           {/* Default */}
 
-          <div className="grid sm:grid-cols-full md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-y-6 gap-x-1">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-y-6 gap-x-16">
             {filterList.map((card) => (
               <div className="sm:col-span-full md:col-span-1 lg:col-span-1">
                 <InfoCard
