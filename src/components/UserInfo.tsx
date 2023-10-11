@@ -3,13 +3,13 @@ import {
   CircleLetterX,
   Crown,
   Dots,
-  FilePencil,
   Trash,
 } from "tabler-icons-react";
 import { Userdata } from "../data/Userdata";
 import { Button, Divider, Modal } from "@mantine/core";
 import DeleteUser from "./DeleteUser";
 import { useDisclosure } from "@mantine/hooks";
+import useAuth from "../utils/auth/useAuth";
 
 function UserInfo(props: Userdata) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -45,6 +45,8 @@ function UserInfo(props: Userdata) {
       <h1 className="ml-2">{props.role}</h1>
     </div>
   );
+
+  const {user} = useAuth();
 
   return (
     <div>
@@ -93,9 +95,9 @@ function UserInfo(props: Userdata) {
                 >
                   <DeleteUser close={close} id={props.id} />
                 </Modal>
-                <div className="bg-slate-200 h-8 w-8 flex items-center justify-center rounded-md" onClick={open}>
+                <Button className="bg-slate-200 hover:bg-slate-300 h-8 w-8 flex items-center justify-center rounded-md" onClick={open} disabled={user?.role === "SUPER_ADMIN"}> 
                 <Trash size={20} strokeWidth={2} color={"#79a1d2"} />
-              </div>
+                </Button >
               </div>
             </div>
 

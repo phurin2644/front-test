@@ -5,6 +5,7 @@ import useWorkingStore from "../utils/stores/working";
 import { useNavigate } from "react-router-dom";
 import DeletePatient from "../components/DeletePatient";
 import { useDisclosure } from "@mantine/hooks";
+import useAuth from "../utils/auth/useAuth";
 
 export const InProcessBtn = () => {
   return (
@@ -85,7 +86,7 @@ function InfoCard({
   const formattedTime = `${hours}:${minutes}:${seconds}`;
   const fullFormattedDate = `${formattedDate} ${formattedTime}`;
   const [opened, { open, close }] = useDisclosure(false);
-
+  const {user} = useAuth();
   return (
     <>
       <div className="bg-white shadow-sm w-full sm:max-w-md md:max-w-lg lg:max-w-xl rounded-md">
@@ -125,6 +126,7 @@ function InfoCard({
             <Button
               className="bg-green-light-1 hover:bg-green-light-7 text-slate-500 rounded-r-none px-3 pr-5 hover:text-slate-100"
               onClick={open}
+              disabled={user?.role === "USER"}
             >
               <div className="flex justify-center items-center">
                 <Trash size={20} strokeWidth={2} className="mr-2" />
