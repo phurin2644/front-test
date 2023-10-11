@@ -1,8 +1,7 @@
-
 import { Button } from "@mantine/core";
 import { Bolt, ClockEdit, Trash } from "tabler-icons-react";
 import { InfoCardProps } from "../data/Patient";
-import useWorkingStore from '../utils/stores/working';
+import useWorkingStore from "../utils/stores/working";
 import { useNavigate } from "react-router-dom";
 
 export const InProcessBtn = () => {
@@ -61,14 +60,7 @@ export const Active = (prop: { title: string }) => {
   );
 };
 
-function InfoCard({
-  firstName,
-  lastName,
-  hospitalNumber,
-  createdAt,
-  Status,
-  id,
-}: InfoCardProps) {
+function InfoCard({ createdAt, patient, currentTasks, id }: InfoCardProps) {
   const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
     day: "numeric",
     month: "numeric",
@@ -87,14 +79,14 @@ function InfoCard({
   return (
     <>
       <div className="bg-white shadow-sm w-full sm:max-w-md md:max-w-lg lg:max-w-xl rounded-md">
-        {Status ? (
-          <Success title={hospitalNumber} />
+        {currentTasks[0].status === "SUCCESS" ? (
+          <Success title={patient.hospitalNumber} />
         ) : (
-          <Active title={hospitalNumber} />
+          <Active title={patient.hospitalNumber} />
         )}
         <div className="px-4 py-3">
           <h1>
-            {firstName} {lastName}
+            {patient.firstName} {patient.lastName}
           </h1>
           <div className="flex items-center ">
             <ClockEdit
@@ -112,10 +104,12 @@ function InfoCard({
                 <h1>Delete</h1>
               </div>
             </Button>
-            <div onClick={() => {
-              setCurrentTaskGroupId(id)
-              navigate("/flow")
-            }}>
+            <div
+              onClick={() => {
+                setCurrentTaskGroupId(id);
+                navigate("/flow");
+              }}
+            >
               <Button className="bg-green-pro hover:bg-green-c text-white rounded-l-none px-3 pl-5">
                 <div className="flex justify-center items-center">
                   <h1>Fast Track</h1>
