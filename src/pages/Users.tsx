@@ -11,23 +11,22 @@ import { Userdata } from "../data/Userdata";
 import useAuth from "../utils/auth/useAuth";
 
 function Users() {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
   const [userData, setUserData] = useState<Userdata[]>([]);
   const numUser = userData.length;
-  const {user} = useAuth();
+  const { user } = useAuth();
 
-  useEffect (()=>{axios.get("http://localhost:5000/users")
-    .then((res)=>{
-      setUserData(res.data);
-      
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
-    });
-      },[])
-
-
+  useEffect(() => {
+    axios
+      .get("api/users")
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
 
   return (
     <>

@@ -43,13 +43,10 @@ function Flow() {
       navigate("/card");
     }
     const fetchTaskgroup = async () => {
-      const tasks = await axios.post(
-        "http://localhost:5000/patients/taskgroups",
-        {
-          id: currentTaskGroupId,
-        }
-      );
-      const res = await axios.post("http://localhost:5000/graph/tasks", {
+      const tasks = await axios.post("api/patients/taskgroups", {
+        id: currentTaskGroupId,
+      });
+      const res = await axios.post("api/graph/tasks", {
         taskGroupId: tasks.data[0].id,
       });
 
@@ -66,7 +63,7 @@ function Flow() {
           title: node.title,
           createdAt: node.createdAt,
           status: node.status,
-          taskGroupId:tasks.data[0].id
+          taskGroupId: tasks.data[0].id,
         },
       }));
 
@@ -196,7 +193,7 @@ function Flow() {
             onClick={open}
           >
             <button>
-              <AiOutlineExclamationCircle style={{ fontSize: '1.6em' }}/>
+              <AiOutlineExclamationCircle style={{ fontSize: "1.6em" }} />
             </button>
           </div>
         </section>
