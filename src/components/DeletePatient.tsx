@@ -5,6 +5,7 @@ import { AlertOctagon, Trash, CircleLetterX } from "tabler-icons-react";
 function DeletePatient(props: { close: () => void , id: string}) {
   const { close,id } = props;
 
+
   console.log('ID:', id); // Add this line to check the value of 'id'
   const  handleDelete = async () => {
     await axios
