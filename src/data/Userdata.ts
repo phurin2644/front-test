@@ -10,6 +10,16 @@ export interface Userdata {
     password: string;
 }
 
+export interface newUser {
+    title: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    department: string;
+    username: string;
+    password: string;
+}
+
 const  userdata : Userdata[] = [
     
 ]

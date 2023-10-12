@@ -31,15 +31,15 @@ const UserList = (props: { value: string; }) => {
     <div>
       {filterList.map((user) => (
           <UserInfo
-            title={user.title}
-            key={user.id}
-            id={user.id}
-            firstName={user.firstName}
-            lastName={user.lastName}
-            role={user.role}
-            department={user.department}
-            createdAt={user.createdAt}
-          />
+          title={user.title}
+          key={user.id}
+          id={user.id}
+          firstName={user.firstName}
+          lastName={user.lastName}
+          role={user.role}
+          department={user.department}
+          createdAt={user.createdAt} 
+          username={""} password={""}          />
       ))}
     </div>
   );

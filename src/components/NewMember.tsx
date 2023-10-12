@@ -1,7 +1,8 @@
 import { Autocomplete, Button, Select, TextInput } from "@mantine/core";
 import { useState } from "react";
 import { UserPlus } from "tabler-icons-react";
-import userdata, { Userdata } from "../data/Userdata";
+import { newUser } from "../data/Userdata";
+import axios from "axios";
 
 function NewMember(props: { close: () => void }) {
   const { close } = props;
@@ -15,26 +16,26 @@ function NewMember(props: { close: () => void }) {
   const [usernameInput, setUserNameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  const Add = () => {
-    const currentDate = new Date();
-    const day = currentDate.getDate();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const fullYear = currentDate.getFullYear();
-    const year = String(fullYear).slice(-2);
-    const formattedDate = `${day}/${month}/${year}`;
-    const newMem: Userdata = {
-      id: `${userdata.length + 1}`,
+  const Add = async () => {
+
+    const newMem: newUser = {
       title: titleInput,
       firstName: firstNameInput,
       lastName: lastNameInput,
       role: roleInput,
       department: departmentInput,
-      createdAt: formattedDate,
       username: usernameInput,
       password: passwordInput,
     };
-    console.log(currentDate);
-    userdata.push(newMem);
+    
+    try {
+      await axios.put("/api/users",{
+        ...newMem,
+      });
+    }catch(error){
+      console.error("Error creating memeber:", error);
+    }
+    window.location.reload();
     close();
   };
 
@@ -46,9 +47,8 @@ function NewMember(props: { close: () => void }) {
         placeholder="Select Title"
         withAsterisk
         onChange={(event) => {
-          const text = event;
+          const text = event ?? "";
           setTitleInput(text);
-          console.log(text);
         }}
         value={titleInput}
       />
@@ -59,7 +59,6 @@ function NewMember(props: { close: () => void }) {
         onChange={(event) => {
           const text = event.target.value;
           setUserNameInput(text);
-          console.log(text);
         }}
         value={usernameInput}
       />
@@ -70,7 +69,6 @@ function NewMember(props: { close: () => void }) {
         onChange={(event) => {
           const text = event.target.value;
           setPasswordInput(text);
-          console.log(text);
         }}
         value={passwordInput}
       />
@@ -81,7 +79,6 @@ function NewMember(props: { close: () => void }) {
         onChange={(event) => {
           const text = event.target.value;
           setFirstNameInput(text);
-          console.log(text);
         }}
         value={firstNameInput}
       />
@@ -92,19 +89,17 @@ function NewMember(props: { close: () => void }) {
         onChange={(event) => {
           const text = event.target.value;
           setLastNameInput(text);
-          console.log(text);
         }}
         value={lastNameInput}
       />
-      <Autocomplete
+      <Select
         label="Department"
         placeholder="Department"
         withAsterisk
         data={["ER", "OR", "LAB", "ANY"]}
         onChange={(event) => {
-          const text = event;
+          const text = event?? "";
           setDepartmentInput(text);
-          console.log(text);
         }}
         value={departmentInput}
       />
@@ -114,9 +109,8 @@ function NewMember(props: { close: () => void }) {
         placeholder="Select Role"
         withAsterisk
         onChange={(event) => {
-          const text = event;
+          const text = event?? "";
           setRoleInput(text);
-          console.log(text);
         }}
         value={roleInput}
       />

@@ -103,9 +103,8 @@ function NewPatientList(props: {
         placeholder="Select Title"
         withAsterisk
         onChange={(event) => {
-          const text = event;
+          const text = event??"";
           setTitleInput(text);
-          console.log(text);
         }}
         value={titleInput}
       />
@@ -116,7 +115,6 @@ function NewPatientList(props: {
         onChange={(event) => {
           const text = event.target.value;
           setFirstNameInput(text);
-          console.log(text);
         }}
         value={firstNameInput}
       />
@@ -127,7 +125,6 @@ function NewPatientList(props: {
         onChange={(event) => {
           const text = event.target.value;
           setLastNameInput(text);
-          console.log(text);
         }}
         value={lastNameInput}
       />
@@ -137,9 +134,8 @@ function NewPatientList(props: {
         withAsterisk
         data={["suandok1", "suandok2"]}
         onChange={(event) => {
-          const text = event;
+          const text = event??"";
           setBlueprintInput(text);
-          console.log(text);
         }}
         value={blueprintInput}
       />
