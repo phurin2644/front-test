@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Select, TextInput } from "@mantine/core";
+import { Button, Select, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { TaskGroup, InfoCardProps } from "../data/Patient";
 import axios from "axios";
@@ -9,7 +9,7 @@ function NewPatientList(props: {
   close: () => void;
   setInfoCard: React.Dispatch<React.SetStateAction<InfoCardProps[]>>;
 }) {
-  const { close, setInfoCard } = props;
+  const { close } = props;
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
   const [HnInput, setHnInput] = useState("");

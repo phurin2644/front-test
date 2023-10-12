@@ -6,6 +6,8 @@ export interface Userdata {
     role: string;
     department: string;
     createdAt: string;
+    username: string;
+    password: string;
 }
 
 const  userdata : Userdata[] = [
