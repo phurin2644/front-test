@@ -1,14 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactFlow, {
-  Controls,
-  Background,
   useNodesState,
   useEdgesState,
   addEdge,
   Connection,
   Edge,
-  Panel,
-  useNodeId,
 } from "reactflow";
 
 import "reactflow/dist/base.css";
@@ -19,13 +15,11 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { Drawer } from "@mantine/core";
 import Navbar from "../components/Navbar";
 import CustomDrawer from "../components/customdrawer";
-import { flowdata, FlowData } from "../data/Flowdata 2";
-import CustomNode, { NodeData } from "../components/CustomNode 2";
+import CustomNode from "../components/CustomNode 2";
 import useWorkingStore from "../utils/stores/working";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CaseInfo } from "../data/Patient";
-import { IconInfoOctagon } from "@tabler/icons-react";
 
 // const nodeTypes = { textUpdater: TextUpdaterNode };
 const nodeTypes = {
@@ -93,10 +87,6 @@ function Flow() {
   const onAddFirstClick = () => {
     onAdd();
   };
-  const onTrack = (props: { id: string }) => {
-    const { id } = props;
-    console.log("Clicked node id:", id);
-  };
   const updateNodeStatus = (nodeId: string, newStatus: any) => {
     setNodes((prevNodes) =>
       prevNodes.map((node) =>
@@ -129,8 +119,8 @@ function Flow() {
   ];
 
   const [opened, { open, close }] = useDisclosure(false);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
     (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
@@ -202,7 +192,7 @@ function Flow() {
       <div className="bg-slate-50 h-screen flex">
         <section className="flex bg-green-light-3  h-14 w-17 ml-6 mt-8 p-1 py-9 rounded-md justify-center items-center">
           <div
-            className="flex justify-center w-12 h-12 p-1 mx-2 bg-white inline-block rounded-xl border-spacing-1.5 border-black hover:bg-slate-200"
+            className="flex justify-center w-12 h-12 p-1 mx-2 bg-white rounded-xl border-spacing-1.5 border-black hover:bg-slate-200"
             onClick={open}
           >
             <button>

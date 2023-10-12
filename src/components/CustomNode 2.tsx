@@ -2,16 +2,9 @@ import React, { memo, useState } from "react";
 import {
   Handle,
   Position,
-  useNodeId,
-  useNodes,
-  useNodesInitialized,
-  useNodesState,
 } from "reactflow";
 import { Click, ClockEdit, SquarePlus } from "tabler-icons-react";
 import { Button, Menu } from "@mantine/core";
-import InfoCard from "./InfoCards";
-import Flow from "../pages/Flow";
-import { IconLogout, IconSettings } from "@tabler/icons-react";
 import axios from "axios"; // Import Axios
 
 export interface NodeData {
@@ -32,9 +25,6 @@ taskGroupId: any;
 
 function CustomNode(props: { data: NodeData }) {
   const { data } = props;
-  const nodeId = useNodeId();
-  const xI = useNodes();
-  const c = useNodesInitialized();
 
   const formattedDate = new Date(data.createdAt).toLocaleDateString("en-US", {
     day: "numeric",
@@ -84,13 +74,13 @@ function CustomNode(props: { data: NodeData }) {
 
     // Make an Axios PATCH request to update the node's status to "SUCCESS"
     axios
-      .patch(`http://localhost:5000/tasks`, {
+      .patch(`/api/tasks`, {
         id: data.id,
         status: "SUCCESS",
       })
-      .then(async (response) => {
+      .then(async () => {
         
-        const res = await axios.post("http://localhost:5000/graph/tasks", {
+        const res = await axios.post("/api/graph/tasks", {
         taskGroupId: data.taskGroupId,
       });
 

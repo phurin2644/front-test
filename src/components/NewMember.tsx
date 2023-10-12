@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Select, TextInput } from "@mantine/core";
+import { Button, Select, TextInput } from "@mantine/core";
 import { useState } from "react";
 import { UserPlus } from "tabler-icons-react";
 import { newUser } from "../data/Userdata";

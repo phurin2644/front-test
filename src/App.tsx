@@ -68,7 +68,7 @@ const ProtectedRoute = ({
   requireRole,
 }: {
   children: ReactElement;
-  requireRole: string[];
+  requireRole?: string[];
 }) => {
   const { state, user } = useAuth();
 

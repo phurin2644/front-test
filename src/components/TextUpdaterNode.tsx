@@ -1,15 +1,13 @@
-import React, { useCallback, ChangeEvent } from 'react';
+import React from 'react';
 import { Handle, Position } from 'reactflow';
 import onAdd from '../pages/Flow';
-
-const handleStyle = { left: 10 };
 
 interface TextUpdaterNodeProps {
     data: any; // Replace 'any' with the actual type of 'data'
     isConnectable: boolean;
 }
 
-const TextUpdaterNode: React.FC<TextUpdaterNodeProps> = ({ data, isConnectable }) => {
+const TextUpdaterNode: React.FC<TextUpdaterNodeProps> = ({ isConnectable }) => {
     // const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     //     console.log(evt.target.value);
     // }, []);
